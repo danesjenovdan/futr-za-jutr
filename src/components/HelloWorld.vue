@@ -1,11 +1,14 @@
 <script setup>
-import { useCounterStore } from '../stores/counter'
+import { useCounterStore } from "../stores/counter";
 
 defineProps({
-  msg: String
-})
+  msg: {
+    type: String,
+    default: "",
+  },
+});
 
-const store = useCounterStore()
+const store = useCounterStore();
 </script>
 
 <template>
@@ -26,7 +29,9 @@ const store = useCounterStore()
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
   </p>
 
-  <button type="button" @click="store.counter++">count is: {{ store.counter }}</button>
+  <button type="button" @click="store.counter++">
+    count is: {{ store.counter }}
+  </button>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
