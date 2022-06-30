@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { useCounterStore } from '../stores/counter'
 
 defineProps({
   msg: String
 })
 
-const count = ref(0)
+const store = useCounterStore()
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const count = ref(0)
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
   </p>
 
-  <button type="button" @click="count++">count is: {{ count }}</button>
+  <button type="button" @click="store.counter++">count is: {{ store.counter }}</button>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
