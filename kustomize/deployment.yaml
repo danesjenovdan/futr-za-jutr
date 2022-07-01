@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: futr-za-jutr
+  labels:
+    app: futr-za-jutr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: futr-za-jutr
+  template:
+    metadata:
+      labels:
+        app: futr-za-jutr
+    spec:
+      containers:
+        - name: futr-za-jutr
+          image: futr-za-jutr
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 100m
+            limits:
+              memory: 100Mi
+              cpu: 100m
