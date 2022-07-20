@@ -17,9 +17,14 @@ body {
   height: 100vh;
   overflow: hidden;
 
-  // @media (min-width: 992px) and (orientation: landscape) {
-  @media (orientation: landscape) {
-    margin: 0 auto;
-    aspect-ratio: 9/16;
+  // // @media (min-width: 992px) and (orientation: landscape) {
+  // @media (orientation: landscape) {
+  //   // margin: 0 auto;
+  //   // aspect-ratio: 9/16;
+  // }
+
+  .constrain-width {
+    max-width: var(--ratio-width);
+    margin-inline: auto;
   }
 }

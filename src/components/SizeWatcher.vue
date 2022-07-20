@@ -4,17 +4,19 @@
 import { onMounted, ref, watchEffect } from "vue";
 import { useElementSize } from "@vueuse/core";
 
-const el = ref(null);
-const { width } = useElementSize(el);
+const app = ref(null);
+const { width, height } = useElementSize(app);
 
 onMounted(() => {
-  el.value = document.querySelector("#app");
+  app.value = document.querySelector("#app");
 });
 
 watchEffect(() => {
+  const ratioWidth = (height.value / 16) * 9;
+  const minWidth = Math.min(width.value, ratioWidth);
+  const remSize = (10 / 360) * minWidth;
   const root = document.documentElement;
-  const remSize = (10 / 360) * width.value;
-  console.log(remSize);
   root.style.setProperty("--rem-size", `${remSize}px`);
+  root.style.setProperty("--ratio-width", `${ratioWidth}px`);
 });
 </script>
