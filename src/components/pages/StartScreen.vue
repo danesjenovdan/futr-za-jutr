@@ -50,7 +50,10 @@
 
 .top {
   flex: 1 1 0%;
-  padding: 4.4rem 2.1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2.1rem;
   background-color: $color-dark-1;
   box-shadow: 0 0 12px 0 $color-dark-1;
 
