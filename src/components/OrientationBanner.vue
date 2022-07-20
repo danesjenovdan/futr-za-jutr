@@ -15,8 +15,10 @@ const portrait = computed(() => width.value < height.value);
 
 <style scoped lang="scss">
 .orientation-banner {
+  position: fixed;
+  inset: 0 0 auto 0;
   background: orange;
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: 700;
   text-align: center;
 

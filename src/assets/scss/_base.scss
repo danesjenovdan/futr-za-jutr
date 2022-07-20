@@ -15,8 +15,10 @@ body {
 #app {
   background: $color-page-bg;
   height: 100vh;
+  overflow: hidden;
 
-  @media (min-width: 992px) and (orientation: landscape) {
+  // @media (min-width: 992px) and (orientation: landscape) {
+  @media (orientation: landscape) {
     margin: 0 auto;
     aspect-ratio: 9/16;
   }
