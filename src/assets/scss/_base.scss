@@ -1,0 +1,23 @@
+:root {
+  --rem-size: 10px;
+}
+
+html {
+  font-size: var(--rem-size, 10px);
+}
+
+body {
+  background: $color-viewport-bg;
+  font-weight: 100%;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+}
+
+#app {
+  background: $color-page-bg;
+  height: 100vh;
+
+  @media (min-width: 992px) and (orientation: landscape) {
+    margin: 0 auto;
+    aspect-ratio: 9/16;
+  }
+}

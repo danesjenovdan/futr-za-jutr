@@ -4,6 +4,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import { routes } from "./routes";
 import App from "./App.vue";
 
+import "./assets/css/bootstrap-reboot.min.css";
+import "./assets/scss/main.scss";
+
 const pinia = createPinia();
 
 const router = createRouter({
