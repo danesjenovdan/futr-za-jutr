@@ -1,6 +1,17 @@
 <template>
   <div class="top">
-    <button @click="$router.push({ name: 'game' })">START GAME</button>
+    <div class="logo">
+      <img src="../../assets/images/logo-igra.svg" alt="Futr za jutr" />
+    </div>
+    <div class="title">
+      Znaš sestaviti<br />
+      trajnosten obrok?
+    </div>
+    <div class="buttons">
+      <button class="start-button" @click="$router.push({ name: 'game' })">
+        ZAČNI!
+      </button>
+    </div>
   </div>
   <div class="bottom">
     <div class="funding-text">
@@ -38,12 +49,51 @@
 @import "../../assets/scss/variables";
 
 .top {
-  flex-basis: 77%;
+  flex: 1 1 0%;
+  padding: 4.4rem 2.1rem 0;
   background-color: $color-dark-1;
   box-shadow: 0 0 12px 0 $color-dark-1;
+
+  .logo {
+    margin-bottom: 2.1rem;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .title {
+    margin-bottom: 3.1rem;
+    font-style: italic;
+    font-size: 2.8rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: $color-white;
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+
+    .start-button {
+      padding: 1.6rem 5.1rem 0.7rem;
+      border: none;
+      background-color: transparent;
+      background-image: url("../../assets/images/buttons/gumb-zacni.svg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      font-size: 2.8rem;
+      font-weight: 800;
+      font-style: italic;
+      line-height: 1;
+      color: $color-accent-primary-contrast;
+    }
+  }
 }
 
 .bottom {
+  flex: 0 0 23%;
   padding: 0 2.8rem;
 
   .funding-text {
