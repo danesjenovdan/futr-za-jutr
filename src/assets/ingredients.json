@@ -1,1 +1,319 @@
-{}
+{
+  "ingredients": {
+    "cheese": {
+      "best": {
+        "name": "Kozji tropinc",
+        "icon": "/ingredient_icons/cheese1.png"
+      },
+      "medium": {
+        "name": "Mozzarella di bufala",
+        "icon": "/ingredient_icons/cheese2.png"
+      },
+      "worst": {
+        "name": "Topljeni cheddar v lističih",
+        "icon": "/ingredient_icons/cheese3.png"
+      }
+    },
+    "cream": {
+      "best": {
+        "name": "Ovsena smetana",
+        "icon": "/ingredient_icons/cream1.png"
+      },
+      "medium": {
+        "name": "Kokosova smetana",
+        "icon": "/ingredient_icons/cream2.png"
+      },
+      "worst": {
+        "name": "Mlečna smetana",
+        "icon": "/ingredient_icons/cream3.png"
+      }
+    },
+    "dough": {
+      "best": {
+        "name": "Testo z drožmi",
+        "icon": "/ingredient_icons/dough1.png"
+      },
+      "medium": {
+        "name": "Polnozrnato testo",
+        "icon": "/ingredient_icons/dough2.png"
+      },
+      "worst": {
+        "name": "Belo testo",
+        "icon": "/ingredient_icons/dough3.png"
+      }
+    },
+    "egg": {
+      "best": {
+        "name": "Jajce iz ekološke reje",
+        "icon": "/ingredient_icons/egg1.png"
+      },
+      "medium": {
+        "name": "Jajce iz proste reje",
+        "icon": "/ingredient_icons/egg2.png"
+      },
+      "worst": {
+        "name": "Jajce iz hlevske reje",
+        "icon": "/ingredient_icons/egg3.png"
+      }
+    },
+    "patty": {
+      "best": {
+        "name": "Fižolov polpet",
+        "icon": "/ingredient_icons/patty1.png"
+      },
+      "medium": {
+        "name": "Sojin polpet",
+        "icon": "/ingredient_icons/patty2.png"
+      },
+      "worst": {
+        "name": "Goveji polpet",
+        "icon": "/ingredient_icons/patty3.png"
+      }
+    },
+    "protein": {
+      "best": {
+        "name": "Čičerika",
+        "icon": "/ingredient_icons/protein1.png"
+      },
+      "medium": {
+        "name": "Losos",
+        "icon": "/ingredient_icons/protein2.png"
+      },
+      "worst": {
+        "name": "Piščanec",
+        "icon": "/ingredient_icons/protein3.png"
+      }
+    },
+    "sauce": {
+      "best": {
+        "name": "Majoneza",
+        "icon": "/ingredient_icons/sauce1.png"
+      },
+      "medium": {
+        "name": "Arašidova omaka",
+        "icon": "/ingredient_icons/sauce2.png"
+      },
+      "worst": {
+        "name": "Guacamole",
+        "icon": "/ingredient_icons/sauce3.png"
+      }
+    },
+    "sweet": {
+      "best": {
+        "name": "Jagoda",
+        "icon": "/ingredient_icons/sweet1.png"
+      },
+      "medium": {
+        "name": "Banana",
+        "icon": "/ingredient_icons/sweet2.png"
+      },
+      "worst": {
+        "name": "Kakav",
+        "icon": "/ingredient_icons/sweet3.png"
+      }
+    },
+    "tomato": {
+      "best": {
+        "name": "Eko paradižnik",
+        "icon": "/ingredient_icons/tomato1.png"
+      },
+      "medium": {
+        "name": "Kupljen paradižnik",
+        "icon": "/ingredient_icons/tomato2.png"
+      },
+      "worst": {
+        "name": "Vložen paradižnik",
+        "icon": "/ingredient_icons/tomato3.png"
+      }
+    },
+    "vegetable": {
+      "best": {
+        "name": "Rukola",
+        "icon": "/ingredient_icons/veg1.png"
+      },
+      "medium": {
+        "name": "Kumara",
+        "icon": "/ingredient_icons/veg2.png"
+      },
+      "worst": {
+        "name": "Paprika",
+        "icon": "/ingredient_icons/veg3.png"
+      }
+    }
+  },
+  "food": {
+    "burger": {
+      "icon": "/food_icons/burger.png",
+      "ingredients": [
+        {
+          "type": "dough",
+          "layer_image": "/ingredient_layers/burger/bun_b_s.png"
+        },
+        {
+          "type": "patty",
+          "layer_image": "/ingredient_layers/burger/patty_s.png"
+        },
+        {
+          "type": "cheese",
+          "layer_image": "/ingredient_layers/burger/cheese_s.png"
+        },
+        {
+          "type": "vegetable",
+          "layer_images": [
+            "/ingredient_layers/burger/veg1_s.png",
+            "/ingredient_layers/burger/veg2_s.png",
+            "/ingredient_layers/burger/veg3_s.png"
+          ]
+        },
+        {
+          "type": "none",
+          "layer_image": "/ingredient_layers/burger/bun_t_s.png"
+        }
+      ]
+    },
+    "pie": {
+      "icon": "/food_icons/pie.png",
+      "ingredients": [
+        {
+          "type": "none",
+          "layer_image": "/ingredient_layers/pie/1pan_s.png"
+        },
+        {
+          "type": "dough",
+          "layer_image": "/ingredient_layers/pie/2dough_s.png"
+        },
+        {
+          "type": "cream",
+          "layer_image": "/ingredient_layers/pie/4cream_s.png"
+        },
+        {
+          "type": "sweet",
+          "layer_images": [
+            "/ingredient_layers/pie/5sweet1_s.png",
+            "/ingredient_layers/pie/5sweet3_s.png",
+            "/ingredient_layers/pie/5sweet4_s.png"
+          ]
+        },
+        {
+          "type": "egg",
+          "layer_image": "/ingredient_layers/pie/3egg_s.png"
+        },
+        {
+          "type": "none",
+          "layer_images": [
+            "/ingredient_layers/pie/6cut1_s.png",
+            "/ingredient_layers/pie/6cut3_s.png",
+            "/ingredient_layers/pie/6cut4_s.png"
+          ]
+        }
+      ]
+    },
+    "salad": {
+      "icon": "/food_icons/salad.png",
+      "ingredients": [
+        {
+          "type": "none",
+          "layer_image": "/ingredient_layers/salad/1plate_s.png"
+        },
+        {
+          "type": "vegetable",
+          "layer_images": [
+            "/ingredient_layers/salad/2veg1_s.png",
+            "/ingredient_layers/salad/2veg2_s.png",
+            "/ingredient_layers/salad/2veg3_s.png"
+          ]
+        },
+        {
+          "type": "tomato",
+          "layer_image": "/ingredient_layers/salad/3tomato_s.png"
+        },
+        {
+          "type": "egg",
+          "layer_image": "/ingredient_layers/salad/4egg_s.png"
+        },
+        {
+          "type": "sauce",
+          "layer_images": [
+            "/ingredient_layers/salad/5sauce1_s.png",
+            "/ingredient_layers/salad/5sauce2_s.png",
+            "/ingredient_layers/salad/5sauce2_s.png"
+          ]
+        }
+      ]
+    },
+    "soup": {
+      "icon": "/food_icons/soup.png",
+      "ingredients": [
+        {
+          "type": "none",
+          "layer_image": "/ingredient_layers/soup/bowl_s.png"
+        },
+        {
+          "type": "tomato",
+          "layer_image": "/ingredient_layers/soup/1tomato_s.png"
+        },
+        {
+          "type": "cream",
+          "layer_image": "/ingredient_layers/soup/2cream_s.png"
+        },
+        {
+          "type": "vegetable",
+          "layer_image": "/ingredient_layers/soup/3_veg_s.png"
+        },
+        {
+          "type": "protein",
+          "layer_image": "/ingredient_layers/soup/4protein_s.png"
+        },
+        {
+          "type": "none",
+          "layer_images": [
+            "/ingredient_layers/soup/5soup1_s.png",
+            "/ingredient_layers/soup/5soup2_s.png",
+            "/ingredient_layers/soup/5soup2_s.png"
+          ]
+        },
+        {
+          "type": "none",
+          "layer_image": "/ingredient_layers/soup/6spoon_s.png"
+        }
+      ]
+    },
+    "taco": {
+      "icon": "/food_icons/taco.png",
+      "ingredients": [
+        {
+          "type": "none",
+          "layer_image": "/ingredient_layers/taco/wrap_b_s.png"
+        },
+        {
+          "type": "tomato",
+          "layer_image": "/ingredient_layers/taco/tomato_s.png"
+        },
+        {
+          "type": "protein",
+          "layer_image": "/ingredient_layers/taco/protein_s.png"
+        },
+        {
+          "type": "sauce",
+          "layer_images": [
+            "/ingredient_layers/taco/sauce1_s.png",
+            "/ingredient_layers/taco/sauce2_s.png",
+            "/ingredient_layers/taco/sauce2_s.png"
+          ]
+        },
+        {
+          "type": "cheese",
+          "layer_image": "/ingredient_layers/taco/cheese_s.png"
+        },
+        {
+          "type": "none",
+          "layer_images": [
+            "/ingredient_layers/taco/fold1_s.png",
+            "/ingredient_layers/taco/fold2_s.png",
+            "/ingredient_layers/taco/fold2_s.png"
+          ]
+        }
+      ]
+    }
+  }
+}
