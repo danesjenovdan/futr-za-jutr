@@ -141,7 +141,7 @@
       }
     }
   },
-  "food": {
+  "foods": {
     "burger": {
       "icon": "/food_icons/burger.png",
       "ingredients": [
@@ -308,9 +308,9 @@
         {
           "type": "none",
           "layer_images": [
-            "/ingredient_layers/taco/fold1_s.png",
-            "/ingredient_layers/taco/fold2_s.png",
-            "/ingredient_layers/taco/fold2_s.png"
+            "/ingredient_layers/taco/fold1.png",
+            "/ingredient_layers/taco/fold2.png",
+            "/ingredient_layers/taco/fold2.png"
           ]
         }
       ]
