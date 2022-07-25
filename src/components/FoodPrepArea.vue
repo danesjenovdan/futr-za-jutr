@@ -25,8 +25,6 @@ const gameStore = useGameStore();
   align-items: center;
   justify-content: center;
 
-  color: white;
-
   .layers {
     position: relative;
     width: 22rem;

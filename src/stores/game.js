@@ -46,7 +46,7 @@ export const useGameStore = defineStore("gameStore", {
     remainingTimeMs: MAX_TIME_SECONDS * 1000,
     paused: true,
     gameOver: false,
-    foods: [createNewFood("burger")],
+    foods: [createNewFood("pie")],
   }),
   getters: {
     currentFood(state) {

@@ -33,6 +33,7 @@ function onResultsClick() {
 .modal-bg {
   position: fixed;
   inset: 0;
+  z-index: 1000;
   background: rgba($color-dark-1, 0.75);
   display: flex;
   justify-content: center;

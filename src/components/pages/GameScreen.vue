@@ -8,6 +8,7 @@
   <div class="bottom">
     <BottomBar />
   </div>
+  <InstructionsOverlay />
   <GameOverModal />
 </template>
 
@@ -15,6 +16,7 @@
 import TopBar from "../TopBar.vue";
 import BottomBar from "../BottomBar.vue";
 import FoodPrepArea from "../FoodPrepArea.vue";
+import InstructionsOverlay from "../InstructionsOverlay.vue";
 import GameOverModal from "../GameOverModal.vue";
 </script>
 
@@ -32,6 +34,8 @@ import GameOverModal from "../GameOverModal.vue";
 }
 
 .bottom {
+  position: relative;
+  z-index: 600;
   flex: 0 0 6.4rem;
   background: $color-dark-2;
 }
