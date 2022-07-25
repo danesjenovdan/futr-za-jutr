@@ -19,7 +19,9 @@ import { useGameStore, MAX_TIME_SECONDS } from "../stores/game";
 import { useTimer } from "../composables/useTimer";
 
 const gameStore = useGameStore();
-const { remainingMs, start } = useTimer(MAX_TIME_SECONDS, { autoStart: false });
+const { remainingMs, start, stop } = useTimer(MAX_TIME_SECONDS, {
+  autoStart: false,
+});
 
 watch(remainingMs, (newValue) => {
   gameStore.remainingTimeMs = newValue;
@@ -34,6 +36,8 @@ watch(
   (newValue) => {
     if (!newValue) {
       start();
+    } else {
+      stop();
     }
   }
 );

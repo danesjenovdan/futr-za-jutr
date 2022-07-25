@@ -18,6 +18,11 @@ export const useTimer = (durationSeconds, { autoStart = true } = {}) => {
     }
   };
 
+  const stop = () => {
+    clearInterval(updateTimeInterval);
+    updateTimeInterval = null;
+  };
+
   onBeforeUnmount(() => {
     clearInterval(updateTimeInterval);
     updateTimeInterval = null;
@@ -34,5 +39,6 @@ export const useTimer = (durationSeconds, { autoStart = true } = {}) => {
   return {
     remainingMs,
     start,
+    stop,
   };
 };
