@@ -7,13 +7,45 @@
       </div>
       <div class="pill time">
         <img class="icon" src="../assets/images/icons/ura.svg" alt="" />
-        <div class="text">1:33</div>
+        <div class="text">{{ formattedTimer }}</div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed, watch } from "vue";
+import { useGameStore, MAX_TIME_SECONDS } from "../stores/game";
+import { useTimer } from "../composables/useTimer";
+
+const gameStore = useGameStore();
+const { remainingMs, start } = useTimer(MAX_TIME_SECONDS, { autoStart: false });
+
+watch(remainingMs, (newValue) => {
+  gameStore.remainingTimeMs = newValue;
+  if (newValue <= 0) {
+    gameStore.paused = true;
+    gameStore.gameOver = true;
+  }
+});
+
+watch(
+  () => gameStore.paused,
+  (newValue) => {
+    if (!newValue) {
+      start();
+    }
+  }
+);
+
+const formattedTimer = computed(() => {
+  const seconds = Math.ceil(gameStore.remainingTimeMs / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds % 60).padStart(2, "0");
+  return `${formattedMinutes}:${formattedSeconds}`;
+});
+</script>
 
 <style scoped lang="scss">
 @import "../assets/scss/variables";
