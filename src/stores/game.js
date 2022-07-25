@@ -12,6 +12,10 @@ function getRandomFoodId() {
   return sample(keys);
 }
 
+function getLayerImage(ingredient) {
+  return ingredient.layer_image || ingredient.layer_images[0];
+}
+
 function createNewFood(foodId) {
   const nextFoodId =
     foodId && ingredients.foods[foodId] ? foodId : getRandomFoodId();
@@ -22,18 +26,13 @@ function createNewFood(foodId) {
     layers: [],
   };
 
-  for (let i = 0; i < foodTemplate.ingredients.length; i += 1) {
-    const nextIngredient = foodTemplate.ingredients[i];
-
-    if (nextIngredient.type !== "none") {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const ingredient of foodTemplate.ingredients) {
+    if (ingredient.type !== "none") {
       break;
     }
-
-    const nextLayerImage =
-      nextIngredient.layer_image || nextIngredient.layer_images[0];
-
     newFood.layers.push({
-      layerImage: nextLayerImage,
+      layerImage: getLayerImage(ingredient),
     });
   }
 
@@ -47,10 +46,17 @@ export const useGameStore = defineStore("gameStore", {
     paused: true,
     gameOver: false,
     foods: [createNewFood("pie")],
+    ingredientSelectorOpen: false,
   }),
   getters: {
     currentFood(state) {
       return last(state.foods);
+    },
+    continueButtonText(state) {
+      if (state.ingredientSelectorOpen) {
+        return "POTRDI IZBIRO";
+      }
+      return "DODAJ SESTAVINO";
     },
   },
   actions: {
@@ -61,30 +67,31 @@ export const useGameStore = defineStore("gameStore", {
 
       if (this.paused) {
         this.paused = false;
-        return;
       }
 
       const foodTemplate = ingredients.foods[this.currentFood.id];
-      const completedLayers = this.currentFood.layers.length;
+      const numCompletedLayers = this.currentFood.layers.length;
+      const numIngredients = foodTemplate.ingredients.length;
 
-      if (completedLayers < foodTemplate.ingredients.length) {
-        // current food is not completed
-        const nextIngredient = foodTemplate.ingredients[completedLayers];
-        const nextLayerImage =
-          nextIngredient.layer_image || nextIngredient.layer_images[0];
-
+      // current food is not completed
+      if (numCompletedLayers < numIngredients) {
+        const nextIngredient = foodTemplate.ingredients[numCompletedLayers];
         this.currentFood.layers.push({
-          layerImage: nextLayerImage,
+          layerImage: getLayerImage(nextIngredient),
         });
-      } else if (this.foods.length === 4) {
-        // all foods completed
+        return;
+      }
+
+      // all foods completed
+      if (this.foods.length === 4) {
         this.paused = true;
         this.gameOver = true;
-      } else {
-        // current food completed, start new one
-        const nextFood = createNewFood();
-        this.foods.push(nextFood);
+        return;
       }
+
+      // current food completed, start new one
+      const nextFood = createNewFood();
+      this.foods.push(nextFood);
     },
   },
 });

@@ -1,8 +1,8 @@
 <template>
   <div class="bottom-bar">
     <button class="confirm-button" @click="gameStore.continueFoodPrep">
-      <!-- TODO: change text based on action -->
-      DODAJ SESTAVINO
+      {{ gameStore.continueButtonText }}
+      <!-- TODO: add icon -->
     </button>
   </div>
 </template>
