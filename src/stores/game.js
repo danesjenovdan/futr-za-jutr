@@ -2,7 +2,7 @@ import { last, sample } from "lodash-es";
 import { defineStore } from "pinia";
 import ingredients from "../assets/ingredients.json";
 
-export const MAX_TIME_SECONDS = 120;
+export const MAX_TIME_SECONDS = 90;
 const SCORING_INGREDIENTS = Object.keys(ingredients.ingredients);
 
 console.log(SCORING_INGREDIENTS);

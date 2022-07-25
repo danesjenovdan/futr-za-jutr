@@ -5,7 +5,13 @@
         <img class="icon" src="../assets/images/icons/kovanec.svg" alt="" />
         <div class="text">132</div>
       </div>
-      <div class="pill time">
+      <div
+        :class="[
+          'pill',
+          'time',
+          { warning: gameStore.remainingTimeMs <= 5000 },
+        ]"
+      >
         <img class="icon" src="../assets/images/icons/ura.svg" alt="" />
         <div class="text">{{ formattedTimer }}</div>
       </div>
@@ -69,6 +75,7 @@ const formattedTimer = computed(() => {
       display: flex;
       background-color: $color-dark-1;
       border-radius: 10em;
+      box-shadow: inset 0 0 1.1rem rgba($color-black, 0.6);
 
       .icon {
         width: 2.5rem;
@@ -81,6 +88,20 @@ const formattedTimer = computed(() => {
         font-size: 1.5rem;
         font-weight: 800;
         line-height: 1;
+      }
+
+      &.time {
+        .text {
+          min-width: 5.1rem;
+        }
+      }
+
+      &.warning {
+        background-color: $color-warning-bg;
+
+        .text {
+          color: $color-warning-fg;
+        }
       }
     }
   }
