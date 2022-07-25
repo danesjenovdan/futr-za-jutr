@@ -1,19 +1,16 @@
 <template>
   <div class="bottom-bar">
-    <button class="confirm-button" @click="onButtonClick">
+    <button class="confirm-button" @click="gameStore.continueFoodPrep">
+      <!-- TODO: change text based on action -->
       DODAJ SESTAVINO
     </button>
   </div>
 </template>
 
 <script setup>
-import { useCounterStore } from "../stores/counter";
+import { useGameStore } from "../stores/game";
 
-const counterStore = useCounterStore();
-
-function onButtonClick() {
-  counterStore.counter += 1;
-}
+const gameStore = useGameStore();
 </script>
 
 <style scoped lang="scss">
