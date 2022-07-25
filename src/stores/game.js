@@ -12,13 +12,19 @@ function getRandomFoodId() {
   return sample(keys);
 }
 
-function getLayerImage(ingredient) {
-  return ingredient.layer_image || ingredient.layer_images[0];
+function getLayerImage(ingredient, quality) {
+  if (ingredient.layer_image) {
+    return ingredient.layer_image;
+  }
+  const key = quality || "best";
+  return ingredient.layer_images[key];
 }
 
 function createNewFood(foodId) {
-  const nextFoodId =
-    foodId && ingredients.foods[foodId] ? foodId : getRandomFoodId();
+  let nextFoodId = foodId;
+  if (!nextFoodId || !ingredients.foods[nextFoodId]) {
+    nextFoodId = getRandomFoodId();
+  }
   const foodTemplate = ingredients.foods[nextFoodId];
 
   const newFood = {
@@ -47,10 +53,20 @@ export const useGameStore = defineStore("gameStore", {
     gameOver: false,
     foods: [createNewFood("pie")],
     ingredientSelectorOpen: false,
+    ingredientSelection: null,
   }),
   getters: {
     currentFood(state) {
       return last(state.foods);
+    },
+    ingredientSelectorOptions(state) {
+      const foodTemplate = ingredients.foods[state.currentFood.id];
+      const numCompletedLayers = state.currentFood.layers.length;
+      const ingredientType = foodTemplate.ingredients[numCompletedLayers].type;
+      if (!ingredients.ingredients[ingredientType]) {
+        return null;
+      }
+      return ingredients.ingredients[ingredientType];
     },
     continueButtonText(state) {
       if (state.ingredientSelectorOpen) {
@@ -58,15 +74,25 @@ export const useGameStore = defineStore("gameStore", {
       }
       return "DODAJ SESTAVINO";
     },
+    continueButtonDisabled(state) {
+      if (state.ingredientSelectorOpen && !state.ingredientSelection) {
+        return true;
+      }
+      return false;
+    },
   },
   actions: {
     continueFoodPrep() {
-      if (!this.currentFood) {
+      if (!this.currentFood || this.continueButtonDisabled) {
         return;
       }
 
       if (this.paused) {
         this.paused = false;
+        if (this.ingredientSelectorOptions) {
+          this.ingredientSelectorOpen = true;
+          return;
+        }
       }
 
       const foodTemplate = ingredients.foods[this.currentFood.id];
@@ -75,10 +101,20 @@ export const useGameStore = defineStore("gameStore", {
 
       // current food is not completed
       if (numCompletedLayers < numIngredients) {
+        // open ingredient selector
+        if (!this.ingredientSelectorOpen && this.ingredientSelectorOptions) {
+          this.ingredientSelectorOpen = true;
+          return;
+        }
+
+        // confirm ingredient selection
         const nextIngredient = foodTemplate.ingredients[numCompletedLayers];
         this.currentFood.layers.push({
-          layerImage: getLayerImage(nextIngredient),
+          layerImage: getLayerImage(nextIngredient, this.ingredientSelection),
+          quality: this.ingredientSelection,
         });
+        this.ingredientSelectorOpen = false;
+        this.ingredientSelection = null;
         return;
       }
 

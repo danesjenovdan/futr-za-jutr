@@ -1,6 +1,10 @@
 <template>
   <div class="bottom-bar">
-    <button class="confirm-button" @click="gameStore.continueFoodPrep">
+    <button
+      class="confirm-button"
+      :disabled="gameStore.continueButtonDisabled"
+      @click="gameStore.continueFoodPrep"
+    >
       {{ gameStore.continueButtonText }}
       <!-- TODO: add icon -->
     </button>
@@ -34,6 +38,12 @@ const gameStore = useGameStore();
     font-style: italic;
     line-height: 1;
     color: $color-accent-primary-contrast;
+
+    &:disabled {
+      filter: contrast(2) hue-rotate(320deg);
+      opacity: 0.33;
+      cursor: not-allowed;
+    }
   }
 }
 </style>

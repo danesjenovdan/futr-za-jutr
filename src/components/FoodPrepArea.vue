@@ -8,17 +8,20 @@
         <img :src="layer.layerImage" />
       </template>
     </div>
+    <IngredientSelector />
   </div>
 </template>
 
 <script setup>
 import { useGameStore } from "../stores/game";
+import IngredientSelector from "./IngredientSelector.vue";
 
 const gameStore = useGameStore();
 </script>
 
 <style scoped lang="scss">
 .food-prep-area {
+  position: relative;
   display: flex;
   height: 100%;
   flex-direction: column;

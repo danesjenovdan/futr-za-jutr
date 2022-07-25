@@ -159,11 +159,11 @@
         },
         {
           "type": "vegetable",
-          "layer_images": [
-            "/ingredient_layers/burger/veg1_s.png",
-            "/ingredient_layers/burger/veg2_s.png",
-            "/ingredient_layers/burger/veg3_s.png"
-          ]
+          "layer_images": {
+            "best": "/ingredient_layers/burger/veg1_s.png",
+            "medium": "/ingredient_layers/burger/veg2_s.png",
+            "worst": "/ingredient_layers/burger/veg3_s.png"
+          }
         },
         {
           "type": "none",
@@ -188,11 +188,11 @@
         },
         {
           "type": "sweet",
-          "layer_images": [
-            "/ingredient_layers/pie/5sweet1_s.png",
-            "/ingredient_layers/pie/5sweet3_s.png",
-            "/ingredient_layers/pie/5sweet4_s.png"
-          ]
+          "layer_images": {
+            "best": "/ingredient_layers/pie/5sweet1_s.png",
+            "medium": "/ingredient_layers/pie/5sweet3_s.png",
+            "worst": "/ingredient_layers/pie/5sweet4_s.png"
+          }
         },
         {
           "type": "egg",
@@ -200,11 +200,11 @@
         },
         {
           "type": "none",
-          "layer_images": [
-            "/ingredient_layers/pie/6cut1_s.png",
-            "/ingredient_layers/pie/6cut3_s.png",
-            "/ingredient_layers/pie/6cut4_s.png"
-          ]
+          "layer_images": {
+            "best": "/ingredient_layers/pie/6cut1_s.png",
+            "medium": "/ingredient_layers/pie/6cut3_s.png",
+            "worst": "/ingredient_layers/pie/6cut4_s.png"
+          }
         }
       ]
     },
@@ -217,11 +217,11 @@
         },
         {
           "type": "vegetable",
-          "layer_images": [
-            "/ingredient_layers/salad/2veg1_s.png",
-            "/ingredient_layers/salad/2veg2_s.png",
-            "/ingredient_layers/salad/2veg3_s.png"
-          ]
+          "layer_images": {
+            "best": "/ingredient_layers/salad/2veg1_s.png",
+            "medium": "/ingredient_layers/salad/2veg2_s.png",
+            "worst": "/ingredient_layers/salad/2veg3_s.png"
+          }
         },
         {
           "type": "tomato",
@@ -233,11 +233,11 @@
         },
         {
           "type": "sauce",
-          "layer_images": [
-            "/ingredient_layers/salad/5sauce1_s.png",
-            "/ingredient_layers/salad/5sauce2_s.png",
-            "/ingredient_layers/salad/5sauce2_s.png"
-          ]
+          "layer_images": {
+            "best": "/ingredient_layers/salad/5sauce1_s.png",
+            "medium": "/ingredient_layers/salad/5sauce2_s.png",
+            "worst": "/ingredient_layers/salad/5sauce2_s.png"
+          }
         }
       ]
     },
@@ -266,11 +266,11 @@
         },
         {
           "type": "none",
-          "layer_images": [
-            "/ingredient_layers/soup/5soup1_s.png",
-            "/ingredient_layers/soup/5soup2_s.png",
-            "/ingredient_layers/soup/5soup2_s.png"
-          ]
+          "layer_images": {
+            "best": "/ingredient_layers/soup/5soup1_s.png",
+            "medium": "/ingredient_layers/soup/5soup2_s.png",
+            "worst": "/ingredient_layers/soup/5soup2_s.png"
+          }
         },
         {
           "type": "none",
@@ -295,11 +295,11 @@
         },
         {
           "type": "sauce",
-          "layer_images": [
-            "/ingredient_layers/taco/sauce1_s.png",
-            "/ingredient_layers/taco/sauce2_s.png",
-            "/ingredient_layers/taco/sauce2_s.png"
-          ]
+          "layer_images": {
+            "best": "/ingredient_layers/taco/sauce1_s.png",
+            "medium": "/ingredient_layers/taco/sauce2_s.png",
+            "worst": "/ingredient_layers/taco/sauce2_s.png"
+          }
         },
         {
           "type": "cheese",
@@ -307,11 +307,11 @@
         },
         {
           "type": "none",
-          "layer_images": [
-            "/ingredient_layers/taco/fold1.png",
-            "/ingredient_layers/taco/fold2.png",
-            "/ingredient_layers/taco/fold2.png"
-          ]
+          "layer_images": {
+            "best": "/ingredient_layers/taco/fold1.png",
+            "medium": "/ingredient_layers/taco/fold2.png",
+            "worst": "/ingredient_layers/taco/fold2.png"
+          }
         }
       ]
     }
