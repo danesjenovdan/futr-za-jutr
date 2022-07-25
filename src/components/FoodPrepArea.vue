@@ -24,6 +24,11 @@ const gameStore = useGameStore();
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
+  background-image: url("../assets/images/backgrounds/foodprepbg.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
 
   .layers {
     position: relative;
