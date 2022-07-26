@@ -10,6 +10,7 @@
   </div>
   <InstructionsOverlay />
   <GameOverModal />
+  <ImagePreloader />
 </template>
 
 <script setup>
@@ -18,6 +19,7 @@ import BottomBar from "../BottomBar.vue";
 import FoodPrepArea from "../FoodPrepArea.vue";
 import InstructionsOverlay from "../InstructionsOverlay.vue";
 import GameOverModal from "../GameOverModal.vue";
+import ImagePreloader from "../ImagePreloader.vue";
 </script>
 
 <style scoped lang="scss">
