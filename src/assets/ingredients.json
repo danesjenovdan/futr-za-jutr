@@ -86,7 +86,7 @@
     },
     "sauce": {
       "best": {
-        "name": "Majoneza",
+        "name": "Jogurtova omaka",
         "icon": "/ingredient_icons/sauce1.png"
       },
       "medium": {
@@ -100,7 +100,7 @@
     },
     "sweet": {
       "best": {
-        "name": "Jagoda",
+        "name": "Češnja",
         "icon": "/ingredient_icons/sweet1.png"
       },
       "medium": {
