@@ -183,6 +183,10 @@
           "layer_image": "/ingredient_layers/pie/2dough_s.png"
         },
         {
+          "type": "egg",
+          "layer_image": "/ingredient_layers/pie/3egg_s.png"
+        },
+        {
           "type": "cream",
           "layer_image": "/ingredient_layers/pie/4cream_s.png"
         },
@@ -195,16 +199,13 @@
           }
         },
         {
-          "type": "egg",
-          "layer_image": "/ingredient_layers/pie/3egg_s.png"
-        },
-        {
           "type": "none",
           "layer_images": {
             "best": "/ingredient_layers/pie/6cut1_s.png",
             "medium": "/ingredient_layers/pie/6cut3_s.png",
             "worst": "/ingredient_layers/pie/6cut4_s.png"
-          }
+          },
+          "replace": true
         }
       ]
     },
@@ -311,7 +312,8 @@
             "best": "/ingredient_layers/taco/fold1.png",
             "medium": "/ingredient_layers/taco/fold2.png",
             "worst": "/ingredient_layers/taco/fold2.png"
-          }
+          },
+          "replace": true
         }
       ]
     }

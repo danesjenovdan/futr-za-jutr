@@ -39,6 +39,7 @@ function createNewFood(foodId) {
     }
     newFood.layers.push({
       layerImage: getLayerImage(ingredient),
+      replace: ingredient.replace,
     });
   }
 
@@ -70,6 +71,13 @@ export const useGameStore = defineStore("gameStore", {
       const numDone = state.currentFood.layers.length;
       const numIngredients = foodTemplate.ingredients.length;
       return numDone >= numIngredients;
+    },
+    displayedLayers(state) {
+      const lastLayer = last(state.currentFood.layers);
+      if (lastLayer?.replace) {
+        return [lastLayer];
+      }
+      return state.currentFood.layers;
     },
     ingredientSelectorOptions(state) {
       return ingredients.ingredients[state.currentIngredientType];
@@ -130,6 +138,7 @@ export const useGameStore = defineStore("gameStore", {
           this.currentFood.layers.push({
             layerImage: getLayerImage(ingredient, this.ingredientSelection),
             quality: this.ingredientSelection,
+            replace: ingredient.replace,
           });
           this.ingredientSelection = null;
 
