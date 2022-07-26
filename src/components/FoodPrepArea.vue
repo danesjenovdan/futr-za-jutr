@@ -2,7 +2,7 @@
   <div class="food-prep-area constrain-width">
     <div class="layers">
       <template
-        v-for="layer in gameStore.currentFood.layers"
+        v-for="layer in gameStore.displayedLayers"
         :key="layer.layerImage"
       >
         <img :src="layer.layerImage" />

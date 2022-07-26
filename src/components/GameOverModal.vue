@@ -4,11 +4,16 @@
       <div>Zmanjkalo ti je časa!</div>
       <div>image</div>
       <div>
-        <p>V resničnem življenju pri izbiri hrane ne rabiš hiteti.</p>
-        <p>Pomembno je, katere sestavine uporabiš!</p>
+        <p>V resničnem življenju ti pri izbiri hrane ni treba hiteti.</p>
+        <p>
+          Zato za pripravo jedi izbiraj zdrave, trajnostne in okolju prijazne
+          sestavine!
+        </p>
       </div>
       <div>
-        <button type="button" @click="onResultsClick">POGLEJ REZULTAT</button>
+        <button type="button" @click="onResultsClick">
+          PREVERI SVOJ REZULTAT
+        </button>
       </div>
     </div>
   </div>

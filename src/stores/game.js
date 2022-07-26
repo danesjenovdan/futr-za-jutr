@@ -12,11 +12,17 @@ function getRandomFoodId() {
   return sample(keys);
 }
 
-function getLayerImage(ingredient, quality) {
+function getLayerImage(ingredient, quality, layers) {
   if (ingredient.layer_image) {
     return ingredient.layer_image;
   }
-  const key = quality || "best";
+  let key = quality;
+  if (ingredient.layer_image_from_index != null) {
+    key = layers[ingredient.layer_image_from_index]?.quality;
+  }
+  if (!key) {
+    key = "best";
+  }
   return ingredient.layer_images[key];
 }
 
@@ -38,7 +44,8 @@ function createNewFood(foodId) {
       break;
     }
     newFood.layers.push({
-      layerImage: getLayerImage(ingredient),
+      layerImage: getLayerImage(ingredient, undefined, newFood.layers),
+      replace: ingredient.replace,
     });
   }
 
@@ -51,7 +58,7 @@ export const useGameStore = defineStore("gameStore", {
     remainingTimeMs: MAX_TIME_SECONDS * 1000,
     paused: true,
     gameOver: false,
-    foods: [createNewFood("pie")],
+    foods: [createNewFood("taco")],
     ingredientSelectorOpen: false,
     ingredientSelection: null,
   }),
@@ -59,18 +66,40 @@ export const useGameStore = defineStore("gameStore", {
     currentFood(state) {
       return last(state.foods);
     },
-    ingredientSelectorOptions(state) {
+    currentIngredientType(state) {
       const foodTemplate = ingredients.foods[state.currentFood.id];
-      const numCompletedLayers = state.currentFood.layers.length;
-      const ingredientType = foodTemplate.ingredients[numCompletedLayers].type;
-      if (!ingredients.ingredients[ingredientType]) {
-        return null;
+      const numDone = state.currentFood.layers.length;
+      const ingredient = foodTemplate.ingredients[numDone];
+      return ingredient?.type;
+    },
+    currentFoodDone(state) {
+      const foodTemplate = ingredients.foods[state.currentFood.id];
+      const numDone = state.currentFood.layers.length;
+      const numIngredients = foodTemplate.ingredients.length;
+      return numDone >= numIngredients;
+    },
+    displayedLayers(state) {
+      const lastLayer = last(state.currentFood.layers);
+      if (lastLayer?.replace) {
+        return [lastLayer];
       }
-      return ingredients.ingredients[ingredientType];
+      return state.currentFood.layers;
+    },
+    ingredientSelectorOptions(state) {
+      return ingredients.ingredients[state.currentIngredientType];
     },
     continueButtonText(state) {
+      if (state.paused && !state.gameOver) {
+        return "ZAČNI IGRO";
+      }
       if (state.ingredientSelectorOpen) {
         return "POTRDI IZBIRO";
+      }
+      if (state.currentFoodDone) {
+        return "NASLEDNJA JED";
+      }
+      if (state.currentIngredientType === "none") {
+        return "ZAKLJUČI JED";
       }
       return "DODAJ SESTAVINO";
     },
@@ -96,11 +125,11 @@ export const useGameStore = defineStore("gameStore", {
       }
 
       const foodTemplate = ingredients.foods[this.currentFood.id];
-      const numCompletedLayers = this.currentFood.layers.length;
+      const numDone = this.currentFood.layers.length;
       const numIngredients = foodTemplate.ingredients.length;
 
       // current food is not completed
-      if (numCompletedLayers < numIngredients) {
+      if (numDone < numIngredients) {
         // open ingredient selector
         if (!this.ingredientSelectorOpen && this.ingredientSelectorOptions) {
           this.ingredientSelectorOpen = true;
@@ -108,13 +137,27 @@ export const useGameStore = defineStore("gameStore", {
         }
 
         // confirm ingredient selection
-        const nextIngredient = foodTemplate.ingredients[numCompletedLayers];
-        this.currentFood.layers.push({
-          layerImage: getLayerImage(nextIngredient, this.ingredientSelection),
-          quality: this.ingredientSelection,
-        });
         this.ingredientSelectorOpen = false;
-        this.ingredientSelection = null;
+
+        for (let i = numDone; i < foodTemplate.ingredients.length; i += 1) {
+          const ingredient = foodTemplate.ingredients[i];
+          this.currentFood.layers.push({
+            layerImage: getLayerImage(
+              ingredient,
+              this.ingredientSelection,
+              this.currentFood.layers
+            ),
+            quality: this.ingredientSelection,
+            replace: ingredient.replace,
+          });
+          this.ingredientSelection = null;
+
+          const nextIngredient = foodTemplate.ingredients[i + 1];
+          if (ingredient.type !== "none" || nextIngredient?.type !== "none") {
+            break;
+          }
+        }
+
         return;
       }
 
