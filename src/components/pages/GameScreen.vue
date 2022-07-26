@@ -1,72 +1,42 @@
-<script setup>
-import { computed, watch } from "vue";
-import { useRouter } from "vue-router";
-import { useCounterStore } from "../../stores/counter";
-import { useTimer } from "../../composables/useTimer";
-
-const router = useRouter();
-const counterStore = useCounterStore();
-const { remainingMs } = useTimer(20);
-
-const formattedTimer = computed(() => {
-  const seconds = remainingMs.value / 1000;
-  const minutes = seconds / 60;
-  const formattedMinutes = String(Math.floor(minutes)).padStart(2, "0");
-  const formattedSeconds = String(Math.floor(seconds % 60)).padStart(2, "0");
-  return `${formattedMinutes}:${formattedSeconds}`;
-});
-
-function addIngredient() {
-  counterStore.counter += 1;
-}
-
-watch(remainingMs, (newValue) => {
-  if (newValue <= 0) {
-    router.push({ name: "results" });
-  }
-});
-
-counterStore.$subscribe((mutation, state) => {
-  if (state.counter >= 4) {
-    setTimeout(() => {
-      alert("Congratz!");
-      router.push({ name: "results" });
-    }, 250);
-  }
-});
-</script>
-
 <template>
-  <div>
-    <h1>GAME SCREEN</h1>
-    <div>
-      {{ formattedTimer }}
-    </div>
-
-    <div>{{ counterStore.counter }}</div>
-
-    <div class="ingredients">
-      <img
-        v-for="i in counterStore.counter"
-        :key="i"
-        :src="`/ingredients/tmp${i}.png`"
-      />
-    </div>
-
-    <div>
-      <button @click="addIngredient">dodaj sestavino</button>
-    </div>
+  <div class="top">
+    <TopBar />
   </div>
+  <div class="main-area">
+    <FoodPrepArea />
+  </div>
+  <div class="bottom">
+    <BottomBar />
+  </div>
+  <InstructionsOverlay />
+  <GameOverModal />
 </template>
 
-<style scoped>
-.ingredients {
-  position: relative;
-  width: 250px;
-  height: 250px;
+<script setup>
+import TopBar from "../TopBar.vue";
+import BottomBar from "../BottomBar.vue";
+import FoodPrepArea from "../FoodPrepArea.vue";
+import InstructionsOverlay from "../InstructionsOverlay.vue";
+import GameOverModal from "../GameOverModal.vue";
+</script>
+
+<style scoped lang="scss">
+@import "../../assets/scss/variables";
+
+.top {
+  flex: 0 0 4.4rem;
+  background: $color-dark-2;
 }
 
-.ingredients img {
-  position: absolute;
+.main-area {
+  flex: 1 1 0%;
+  background: $color-dark-1;
+}
+
+.bottom {
+  position: relative;
+  z-index: 600;
+  flex: 0 0 6.4rem;
+  background: $color-dark-2;
 }
 </style>

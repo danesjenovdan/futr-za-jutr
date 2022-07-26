@@ -16,5 +16,7 @@ module.exports = {
     ],
     // allow a single named export in file
     "import/prefer-default-export": ["off"],
+    // allow mutating param object props
+    "no-param-reassign": ["error", { props: false }],
   },
 };
