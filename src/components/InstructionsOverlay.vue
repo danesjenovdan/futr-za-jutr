@@ -1,10 +1,12 @@
 <template>
   <div v-if="gameStore.paused && !gameStore.gameOver" class="modal-bg">
-    <div class="top-bubble">
-      <div class="text">Glej naročila in pazi na čas!</div>
-    </div>
-    <div class="bottom-bubble">
-      <div class="text">Izbiraj primerne trajnostne sestavine.</div>
+    <div class="constrain-width">
+      <div class="top-bubble">
+        <div class="text">Glej naročila in pazi na čas!</div>
+      </div>
+      <div class="bottom-bubble">
+        <div class="text">Izbiraj primerne trajnostne sestavine.</div>
+      </div>
     </div>
   </div>
 </template>

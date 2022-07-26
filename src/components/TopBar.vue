@@ -1,19 +1,21 @@
 <template>
   <div class="top-bar">
-    <div class="top-content">
-      <div class="pill points">
-        <img class="icon" src="../assets/images/icons/kovanec.svg" alt="" />
-        <div class="text">132</div>
-      </div>
-      <div
-        :class="[
-          'pill',
-          'time',
-          { warning: gameStore.remainingTimeMs <= 5000 },
-        ]"
-      >
-        <img class="icon" src="../assets/images/icons/ura.svg" alt="" />
-        <div class="text">{{ formattedTimer }}</div>
+    <div class="top-content constrain-width">
+      <div class="pills">
+        <div class="pill points">
+          <img class="icon" src="../assets/images/icons/kovanec.svg" alt="" />
+          <div class="text">132</div>
+        </div>
+        <div
+          :class="[
+            'pill',
+            'time',
+            { warning: gameStore.remainingTimeMs <= 5000 },
+          ]"
+        >
+          <img class="icon" src="../assets/images/icons/ura.svg" alt="" />
+          <div class="text">{{ formattedTimer }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -63,44 +65,50 @@ const formattedTimer = computed(() => {
 .top-bar {
   display: flex;
   height: 100%;
+  padding: 0 1.3rem;
 
   .top-content {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    padding: 0 1.3rem;
+    width: 100%;
 
-    .pill {
+    .pills {
       display: flex;
-      background-color: $color-dark-1;
-      border-radius: 10em;
-      box-shadow: inset 0 0 1.1rem rgba($color-black, 0.6);
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
 
-      .icon {
-        width: 2.5rem;
-        height: 2.5rem;
-      }
+      .pill {
+        display: flex;
+        background-color: $color-dark-1;
+        border-radius: 10em;
+        box-shadow: inset 0 0 1.1rem rgba($color-black, 0.6);
 
-      .text {
-        padding: 0.6rem 1.1rem 0.4rem 0.6rem;
-        color: $color-white;
-        font-size: 1.5rem;
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      &.time {
-        .text {
-          min-width: 5.1rem;
+        .icon {
+          width: 2.5rem;
+          height: 2.5rem;
         }
-      }
-
-      &.warning {
-        background-color: $color-warning-bg;
 
         .text {
-          color: $color-warning-fg;
+          padding: 0.6rem 1.1rem 0.4rem 0.6rem;
+          color: $color-white;
+          font-size: 1.5rem;
+          font-weight: 800;
+          line-height: 1;
+        }
+
+        &.time {
+          .text {
+            min-width: 5.1rem;
+          }
+        }
+
+        &.warning {
+          background-color: $color-warning-bg;
+
+          .text {
+            color: $color-warning-fg;
+          }
         }
       }
     }
