@@ -3,141 +3,171 @@
     "cheese": {
       "best": {
         "name": "Kozji tropinc",
-        "icon": "/ingredient_icons/cheese1.png"
+        "icon": "/ingredient_icons/cheese1.png",
+        "description": "Slovenski sir iz kozjega mleka, ki zori v teranovih tropinah."
       },
       "medium": {
         "name": "Mozzarella di bufala",
-        "icon": "/ingredient_icons/cheese2.png"
+        "icon": "/ingredient_icons/cheese2.png",
+        "description": "Italijanski sir, ki ga izdelujejo iz mleka vodnih bivolic."
       },
       "worst": {
         "name": "Topljeni cheddar v lističih",
-        "icon": "/ingredient_icons/cheese3.png"
+        "icon": "/ingredient_icons/cheese3.png",
+        "description": "Vrsta sira, ki izvira iz jugozahodne Anglije in ga izdelujejo iz kravjega mleka."
       }
     },
     "cream": {
       "best": {
         "name": "Ovsena smetana",
-        "icon": "/ingredient_icons/cream1.png"
+        "icon": "/ingredient_icons/cream1.png",
+        "description": "Rastlinska smetana, ki je narejena iz ovsa."
       },
       "medium": {
         "name": "Kokosova smetana",
-        "icon": "/ingredient_icons/cream2.png"
+        "icon": "/ingredient_icons/cream2.png",
+        "description": "Rastlinska smetana, ki je narejena iz kokosovega mleka."
       },
       "worst": {
         "name": "Mlečna smetana",
-        "icon": "/ingredient_icons/cream3.png"
+        "icon": "/ingredient_icons/cream3.png",
+        "description": "Smetana, ki je v večini primerov pripravljena iz kravjega mleka."
       }
     },
     "dough": {
       "best": {
         "name": "Testo z drožmi",
-        "icon": "/ingredient_icons/dough1.png"
+        "icon": "/ingredient_icons/dough1.png",
+        "description": "Kislo testo, ki nastane po naravnem postopku fermentacije."
       },
       "medium": {
         "name": "Polnozrnato testo",
-        "icon": "/ingredient_icons/dough2.png"
+        "icon": "/ingredient_icons/dough2.png",
+        "description": "Testo, pripravljeno iz 100-odstotno polnozrnate moke."
       },
       "worst": {
         "name": "Belo testo",
-        "icon": "/ingredient_icons/dough3.png"
+        "icon": "/ingredient_icons/dough3.png",
+        "description": "Testo, pripravljeno iz industrijsko pridelane bele moke."
       }
     },
     "egg": {
       "best": {
         "name": "Jajce iz ekološke reje",
-        "icon": "/ingredient_icons/egg1.png"
+        "icon": "/ingredient_icons/egg1.png",
+        "description": "Jajca kokoši, ki imajo možnost izhoda na prosto in so hranjene z naravno hrano."
       },
       "medium": {
         "name": "Jajce iz proste reje",
-        "icon": "/ingredient_icons/egg2.png"
+        "icon": "/ingredient_icons/egg2.png",
+        "description": "Jajca kokoši, ki imajo možnost izhoda na prosto."
       },
       "worst": {
         "name": "Jajce iz hlevske reje",
-        "icon": "/ingredient_icons/egg3.png"
+        "icon": "/ingredient_icons/egg3.png",
+        "description": "Jajca kokoši, ki živijo v hlevu."
       }
     },
     "patty": {
       "best": {
         "name": "Fižolov polpet",
-        "icon": "/ingredient_icons/patty1.png"
+        "icon": "/ingredient_icons/patty1.png",
+        "description": "Rastlinski polpet, pripravljen iz fižola."
       },
       "medium": {
         "name": "Sojin polpet",
-        "icon": "/ingredient_icons/patty2.png"
+        "icon": "/ingredient_icons/patty2.png",
+        "description": "Rastlinski polpet, pripravljen iz masovno pridelane soje."
       },
       "worst": {
         "name": "Goveji polpet",
-        "icon": "/ingredient_icons/patty3.png"
+        "icon": "/ingredient_icons/patty3.png",
+        "description": "Polpet, narejen iz 100-odstotnega govejega mesa."
       }
     },
     "protein": {
       "best": {
         "name": "Čičerika",
-        "icon": "/ingredient_icons/protein1.png"
+        "icon": "/ingredient_icons/protein1.png",
+        "description": "Stročnica, ki vsebuje veliko beljakovin in je preprosta za gojenje."
       },
       "medium": {
         "name": "Losos",
-        "icon": "/ingredient_icons/protein2.png"
+        "icon": "/ingredient_icons/protein2.png",
+        "description": "Riba, bogata z omega-3 maščobami, ki jo večinoma gojijo v ribogojnicah."
       },
       "worst": {
         "name": "Piščanec",
-        "icon": "/ingredient_icons/protein3.png"
+        "icon": "/ingredient_icons/protein3.png",
+        "description": "Piščančje meso, ki v primerjavi z drugimi vrstami mesa vsebuje več polnovrednih beljakovin in manj maščob."
       }
     },
     "sauce": {
       "best": {
         "name": "Jogurtova omaka",
-        "icon": "/ingredient_icons/sauce1.png"
+        "icon": "/ingredient_icons/sauce1.png",
+        "description": "Omaka, ki jo pripravimo iz jogurta."
       },
       "medium": {
         "name": "Arašidova omaka",
-        "icon": "/ingredient_icons/sauce2.png"
+        "icon": "/ingredient_icons/sauce2.png",
+        "description": "Omaka, ki jo pripravimo iz arašidovega masla."
       },
       "worst": {
         "name": "Guacamole",
-        "icon": "/ingredient_icons/sauce3.png"
+        "icon": "/ingredient_icons/sauce3.png",
+        "description": "Omaka, ki jo pripravimo iz avokada."
       }
     },
     "sweet": {
       "best": {
         "name": "Češnja",
-        "icon": "/ingredient_icons/sweet1.png"
+        "icon": "/ingredient_icons/sweet1.png",
+        "description": "Okusno in zdravo sadje, ki raste tako rekoč po celem svetu."
       },
       "medium": {
         "name": "Banana",
-        "icon": "/ingredient_icons/sweet2.png"
+        "icon": "/ingredient_icons/sweet2.png",
+        "description": "Zdravo in priročno sadje, ki raste na monokulturnih plantažah v tropskem podnebju."
       },
       "worst": {
         "name": "Kakav",
-        "icon": "/ingredient_icons/sweet3.png"
+        "icon": "/ingredient_icons/sweet3.png",
+        "description": "Posušena in fermentirana semena kakavovca, ki izvira iz Južne Amerike."
       }
     },
     "tomato": {
       "best": {
         "name": "Eko paradižnik",
-        "icon": "/ingredient_icons/tomato1.png"
+        "icon": "/ingredient_icons/tomato1.png",
+        "description": "Paradižnik, pridelan na ekološki način, ki spoštuje naravne življenjske cikle."
       },
       "medium": {
         "name": "Kupljen paradižnik",
-        "icon": "/ingredient_icons/tomato2.png"
+        "icon": "/ingredient_icons/tomato2.png",
+        "description": "Svež paradižnik, ki ga najpogosteje kupimo v trgovini."
       },
       "worst": {
         "name": "Vložen paradižnik",
-        "icon": "/ingredient_icons/tomato3.png"
+        "icon": "/ingredient_icons/tomato3.png",
+        "description": "Paradižnik, vložen v konzerve."
       }
     },
     "vegetable": {
       "best": {
         "name": "Rukola",
-        "icon": "/ingredient_icons/veg1.png"
+        "icon": "/ingredient_icons/veg1.png",
+        "description": "Listnata zelenjava, ki jo je mogoče preprosto gojiti tudi doma."
       },
       "medium": {
         "name": "Kumara",
-        "icon": "/ingredient_icons/veg2.png"
+        "icon": "/ingredient_icons/veg2.png",
+        "description": "Zelo razširjena rastlina iz družine bučevk, katere gojenje je relativno zapleteno."
       },
       "worst": {
         "name": "Paprika",
-        "icon": "/ingredient_icons/veg3.png"
+        "icon": "/ingredient_icons/veg3.png",
+        "description": "Enoletnica, ki jo večinoma pridelujejo z intenzivno obliko kmetijstva."
       }
     }
   },

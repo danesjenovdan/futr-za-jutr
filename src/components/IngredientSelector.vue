@@ -49,16 +49,24 @@
         <div class="divider">
           <!-- TODO: arrow triangle on selection -->
         </div>
-        <div class="description">Izberi sestavino!</div>
+        <div class="description">{{ description }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from "vue";
 import { useGameStore } from "../stores/game";
 
 const gameStore = useGameStore();
+
+const description = computed(() => {
+  return (
+    gameStore.ingredientSelectorOptions[gameStore.ingredientSelection]
+      ?.description || "Izberi sestavino!"
+  );
+});
 </script>
 
 <style scoped lang="scss">
