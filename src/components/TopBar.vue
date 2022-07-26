@@ -2,9 +2,9 @@
   <div class="top-bar">
     <div class="top-content constrain-width">
       <div class="pills">
-        <div class="pill points">
+        <div class="pill score">
           <img class="icon" src="../assets/images/icons/kovanec.svg" alt="" />
-          <div class="text">132</div>
+          <div class="text">{{ gameStore.score }}</div>
         </div>
         <div
           :class="[
@@ -95,6 +95,13 @@ const formattedTimer = computed(() => {
           font-size: 1.5rem;
           font-weight: 800;
           line-height: 1;
+        }
+
+        &.score {
+          .text {
+            min-width: 4rem;
+            text-align: right;
+          }
         }
 
         &.time {

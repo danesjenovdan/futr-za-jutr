@@ -58,13 +58,15 @@ export const useGameStore = defineStore("gameStore", {
     remainingTimeMs: MAX_TIME_SECONDS * 1000,
     paused: true,
     gameOver: false,
-    foods: [createNewFood("taco")],
+    combinedFoods: [createNewFood("pie")],
     ingredientSelectorOpen: false,
     ingredientSelection: null,
+    orderQueue: [],
+    score: 0,
   }),
   getters: {
     currentFood(state) {
-      return last(state.foods);
+      return last(state.combinedFoods);
     },
     currentIngredientType(state) {
       const foodTemplate = ingredients.foods[state.currentFood.id];
@@ -158,11 +160,15 @@ export const useGameStore = defineStore("gameStore", {
           }
         }
 
+        if (this.currentFood.layers.length >= numIngredients) {
+          this.score += 50;
+        }
+
         return;
       }
 
       // all foods completed
-      if (this.foods.length === 4) {
+      if (this.combinedFoods.length === 4) {
         this.paused = true;
         this.gameOver = true;
         return;
@@ -170,7 +176,7 @@ export const useGameStore = defineStore("gameStore", {
 
       // current food completed, start new one
       const nextFood = createNewFood();
-      this.foods.push(nextFood);
+      this.combinedFoods.push(nextFood);
     },
   },
 });
