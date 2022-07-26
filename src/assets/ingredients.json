@@ -160,9 +160,9 @@
         {
           "type": "vegetable",
           "layer_images": {
-            "best": "/ingredient_layers/burger/veg1_s.png",
+            "best": "/ingredient_layers/burger/veg3_s.png",
             "medium": "/ingredient_layers/burger/veg2_s.png",
-            "worst": "/ingredient_layers/burger/veg3_s.png"
+            "worst": "/ingredient_layers/burger/veg1_s.png"
           }
         },
         {
@@ -193,18 +193,19 @@
         {
           "type": "sweet",
           "layer_images": {
-            "best": "/ingredient_layers/pie/5sweet1_s.png",
-            "medium": "/ingredient_layers/pie/5sweet3_s.png",
-            "worst": "/ingredient_layers/pie/5sweet4_s.png"
+            "best": "/ingredient_layers/pie/5sweet4_s.png",
+            "medium": "/ingredient_layers/pie/5sweet1_s.png",
+            "worst": "/ingredient_layers/pie/5sweet3_s.png"
           }
         },
         {
           "type": "none",
           "layer_images": {
-            "best": "/ingredient_layers/pie/6cut1_s.png",
-            "medium": "/ingredient_layers/pie/6cut3_s.png",
-            "worst": "/ingredient_layers/pie/6cut4_s.png"
+            "best": "/ingredient_layers/pie/6cut4_s.png",
+            "medium": "/ingredient_layers/pie/6cut1_s.png",
+            "worst": "/ingredient_layers/pie/6cut3_s.png"
           },
+          "layer_image_from_index": 4,
           "replace": true
         }
       ]
@@ -219,9 +220,9 @@
         {
           "type": "vegetable",
           "layer_images": {
-            "best": "/ingredient_layers/salad/2veg1_s.png",
-            "medium": "/ingredient_layers/salad/2veg2_s.png",
-            "worst": "/ingredient_layers/salad/2veg3_s.png"
+            "best": "/ingredient_layers/salad/2veg2_s.png",
+            "medium": "/ingredient_layers/salad/2veg3_s.png",
+            "worst": "/ingredient_layers/salad/2veg1_s.png"
           }
         },
         {
@@ -235,9 +236,9 @@
         {
           "type": "sauce",
           "layer_images": {
-            "best": "/ingredient_layers/salad/5sauce1_s.png",
+            "best": "/ingredient_layers/salad/5sauce2_s.png",
             "medium": "/ingredient_layers/salad/5sauce2_s.png",
-            "worst": "/ingredient_layers/salad/5sauce2_s.png"
+            "worst": "/ingredient_layers/salad/5sauce1_s.png"
           }
         }
       ]
@@ -297,9 +298,9 @@
         {
           "type": "sauce",
           "layer_images": {
-            "best": "/ingredient_layers/taco/sauce1_s.png",
+            "best": "/ingredient_layers/taco/sauce2_s.png",
             "medium": "/ingredient_layers/taco/sauce2_s.png",
-            "worst": "/ingredient_layers/taco/sauce2_s.png"
+            "worst": "/ingredient_layers/taco/sauce1_s.png"
           }
         },
         {
@@ -309,10 +310,11 @@
         {
           "type": "none",
           "layer_images": {
-            "best": "/ingredient_layers/taco/fold1.png",
+            "best": "/ingredient_layers/taco/fold2.png",
             "medium": "/ingredient_layers/taco/fold2.png",
-            "worst": "/ingredient_layers/taco/fold2.png"
+            "worst": "/ingredient_layers/taco/fold1.png"
           },
+          "layer_image_from_index": 3,
           "replace": true
         }
       ]

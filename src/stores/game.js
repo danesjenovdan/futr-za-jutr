@@ -12,11 +12,17 @@ function getRandomFoodId() {
   return sample(keys);
 }
 
-function getLayerImage(ingredient, quality) {
+function getLayerImage(ingredient, quality, layers) {
   if (ingredient.layer_image) {
     return ingredient.layer_image;
   }
-  const key = quality || "best";
+  let key = quality;
+  if (ingredient.layer_image_from_index != null) {
+    key = layers[ingredient.layer_image_from_index]?.quality;
+  }
+  if (!key) {
+    key = "best";
+  }
   return ingredient.layer_images[key];
 }
 
@@ -38,7 +44,7 @@ function createNewFood(foodId) {
       break;
     }
     newFood.layers.push({
-      layerImage: getLayerImage(ingredient),
+      layerImage: getLayerImage(ingredient, undefined, newFood.layers),
       replace: ingredient.replace,
     });
   }
@@ -52,7 +58,7 @@ export const useGameStore = defineStore("gameStore", {
     remainingTimeMs: MAX_TIME_SECONDS * 1000,
     paused: true,
     gameOver: false,
-    foods: [createNewFood("pie")],
+    foods: [createNewFood("taco")],
     ingredientSelectorOpen: false,
     ingredientSelection: null,
   }),
@@ -136,7 +142,11 @@ export const useGameStore = defineStore("gameStore", {
         for (let i = numDone; i < foodTemplate.ingredients.length; i += 1) {
           const ingredient = foodTemplate.ingredients[i];
           this.currentFood.layers.push({
-            layerImage: getLayerImage(ingredient, this.ingredientSelection),
+            layerImage: getLayerImage(
+              ingredient,
+              this.ingredientSelection,
+              this.currentFood.layers
+            ),
             quality: this.ingredientSelection,
             replace: ingredient.replace,
           });
