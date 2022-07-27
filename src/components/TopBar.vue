@@ -2,9 +2,9 @@
   <div class="top-bar">
     <div class="top-content constrain-width">
       <div class="pills">
-        <div class="pill points">
-          <img class="icon" src="../assets/images/icons/kovanec.svg" alt="" />
-          <div class="text">132</div>
+        <div class="pill score">
+          <img class="icon" src="../assets/images/icons/kovanec.svg" />
+          <div class="text">{{ gameStore.score }}</div>
         </div>
         <div
           :class="[
@@ -13,50 +13,34 @@
             { warning: gameStore.remainingTimeMs <= 5000 },
           ]"
         >
-          <img class="icon" src="../assets/images/icons/ura.svg" alt="" />
-          <div class="text">{{ formattedTimer }}</div>
+          <img class="icon" src="../assets/images/icons/ura.svg" />
+          <div class="text">{{ formatTimer(gameStore.remainingTimeMs) }}</div>
         </div>
+      </div>
+      <div class="orders">
+        <template v-for="order in gameStore.orderQueue" :key="order.createdAt">
+          <div :class="['order', { warning: order.remainingTimeMs <= 5000 }]">
+            <img class="icon" :src="`/food_icons/${order.id}.png`" />
+            <div class="text">{{ formatTimer(order.remainingTimeMs) }}</div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, watch } from "vue";
-import { useGameStore, MAX_TIME_SECONDS } from "../stores/game";
-import { useTimer } from "../composables/useTimer";
+import { useGameStore } from "../stores/game";
 
 const gameStore = useGameStore();
-const { remainingMs, start, stop } = useTimer(MAX_TIME_SECONDS, {
-  autoStart: false,
-});
 
-watch(remainingMs, (newValue) => {
-  gameStore.remainingTimeMs = newValue;
-  if (newValue <= 0) {
-    gameStore.paused = true;
-    gameStore.gameOver = true;
-  }
-});
-
-watch(
-  () => gameStore.paused,
-  (newValue) => {
-    if (!newValue) {
-      start();
-    } else {
-      stop();
-    }
-  }
-);
-
-const formattedTimer = computed(() => {
-  const seconds = Math.ceil(gameStore.remainingTimeMs / 1000);
+function formatTimer(remainingMs) {
+  const seconds = Math.ceil(remainingMs / 1000);
   const minutes = Math.floor(seconds / 60);
   const formattedMinutes = String(minutes).padStart(2, "0");
   const formattedSeconds = String(seconds % 60).padStart(2, "0");
   return `${formattedMinutes}:${formattedSeconds}`;
-});
+}
 </script>
 
 <style scoped lang="scss">
@@ -70,6 +54,7 @@ const formattedTimer = computed(() => {
   .top-content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
 
     .pills {
@@ -97,10 +82,54 @@ const formattedTimer = computed(() => {
           line-height: 1;
         }
 
+        &.score {
+          .text {
+            min-width: 4rem;
+            text-align: right;
+          }
+        }
+
         &.time {
           .text {
             min-width: 5.1rem;
           }
+        }
+
+        &.warning {
+          background-color: $color-warning-bg;
+
+          .text {
+            color: $color-warning-fg;
+          }
+        }
+      }
+    }
+
+    .orders {
+      position: absolute;
+      top: 0.95rem;
+      right: 0;
+
+      .order {
+        display: flex;
+        margin-bottom: 0.6rem;
+        background-color: $color-white;
+        border-radius: 10em 0 0 10em;
+        box-shadow: inset 0 0 1.1rem rgba($color-black, 0.6);
+
+        .icon {
+          width: 2.5rem;
+          height: 2.5rem;
+          transform: translateX(-5%) scale(1.33);
+        }
+
+        .text {
+          min-width: 5.2rem;
+          padding: 0.6rem 1.1rem 0.4rem 0.6rem;
+          color: $color-dark-1;
+          font-size: 1.5rem;
+          font-weight: 800;
+          line-height: 1;
         }
 
         &.warning {

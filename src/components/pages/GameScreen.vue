@@ -10,14 +10,32 @@
   </div>
   <InstructionsOverlay />
   <GameOverModal />
+  <ImagePreloader />
 </template>
 
 <script setup>
+import { watch } from "vue";
+import { useTimerStore } from "../../stores/timer";
+import { useGameStore } from "../../stores/game";
 import TopBar from "../TopBar.vue";
 import BottomBar from "../BottomBar.vue";
 import FoodPrepArea from "../FoodPrepArea.vue";
 import InstructionsOverlay from "../InstructionsOverlay.vue";
 import GameOverModal from "../GameOverModal.vue";
+import ImagePreloader from "../ImagePreloader.vue";
+
+const timerStore = useTimerStore();
+const gameStore = useGameStore();
+
+watch(
+  () => gameStore.gameOver,
+  (value) => value && timerStore.stop()
+);
+
+watch(
+  () => gameStore.remainingTimeMs,
+  () => gameStore.tick()
+);
 </script>
 
 <style scoped lang="scss">

@@ -3,141 +3,201 @@
     "cheese": {
       "best": {
         "name": "Kozji tropinc",
-        "icon": "/ingredient_icons/cheese1.png"
+        "icon": "/ingredient_icons/cheese1.png",
+        "description": "Slovenski sir iz kozjega mleka, ki zori v teranovih tropinah.",
+        "long_description": "Tropinc je slovenski sir iz kozjega mleka, ki zori v teranovih tropinah. Kozjereja povzroča manjši ogljični odtis kot govedoreja, saj zahteva manjše površine, koze pa porabijo manj vode in proizvedejo manj metana kot krave (ta plin ima kar 25-krat močnejši toplogredni vpliv kot CO2). Pri razmisleku o trajnosti tropinca igrata pomembno vlogo predvsem manjši vpliv na okolje pri kozjereji in dejstvo, da gre za domačo vrsta sira, kar močno zmanjša ogljični vtis zaradi transporta. Poleg tega ta sir pogosto proizvajajo v zadrugah in drugih skupnostnih oblikah povezovanja pridelovalk in predelovalcev mleka ter mlečnih izdelkov."
       },
       "medium": {
         "name": "Mozzarella di bufala",
-        "icon": "/ingredient_icons/cheese2.png"
+        "icon": "/ingredient_icons/cheese2.png",
+        "description": "Italijanski sir, ki ga izdelujejo iz mleka vodnih bivolic.",
+        "long_description": "Mozzarella di bufala oziroma bivolja mocarela je vrsta italijanskega sira, ki ga izdelujejo iz mleka vodnih bivolic. Vzreja živali prispeva skoraj polovico emisij, ki so posledica kmetijstva, pri čemer največji ogljični odtis povzroča govedoreja. Govedo zaseda ogromne površine, močno izčrpava vodne vire in proizvede veliko metana, ki ima kar 25-krat močnejši toplogredni vpliv kot CO2. S trajnostnega vidika je sporna tudi embalaža, v katero pakirajo mocarelo, a je kljub temu vzreja vodnih bivolov v Italiji praviloma bolj trajnostna kot masovna govedoreja, pot živila v Slovenijo pa ne ustvarja večjega ogljičnega odtisa."
       },
       "worst": {
         "name": "Topljeni cheddar v lističih",
-        "icon": "/ingredient_icons/cheese3.png"
+        "icon": "/ingredient_icons/cheese3.png",
+        "description": "Vrsta sira, ki izvira iz jugozahodne Anglije in ga izdelujejo iz kravjega mleka.",
+        "long_description": "Cheddar oziroma čedar je vrsta trdega sira, ki izvira iz jugozahodne Anglije, izdelujejo pa ga iz kravjega mleka. Vzreja živali prispeva skoraj polovico emisij, ki so posledica kmetijstva, pri čemer največji ogljični odtis povzroča govedoreja. K okoljskemu vplivu takšnega čedarja negativno prispevajo še obdelava sira v topljene lističe, saj tovrstni izdelki vsebujejo le od 48 do 55 % sira, pogosto pa jim dodajajo tudi palmovo olje, fosfate ali umetna barvila. Pri razmisleku o trajnosti moramo upoštevati tudi odvečno embalažo, uporabljeno za pakiranje vsakega lističa posebej, in pot iz Velike Britanije v Slovenijo."
       }
     },
     "cream": {
       "best": {
         "name": "Ovsena smetana",
-        "icon": "/ingredient_icons/cream1.png"
+        "icon": "/ingredient_icons/cream1.png",
+        "description": "Rastlinska smetana, ki je narejena iz ovsa.",
+        "long_description": "Mlečna industrija ima skupaj z mesno izjemno škodljiv vpliv na okolje, zato ovsena smetana predstavlja odličen trajnosten rastlinski nadomestek mlečni smetani (posebej, če ta ni ekološko ali lokalno pridelana). Na policah trgovin lahko brez težav najdemo tudi izdelke iz ekološko pridelanega ovsa, ki ga gojijo v Sloveniji oziroma vsaj kateri od držav EU, kar zmanjša še ogljični odtis zaradi transporta. Smetano iz ovsa lahko brez težav pripravimo tudi sami, pri čemer še lažje izberemo najbolj trajnosten pridelek."
       },
       "medium": {
         "name": "Kokosova smetana",
-        "icon": "/ingredient_icons/cream2.png"
+        "icon": "/ingredient_icons/cream2.png",
+        "description": "Rastlinska smetana, ki je narejena iz kokosovega mleka.",
+        "long_description": "Kokosova smetana lahko predstavlja dober rastlinski nadomestek za mlečno smetano, a je kljub temu sporna z vidika trajnosti. Zaradi priljubljenosti kokosa se je namreč močno povečala njegova pridelava (predvsem v azijskih državah za uvoz v države globalnega severa), s tem pa tudi ogljični odtis, kar ima izjemno negativen vpliv na okolje. Za gojenje kokosov namreč izsekavajo gozdove, uporabljajo kemična gnojila in pesticide ter izkoriščajo lokalno delovno silo. Ob nakupu moramo biti zato pozorni na certifikat fair trade (pravična trgovina) in ekološko pridelavo."
       },
       "worst": {
         "name": "Mlečna smetana",
-        "icon": "/ingredient_icons/cream3.png"
+        "icon": "/ingredient_icons/cream3.png",
+        "description": "Smetana, ki je v večini primerov pripravljena iz kravjega mleka.",
+        "long_description": "Mlečna industrija ima skupaj z mesno izjemno škodljiv vpliv na okolje. Krave mlekarice – glavni vir mleka za izdelavo mlečne smetane – zasedajo velike površine, močno izčrpavajo vodne vire in proizvedejo veliko metana, ki ima kar 25-krat močnejši toplogredni vpliv kot CO2. Poleg tega živali za masovno proizvodnjo mleka prisilijo pridelati ogromne količine mleka, pri čemer jih pogosto podvržejo neznosnim pogojem in neetičnim praksam, kot sta prekomerno hranjenje in molža. Negativen vpliv na okolje lahko zmanjšamo predvsem z izbiro ekološko in lokalno pridelane mlečne smetane."
       }
     },
     "dough": {
       "best": {
         "name": "Testo z drožmi",
-        "icon": "/ingredient_icons/dough1.png"
+        "icon": "/ingredient_icons/dough1.png",
+        "description": "Kislo testo, ki nastane po naravnem postopku fermentacije.",
+        "long_description": "Droži so mešanica kvasovk in mlečnokislinskih ter ocetnokislinskih bakterij, s katerimi pripravljamo kislo testo, ki nastane po naravnem postopku fermentacije. Droži so povsem naravno vzhajalno sredstvo, ki ga lahko dobimo s preprosto mešanico moke in vode. Testo z drožmi praviloma pripravljamo doma, zato za trajnostno, zdravo in okolju prijazno jed poskrbimo z izbiro lokalnih in ekološko pridelanih sestavin, kot je na primer slovenska 100-odstotna polnozrnata moka, izogibamo pa se industrijsko pridelani beli pšenični moki, ki lahko med drugim vsebuje različne umetne dodatke."
       },
       "medium": {
         "name": "Polnozrnato testo",
-        "icon": "/ingredient_icons/dough2.png"
+        "icon": "/ingredient_icons/dough2.png",
+        "description": "Testo, pripravljeno iz 100-odstotno polnozrnate moke.",
+        "long_description": "Testo iz 100-odstotno polnozrnate moke praviloma ne vsebuje dodatkov, hkrati pa moka ni beljena s kemikalijami. Pri njeni pridelavi namreč uporabljajo cela pšenična zrna, ki vsebujejo hranilne snovi ter vlaknine, vitamine in minerale. Uživanje izdelkov iz polnozrnatega testa lahko pomaga preprečevati prebavne težave, raka črevesja in bolezni srca, poleg tega pa so ti izdelki bolj nasitni, zaradi česar pojemo manj. A zlasti kupljeni izdelki, ki so industrijsko pripravljeni, lahko vsebujejo tudi umetne dodatke, ki podaljšujejo obstojnost ali zagotavljajo boljšo strukturo, vendar pa so sporni tako z vidika trajnosti kot tudi vpliva na okolje."
       },
       "worst": {
         "name": "Belo testo",
-        "icon": "/ingredient_icons/dough3.png"
+        "icon": "/ingredient_icons/dough3.png",
+        "description": "Testo, pripravljeno iz industrijsko pridelane bele moke.",
+        "long_description": "Belo testo je manj trajnostno in manj zdravo, saj pri pridelavi bele pšenične moke zrnom industrijsko odstranijo ovojnico in otrobe, ki vsebujejo veliko vlaknin, beljakovin in vitaminov. Namesto teh jim dodajo manj hranilne umetne snovi, za pridobivanje bele barve pa uporabljajo tudi različne kemikalije. Posebej sporni so kupljeni izdelki iz belega testa, saj praviloma vsebujejo številne dodatke in ojačevalce okusa ter druge sporne sestavine, kot je na primer palmovo olje, upoštevati pa moramo še vpliv industrijske predelave, prevoz in embalažo."
       }
     },
     "egg": {
       "best": {
         "name": "Jajce iz ekološke reje",
-        "icon": "/ingredient_icons/egg1.png"
+        "icon": "/ingredient_icons/egg1.png",
+        "description": "Jajca kokoši, ki imajo možnost izhoda na prosto in so hranjene z naravno hrano.",
+        "long_description": "Pri ekološki pridelavi gre za jajca kokoši, ki so hranjene z naravno hrano brez pesticidov, antibiotikov, hormonov ali drugih kemikalij, poleg tega pa hrana ne sme biti gensko spremenjena. Ker se kokoši v tem primeru hranijo predvsem z naravno pšenico brez barvil, so rumenjaki ekološko pridelanih jajc pogosto manj intenzivno rumeni. Pogoj za tovrstno pridelavo jajc je tudi možnost paše kokoši na odprtem, na zemlji, ki ni bila gnojena z umetnimi gnojili. Kokošim v taki reji ne odstranijo kljunov in jim dovolijo brskanje po zemlji ter socialne stike."
       },
       "medium": {
         "name": "Jajce iz proste reje",
-        "icon": "/ingredient_icons/egg2.png"
+        "icon": "/ingredient_icons/egg2.png",
+        "description": "Jajca kokoši, ki imajo možnost izhoda na prosto.",
+        "long_description": "Pri prosti oziroma pašni reji kokoši sicer živijo v hlevu, kjer jih je lahko v objektu tako kot pri hlevski reji največ devet na kvadratni meter, a imajo na voljo tudi izhod na prosto – na pašnik, v gozd ali sadovnjak. Za vsako kokoš v prosti reji so na voljo najmanj štirje kvadratni metri izhoda na prosto, imeti pa morajo zatočišče pred ujedami. Čeprav posebnih predpisov na tem področju ni, imajo kokoši v prosti reji navadno dostop do kakovostnejše prehrane kot tiste v hlevski, zaradi česar so tudi jajca višje kakovosti."
       },
       "worst": {
         "name": "Jajce iz hlevske reje",
-        "icon": "/ingredient_icons/egg3.png"
+        "icon": "/ingredient_icons/egg3.png",
+        "description": "Jajca kokoši, ki živijo v hlevu.",
+        "long_description": "Za razliko od baterijske reje, kjer so kokoši tako rekoč ves čas zaprte v kletkah, se pri hlevskem načinu reje lahko prosto gibajo po hlevu. V objektu jih je največ devet na kvadratni meter, na voljo pa imajo gnezdo ali skupno gnezdišče, nastilj za brskanje ter prašne kopeli in gredi za počitek. A tudi v tem primeru gre za izrazito industrijski način reje živali in pridelave jajc, saj sta svetloba in prezračevanje umetna, krma nekakovostna, kokošim pa zaradi preprečevanja medsebojnega kljuvanja skrajšajo kljune."
       }
     },
     "patty": {
       "best": {
         "name": "Fižolov polpet",
-        "icon": "/ingredient_icons/patty1.png"
+        "icon": "/ingredient_icons/patty1.png",
+        "description": "Rastlinski polpet, pripravljen iz fižola.",
+        "long_description": "Fižol ima zelo visoko vsebnost beljakovin, zato predstavlja enega najboljših in najbolj trajnostnih rastlinskih nadomestkov izdelkom živalskega izvora, ki sicer spadajo med živila z največjim vplivom na okolje. Fižol je tudi bogat vir vlaknin, vsebuje veliko vitaminov in mineralov ter antioksidantov, poleg tega pa pripomore k zniževanju ravni sladkorja v urinu in krvi. Veliko fižola pridelamo lokalno, kar pomeni, da ne povzroča večjega ogljičnega odtisa zaradi prevoza, preprosto pa ga lahko gojimo tudi doma."
       },
       "medium": {
         "name": "Sojin polpet",
-        "icon": "/ingredient_icons/patty2.png"
+        "icon": "/ingredient_icons/patty2.png",
+        "description": "Rastlinski polpet, pripravljen iz masovno pridelane soje.",
+        "long_description": "Soja spada med rastline z visoko vsebnostjo beljakovin, zato predstavlja primeren nadomestek izdelkom živalskega izvora, ki sicer spadajo med živila z največjim vplivom na okolje. A delež v Sloveniji in Evropi pridelane soje je zanemarljiv, saj večino izdelkov uvozimo iz držav preko oceana, s čimer se poveča ogljični odtis. Posebej sporna je tudi pridelava soje, saj zaradi naraščajočega povpraševanja za njeno gojenje pogosto izsekavajo gozdove. Obenem le približno 7 % soje namenimo prehrani ljudi, več kot 77 % pa krmi živine. Veliko soje je gensko spremenjene, težavni pa so tudi delovni pogoji kmetov v številnih državah, kjer jo pridelujejo."
       },
       "worst": {
         "name": "Goveji polpet",
-        "icon": "/ingredient_icons/patty3.png"
+        "icon": "/ingredient_icons/patty3.png",
+        "description": "Polpet, narejen iz 100-odstotnega govejega mesa.",
+        "long_description": "Vzreja živali prispeva skoraj polovico emisij, ki so posledica kmetijstva, pri čemer največji ogljični odtis povzroča govedoreja. Govedo zaseda ogromne površine, močno izčrpava vodne vire in proizvede veliko metana, ki ima kar 25-krat močnejši toplogredni vpliv kot CO2. Poleg tega živali pogosto živijo v neznosnih pogojih, za hitro pridobivanje mase pa jih hranijo z dodatki, med drugim s sojo (le približno 7 % te je namenjene prehrani ljudi, več kot 77 % pa za krmo živine), kar prinaša dodatne škodljive vplive zaradi izsekavanja gozdov, industrijske predelave in transporta. Z vidika trajnosti je posebej sporna tudi mesnopredelovalna industrija."
       }
     },
     "protein": {
       "best": {
         "name": "Čičerika",
-        "icon": "/ingredient_icons/protein1.png"
+        "icon": "/ingredient_icons/protein1.png",
+        "description": "Stročnica, ki vsebuje veliko beljakovin in je preprosta za gojenje.",
+        "long_description": "Čičerika je stročnica, iz katere je mogoče pripraviti odlične trajnostne alternative mesnim izdelkom, saj vsebuje veliko beljakovin, pa tudi vitaminov in drugih hranilnih snovi. Čeprav je v Sloveniji tako rekoč ne gojimo, transport pa s seboj prinaša dodaten ogljični odtis, je njena pridelava zelo preprosta – čičerika za rast namreč ne rabi veliko vode in dodatnih gnojil, zato tudi pri intenzivnejšem kmetovanju s tega naslova ni večjih vplivov na okolje. Čičerika brez težav raste na domačem vrtu, če jo kupujemo v trgovini, pa k trajnosti prispevamo z nakupom ekološko pridelanih, posušenih in svežih izdelkov, ki niso vloženi v konzerve."
       },
       "medium": {
         "name": "Losos",
-        "icon": "/ingredient_icons/protein2.png"
+        "icon": "/ingredient_icons/protein2.png",
+        "description": "Riba, bogata z omega-3 maščobami, ki jo večinoma gojijo v ribogojnicah.",
+        "long_description": "Losos je bogat z omega-3 maščobami in vsebuje kakovostne beljakovine ter druge hranilne snovi, poleg tega pa ima pot ribjega mesa do naših krožnikov praviloma manjši vpliv na okolje kot živinoreja. A danes večina lososa, ki ga najdemo v slovenskih trgovinah, prihaja iz ribogojnic, ki so z ekološkega vidika sporne zaradi intenzivne proizvodnje, nekakovostne hrane, s katero hranijo ribe, in onesnaževanja morja, kar vpliva tudi na hranilne vrednosti končnega izdelka. Zato moramo biti pri nakupu pozorni, da je losos ekološko gojen (ima certifikat ASC), še bolje pa je, da za pripravo jedi izberemo lokalno vrsto ribe."
       },
       "worst": {
         "name": "Piščanec",
-        "icon": "/ingredient_icons/protein3.png"
+        "icon": "/ingredient_icons/protein3.png",
+        "description": "Piščančje meso, ki v primerjavi z drugimi vrstami mesa vsebuje več polnovrednih beljakovin in manj maščob.",
+        "long_description": "Piščančje meso je v Sloveniji izjemno priljubljeno, saj v primerjavi z drugimi vrstami mesa vsebuje več polnovrednih beljakovin in druge hranilne snovi, hkrati pa ima malo maščob. Perutnina je bolj trajnostna izbira od drugih vrst mesa, a ima z vidika vpliva na okolje vseeno tudi negativne plati. Pri tem izstopa predvsem intenzivna reja, saj piščance in kokoši večinoma hranijo s sojino krmo, ki je sporna z okoljskega in trajnostnega vidika, pogosto pa so neprimerni tudi pogoji, v katerih živali živijo. Težavo predstavlja še pretirana uporaba antibiotikov pri vzreji. Če že posegamo po mesu, poskrbimo, da prihaja iz ekološke in lokalne reje, še raje pa se odločimo za njegove rastlinske nadomestke."
       }
     },
     "sauce": {
       "best": {
         "name": "Jogurtova omaka",
-        "icon": "/ingredient_icons/sauce1.png"
+        "icon": "/ingredient_icons/sauce1.png",
+        "description": "Omaka, ki jo pripravimo iz jogurta.",
+        "long_description": "Jogurtovo omako je mogoče hitro in preprosto pripraviti doma. Če pri tem uporabimo lokalen in ekološko pridelan (ovčji) jogurt ali pa se odločimo za njegovo vegansko različico, lahko dobimo trajnostno omako za popestritev številnih jedi. Poleg tega jogurt vsebuje tudi številne hranilne snovi, kot so beljakovine, vitamin B in kalcij, hkrati pa manj maščob, zato takšna omaka predstavlja precej bolj zdrav nadomestek majonezi in podobnim izdelkom."
       },
       "medium": {
         "name": "Arašidova omaka",
-        "icon": "/ingredient_icons/sauce2.png"
+        "icon": "/ingredient_icons/sauce2.png",
+        "description": "Omaka, ki jo pripravimo iz arašidovega masla.",
+        "long_description": "Glavna sestavina za pripravo arašidove omake je arašidovo maslo. Ker tega največkrat kupimo v trgovini, je naša izbira pogosto netrajnostna, saj je večina izdelkov uvožena iz držav preko oceana, vsebuje dodatke, kot so palmovo olje, transmaščobe in sladkor, sporna pa je tudi dodatna embalaža. Bolj trajnosten je lahko nakup 100-odstotnega arašidovega masla, še bolje pa je, če si ga pripravimo kar doma, pri čemer smo pozorni na poreklo in ekološko pridelavo izbranih arašidov. Ali ste vedeli, da jih lahko na domačem vrtu gojimo tudi sami?"
       },
       "worst": {
         "name": "Guacamole",
-        "icon": "/ingredient_icons/sauce3.png"
+        "icon": "/ingredient_icons/sauce3.png",
+        "description": "Omaka, ki jo pripravimo iz avokada.",
+        "long_description": "Omako guacamole pripravimo iz avokada, ki je zelo sporen z vidika trajnosti in vpliva na okolje. Zaradi priljubljenosti se je namreč izjemno povečal njegov uvoz v Evropo in Severno Ameriko, s tem pa tudi ogljični odtis. Poleg tega so v državah Južne in Srednje Amerike, od koder večinoma prihaja, za povečanje proizvodnje skrčili ogromne površine gozdov, avokado pa za rast na plantažah potrebuje tudi veliko vode, ki je tam pogosto primanjkuje. Zaradi visoke cene avokada pri njegovem gojenju pogosto prihaja do netrajnostnih praks in izkoriščanja delavcev, zato moramo biti pri nakupu – če ga že izberemo – pozorni na certifikat fair trade (pravična trgovina) in ekološko pridelavo."
       }
     },
     "sweet": {
       "best": {
-        "name": "Češnja",
-        "icon": "/ingredient_icons/sweet1.png"
+        "name": "Češnje",
+        "icon": "/ingredient_icons/sweet1.png",
+        "description": "Okusno in zdravo sadje, ki raste tako rekoč po celem svetu.",
+        "long_description": "Ker češnje rastejo lokalno, jih v sezoni lahko obiramo dozorele in uživamo sveže. Pridelujejo jih po celi državi, od Primorske do Prekmurja, tako da je dostop do njih manj škodljiv za okolje, saj so transportne poti krajše, to pa vpliva tudi na njihovo kakovost. Poleg tega, da so okusne, so češnje tudi zdrave, saj vsebujejo veliko vitaminov, mineralov, antioksidantov in drugih hranljivih snovi. Za še bolj trajnostno izbiro poskrbimo z nakupom lokalno gojenih češenj v sezoni njihove rasti, pri sadju pa smo pozorni tudi na ekološko pridelavo, pri kateri ne uporabljajo pesticidov in fitofarmacevtskih sredstev."
       },
       "medium": {
         "name": "Banana",
-        "icon": "/ingredient_icons/sweet2.png"
+        "icon": "/ingredient_icons/sweet2.png",
+        "description": "Zdravo in priročno sadje, ki raste na monokulturnih plantažah v tropskem podnebju.",
+        "long_description": "Ker banane pri nas zrastejo le v tropskem rastlinjaku botaničnega vrta, niso trajnostna prehranska izbira. Čeprav njihova pridelava proizvede manj toplogrednih plinov kot pridelava hrane živalskega izvora, so izpusti višji kot pri pridelavi soje ali riža. Večina banan je namreč pridelanih na monokulturnih plantažah, kjer uporabljajo veliko količino pesticidov in plastike – vsak šop banan namreč oblečejo v plastično vrečo, prepojeno s pesticidi. Poleg tega pri gojenju in obiranju banan pogosto prihaja tudi do izkoriščanja delovne sile, zato moramo biti pri nakupu pozorni na certifikat fair trade (pravična trgovina). Ko temu prištejemo še pakiranje in transport, je jasno, da so banane z drugega konca sveta ekološko gledano pač slaba izbira, čeprav so poceni, priročne, okusne in dobre za naše zdravje."
       },
       "worst": {
         "name": "Kakav",
-        "icon": "/ingredient_icons/sweet3.png"
+        "icon": "/ingredient_icons/sweet3.png",
+        "description": "Posušena in fermentirana semena kakavovca, ki izvira iz Južne Amerike.",
+        "long_description": "Večina kakava na trgu je pridelana netrajnostno. Zaradi intenzivnega gojenja pridelovalci uporabljajo fitofarmacevtska sredstva, izbirajo sorte, ki povečajo količino pridelka, ne pa kakovosti, zavoljo ogromnih plantaž izsekavajo gozdove in uničujejo naravni habitat, marsikje pa izkoriščajo celo otroško delovno silo – na plantažah še vedno dela več kot 1,5 milijona otrok. In vse to, še preden ga predelajo, zapakirajo v plastično embalažo in transportirajo po svetu. Kakav, čeprav bogat s hranili, je, kar se tiče škodljivosti za okolje, na lestvici takoj za rdečim mesom, zato naj se v katerikoli obliki na jedilniku znajde zgolj, če je pridelan ekološko in ima certifikat fair trade (pravična trgovina)."
       }
     },
     "tomato": {
       "best": {
-        "name": "Eko paradižnik",
-        "icon": "/ingredient_icons/tomato1.png"
+        "name": "Ekološki paradižnik",
+        "icon": "/ingredient_icons/tomato1.png",
+        "description": "Paradižnik, pridelan na ekološki način, ki spoštuje naravne življenjske cikle.",
+        "long_description": "Ekološka pridelava je oblika trajnostnega kmetovanja, ki spoštuje naravne življenjske cikle oziroma sezonskost ter vključuje naravi prijazne ukrepe in tehnologije, kar zmanjša človekov vpliv na okolje. Ekološki paradižnik je pridelan brez uporabe umetnih gnojil, pesticidov in gensko spremenjenih organizmov, hkrati pa ima visoko vsebnost vitaminov, mineralov in antioksidantov. Če smo pri izbiri ekoloških izdelkov pozorni še na lokalno pridelavo ali pa paradižnik vzamemo kar z domačega vrta, poskrbimo za najbolj trajnosten obrok."
       },
       "medium": {
-        "name": "Kupljen paradižnik",
-        "icon": "/ingredient_icons/tomato2.png"
+        "name": "Svež paradižnik",
+        "icon": "/ingredient_icons/tomato2.png",
+        "description": "Svež paradižnik, ki ga najpogosteje kupimo v trgovini.",
+        "long_description": "Svež paradižnik je bolj trajnostna izbira kot vložen, a pazljivi moramo biti na odvečno embalažo, predvsem pa na poreklo, saj veliko paradižnika, ki ga najdemo na policah slovenskih trgovin, izvira iz tujine. Tak paradižnik je z vidika trajnosti sporen zaradi ogljičnega odtisa, plantažne pridelave in rabe pesticidov ter dejstva, da ga posebej v Italiji in Španiji, od koder večinoma prihaja, pogosto obirajo migranti, ki se soočajo s kršitvami človekovih pravic in sodobnim suženjstvom. Pri nakupu svežega paradižnika moramo biti pozorni tudi na njegovo sezonskost in tako poskrbimo za boljšo kakovost ter manjši vpliv na okolje."
       },
       "worst": {
         "name": "Vložen paradižnik",
-        "icon": "/ingredient_icons/tomato3.png"
+        "icon": "/ingredient_icons/tomato3.png",
+        "description": "Paradižnik, vložen v konzerve.",
+        "long_description": "Paradižnik v konzervah, ki jih najdemo na policah slovenskih trgovin, praviloma prihaja iz tujine, zato je z vidika trajnosti sporen tako zaradi ogljičnega odtisa, ki ga povzroča transport, kot tudi zaradi masovne pridelave, industrijskega procesa pakiranja in dodatne embalaže. Poleg tega ga posebej v Italiji in Španiji, od koder prihaja večina tovrstnih izdelkov, pogosto obirajo migranti, ki se redno soočajo s kršitvami človekovih pravic in sodobnim suženjstvom."
       }
     },
     "vegetable": {
       "best": {
         "name": "Rukola",
-        "icon": "/ingredient_icons/veg1.png"
+        "icon": "/ingredient_icons/veg1.png",
+        "description": "Listnata zelenjava, ki jo je mogoče preprosto gojiti tudi doma.",
+        "long_description": "Rukolo lahko preprosto gojimo na domačem vrtu ali balkonu, obirati jo je mogoče kmalu po setvi, ena rastlina pa prinese obilo pridelka. Če je ne gojimo doma, lahko na policah slovenskih trgovin večinoma najdemo lokalno pridelano rukolo, zaradi česar je vpliv na okolje, ki ga povzroča prevoz, manjši. Poleg tega ima rukola številne koristi za zdravje, saj vsebuje veliko vitaminov, mineralov in antioksidantov. K čim bolj trajnostnemu nakupu lahko prispevamo še z izbiro ekoloških in sezonskih pridelkov, ki so pakirani v čim manj embalaže."
       },
       "medium": {
         "name": "Kumara",
-        "icon": "/ingredient_icons/veg2.png"
+        "icon": "/ingredient_icons/veg2.png",
+        "description": "Zelo razširjena rastlina iz družine bučevk, katere gojenje je relativno zapleteno.",
+        "long_description": "Kumare dobro uspevajo tudi v Sloveniji, zato lahko v trgovinah najdemo številne lokalne pridelke, kar pripomore k manjšemu ogljičnemu odtisu. A njihovo gojenje je relativno zapleteno, saj za rast porabijo zelo velike količine vode, poleg tega pa pri intenzivnem kmetovanju pogosto potrebujejo tudi plastične ponjave in vrvice ter gnojila, ki lahko škodujejo okolju. K bolj trajnostnemu nakupu lahko prispevamo z izbiro lokalnih, ekoloških in sezonskih pridelkov, pozorni pa moramo biti tudi na odvečno embalažo."
       },
       "worst": {
         "name": "Paprika",
-        "icon": "/ingredient_icons/veg3.png"
+        "icon": "/ingredient_icons/veg3.png",
+        "description": "Enoletnica, ki jo večinoma pridelujejo z intenzivno obliko kmetijstva.",
+        "long_description": "Veliko paprik, ki jih najdemo na policah slovenskih trgovin, je uvoženih iz Španije ali Italije, tako da k večjemu ogljičnemu odtisu prispeva že prevoz. Uvoženo papriko večinoma pridelujejo z intenzivno obliko kmetijstva, ki zaradi težnje po čim večjem dobičku uporablja ogromno vode, umetna gnojila, pesticide in veliko energije, vse to pa škoduje okolju. Poleg tega tako pridelana hrana vsebuje manj vitaminov, mineralov in drugih hranilnih snovi. K bolj trajnostnemu nakupu lahko prispevamo z izbiro lokalnih, ekoloških in sezonskih pridelkov, ki niso pakirani v plastično embalažo."
       }
     }
   },
@@ -201,9 +261,9 @@
         {
           "type": "none",
           "layer_images": {
-            "best": "/ingredient_layers/pie/6cut4_s.png",
-            "medium": "/ingredient_layers/pie/6cut1_s.png",
-            "worst": "/ingredient_layers/pie/6cut3_s.png"
+            "best": "/ingredient_layers/pie/6cut4.png",
+            "medium": "/ingredient_layers/pie/6cut1.png",
+            "worst": "/ingredient_layers/pie/6cut3.png"
           },
           "layer_image_from_index": 4,
           "replace": true
@@ -237,7 +297,7 @@
           "type": "sauce",
           "layer_images": {
             "best": "/ingredient_layers/salad/5sauce2_s.png",
-            "medium": "/ingredient_layers/salad/5sauce2_s.png",
+            "medium": "/ingredient_layers/salad/5sauce3_s.png",
             "worst": "/ingredient_layers/salad/5sauce1_s.png"
           }
         }
@@ -295,7 +355,7 @@
           "type": "sauce",
           "layer_images": {
             "best": "/ingredient_layers/taco/sauce2_s.png",
-            "medium": "/ingredient_layers/taco/sauce2_s.png",
+            "medium": "/ingredient_layers/taco/sauce3_s.png",
             "worst": "/ingredient_layers/taco/sauce1_s.png"
           }
         },
