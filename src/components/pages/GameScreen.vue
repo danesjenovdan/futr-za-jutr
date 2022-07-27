@@ -34,18 +34,8 @@ watch(
 
 watch(
   () => gameStore.remainingTimeMs,
-  () => {
-    console.log("yoohoo");
-  }
+  () => gameStore.tick()
 );
-
-// onMounted(() => {
-//   //
-// });
-
-// onUnmounted(() => {
-//   //
-// });
 </script>
 
 <style scoped lang="scss">

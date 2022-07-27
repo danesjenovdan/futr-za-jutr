@@ -3,6 +3,12 @@ import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
+const ORDER_TIME_MS = 30 * 1000;
+const GAME_TIME_MS = 90 * 1000;
+const ORDER_DELAY_MAX_MS = 20 * 1000;
+const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
+const ORDER_DELAY_MIN_MS = 5 * 1000;
+
 function getRandomFoodId() {
   const keys = Object.keys(ingredients.foods);
   return sample(keys);
@@ -48,24 +54,45 @@ function createNewFood(foodId) {
   return newFood;
 }
 
+function createNewOrder(foodId, now) {
+  let nextFoodId = foodId;
+  if (!nextFoodId || !ingredients.foods[nextFoodId]) {
+    nextFoodId = getRandomFoodId();
+  }
+
+  return {
+    id: nextFoodId,
+    createdAt: now || Date.now(),
+    remainingTimeMs: ORDER_TIME_MS,
+  };
+}
+
 export const useGameStore = defineStore("gameStore", {
   state: () => ({
     combinedFoods: [createNewFood("pie")],
     ingredientSelectorOpen: false,
     ingredientSelection: null,
-    orderQueue: [],
+    orderQueue: [createNewOrder("pie")],
     score: 0,
+    bonusTimeMs: 0,
+    orderDelay: ORDER_DELAY_MAX_MS,
   }),
   getters: {
-    remainingTimeMs() {
+    remainingTimeMs(state) {
       const timerStore = useTimerStore();
-      return Math.max(0, 90 * 1000 - timerStore.elapsedMs);
+      return Math.max(
+        0,
+        GAME_TIME_MS + state.bonusTimeMs - timerStore.elapsedMs
+      );
     },
     gameOver(state) {
       return state.remainingTimeMs <= 0;
     },
     currentFood(state) {
       return last(state.combinedFoods);
+    },
+    currentOrder(state) {
+      return state.orderQueue[0];
     },
     currentIngredientType(state) {
       const foodTemplate = ingredients.foods[state.currentFood.id];
@@ -113,8 +140,36 @@ export const useGameStore = defineStore("gameStore", {
     },
   },
   actions: {
+    tick() {
+      const now = Date.now();
+
+      // update remaining time on all orders
+      this.orderQueue.forEach((order) => {
+        const elapsedMs = now - order.createdAt;
+        order.remainingTimeMs = Math.max(0, ORDER_TIME_MS - elapsedMs);
+      });
+
+      // remove all expired items from queue
+      this.orderQueue = this.orderQueue.filter((order, i) => {
+        // first one is the current order
+        if (i === 0) {
+          return true;
+        }
+        return order.remainingTimeMs > 0;
+      });
+
+      const lastOrder = last(this.orderQueue);
+      if (now - lastOrder.createdAt > this.orderDelay) {
+        this.orderQueue.push(createNewOrder(undefined, now));
+        this.orderDelay = Math.max(
+          ORDER_DELAY_MIN_MS,
+          this.orderDelay - ORDER_DELAY_SUBTRACT_MS
+        );
+      }
+    },
     continueFoodPrep() {
       const timerStore = useTimerStore();
+      const now = Date.now();
 
       if (!this.currentFood || this.continueButtonDisabled) {
         return;
@@ -122,6 +177,7 @@ export const useGameStore = defineStore("gameStore", {
 
       if (!timerStore.started) {
         timerStore.start();
+        this.currentOrder.createdAt = now;
         if (this.ingredientSelectorOptions) {
           this.ingredientSelectorOpen = true;
           return;
@@ -163,14 +219,27 @@ export const useGameStore = defineStore("gameStore", {
         }
 
         if (this.currentFood.layers.length >= numIngredients) {
-          this.score += 50;
+          if (this.currentOrder.remainingTimeMs) {
+            this.bonusTimeMs += this.currentOrder.remainingTimeMs;
+            this.score += 50;
+          }
+          this.orderQueue.shift();
+
+          // if queue is empty immediately add a new order
+          if (!this.currentOrder) {
+            this.orderQueue.push(createNewOrder(undefined, now));
+            this.orderDelay = Math.max(
+              ORDER_DELAY_MIN_MS,
+              this.orderDelay - ORDER_DELAY_SUBTRACT_MS
+            );
+          }
         }
 
         return;
       }
 
       // current food completed, start new one
-      const nextFood = createNewFood();
+      const nextFood = createNewFood(this.currentOrder.id);
       this.combinedFoods.push(nextFood);
     },
   },
