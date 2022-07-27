@@ -22,33 +22,10 @@
 </template>
 
 <script setup>
-import { computed, watch } from "vue";
-import { useGameStore, MAX_TIME_SECONDS } from "../stores/game";
-import { useTimer } from "../composables/useTimer";
+import { computed } from "vue";
+import { useGameStore } from "../stores/game";
 
 const gameStore = useGameStore();
-const { remainingMs, start, stop } = useTimer(MAX_TIME_SECONDS, {
-  autoStart: false,
-});
-
-watch(remainingMs, (newValue) => {
-  gameStore.remainingTimeMs = newValue;
-  if (newValue <= 0) {
-    gameStore.paused = true;
-    gameStore.gameOver = true;
-  }
-});
-
-watch(
-  () => gameStore.paused,
-  (newValue) => {
-    if (!newValue) {
-      start();
-    } else {
-      stop();
-    }
-  }
-);
 
 const formattedTimer = computed(() => {
   const seconds = Math.ceil(gameStore.remainingTimeMs / 1000);

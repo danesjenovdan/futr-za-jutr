@@ -14,12 +14,48 @@
 </template>
 
 <script setup>
+import { onMounted, onUnmounted, watch } from "vue";
+import { useGameStore, MAX_TIME_SECONDS } from "../../stores/game";
+import { useTimer } from "../../composables/useTimer";
 import TopBar from "../TopBar.vue";
 import BottomBar from "../BottomBar.vue";
 import FoodPrepArea from "../FoodPrepArea.vue";
 import InstructionsOverlay from "../InstructionsOverlay.vue";
 import GameOverModal from "../GameOverModal.vue";
 import ImagePreloader from "../ImagePreloader.vue";
+
+const gameStore = useGameStore();
+
+const { remainingMs, start, stop } = useTimer(MAX_TIME_SECONDS, {
+  autoStart: false,
+});
+
+watch(remainingMs, (newValue) => {
+  gameStore.remainingTimeMs = newValue;
+  if (newValue <= 0) {
+    gameStore.paused = true;
+    gameStore.gameOver = true;
+  }
+});
+
+watch(
+  () => gameStore.paused,
+  (newValue) => {
+    if (!newValue) {
+      start();
+    } else {
+      stop();
+    }
+  }
+);
+
+onMounted(() => {
+  //
+});
+
+onUnmounted(() => {
+  //
+});
 </script>
 
 <style scoped lang="scss">
