@@ -159,7 +159,7 @@ export const useGameStore = defineStore("gameStore", {
       });
 
       const lastOrder = last(this.orderQueue);
-      if (now - lastOrder.createdAt > this.orderDelay) {
+      if (!lastOrder || now - lastOrder.createdAt > this.orderDelay) {
         this.orderQueue.push(createNewOrder(undefined, now));
         this.orderDelay = Math.max(
           ORDER_DELAY_MIN_MS,
@@ -224,15 +224,6 @@ export const useGameStore = defineStore("gameStore", {
             this.score += 50;
           }
           this.orderQueue.shift();
-
-          // if queue is empty immediately add a new order
-          if (!this.currentOrder) {
-            this.orderQueue.push(createNewOrder(undefined, now));
-            this.orderDelay = Math.max(
-              ORDER_DELAY_MIN_MS,
-              this.orderDelay - ORDER_DELAY_SUBTRACT_MS
-            );
-          }
         }
 
         return;
