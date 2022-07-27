@@ -1,5 +1,5 @@
 <template>
-  <div v-if="gameStore.paused && !gameStore.gameOver" class="modal-bg">
+  <div v-if="!timerStore.started && !gameStore.gameOver" class="modal-bg">
     <div class="constrain-width">
       <div class="top-bubble">
         <div class="text">Glej naročila in pazi na čas!</div>
@@ -12,8 +12,10 @@
 </template>
 
 <script setup>
+import { useTimerStore } from "../stores/timer";
 import { useGameStore } from "../stores/game";
 
+const timerStore = useTimerStore();
 const gameStore = useGameStore();
 </script>
 

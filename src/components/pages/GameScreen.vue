@@ -14,9 +14,9 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, watch } from "vue";
-import { useGameStore, MAX_TIME_SECONDS } from "../../stores/game";
-import { useTimer } from "../../composables/useTimer";
+import { watch } from "vue";
+import { useTimerStore } from "../../stores/timer";
+import { useGameStore } from "../../stores/game";
 import TopBar from "../TopBar.vue";
 import BottomBar from "../BottomBar.vue";
 import FoodPrepArea from "../FoodPrepArea.vue";
@@ -24,38 +24,28 @@ import InstructionsOverlay from "../InstructionsOverlay.vue";
 import GameOverModal from "../GameOverModal.vue";
 import ImagePreloader from "../ImagePreloader.vue";
 
+const timerStore = useTimerStore();
 const gameStore = useGameStore();
 
-const { remainingMs, start, stop } = useTimer(MAX_TIME_SECONDS, {
-  autoStart: false,
-});
-
-watch(remainingMs, (newValue) => {
-  gameStore.remainingTimeMs = newValue;
-  if (newValue <= 0) {
-    gameStore.paused = true;
-    gameStore.gameOver = true;
-  }
-});
+watch(
+  () => gameStore.gameOver,
+  (value) => value && timerStore.stop()
+);
 
 watch(
-  () => gameStore.paused,
-  (newValue) => {
-    if (!newValue) {
-      start();
-    } else {
-      stop();
-    }
+  () => gameStore.remainingTimeMs,
+  () => {
+    console.log("yoohoo");
   }
 );
 
-onMounted(() => {
-  //
-});
+// onMounted(() => {
+//   //
+// });
 
-onUnmounted(() => {
-  //
-});
+// onUnmounted(() => {
+//   //
+// });
 </script>
 
 <style scoped lang="scss">

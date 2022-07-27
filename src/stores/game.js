@@ -1,11 +1,7 @@
 import { last, sample } from "lodash-es";
 import { defineStore } from "pinia";
+import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
-
-export const MAX_TIME_SECONDS = 90;
-const SCORING_INGREDIENTS = Object.keys(ingredients.ingredients);
-
-console.log(SCORING_INGREDIENTS);
 
 function getRandomFoodId() {
   const keys = Object.keys(ingredients.foods);
@@ -54,10 +50,6 @@ function createNewFood(foodId) {
 
 export const useGameStore = defineStore("gameStore", {
   state: () => ({
-    maxTimeSeconds: MAX_TIME_SECONDS,
-    remainingTimeMs: MAX_TIME_SECONDS * 1000,
-    paused: true,
-    gameOver: false,
     combinedFoods: [createNewFood("pie")],
     ingredientSelectorOpen: false,
     ingredientSelection: null,
@@ -65,6 +57,13 @@ export const useGameStore = defineStore("gameStore", {
     score: 0,
   }),
   getters: {
+    remainingTimeMs() {
+      const timerStore = useTimerStore();
+      return Math.max(0, 90 * 1000 - timerStore.elapsedMs);
+    },
+    gameOver(state) {
+      return state.remainingTimeMs <= 0;
+    },
     currentFood(state) {
       return last(state.combinedFoods);
     },
@@ -91,7 +90,8 @@ export const useGameStore = defineStore("gameStore", {
       return ingredients.ingredients[state.currentIngredientType];
     },
     continueButtonText(state) {
-      if (state.paused && !state.gameOver) {
+      const timerStore = useTimerStore();
+      if (!timerStore.started) {
         return "ZAČNI IGRO";
       }
       if (state.ingredientSelectorOpen) {
@@ -114,12 +114,14 @@ export const useGameStore = defineStore("gameStore", {
   },
   actions: {
     continueFoodPrep() {
+      const timerStore = useTimerStore();
+
       if (!this.currentFood || this.continueButtonDisabled) {
         return;
       }
 
-      if (this.paused) {
-        this.paused = false;
+      if (!timerStore.started) {
+        timerStore.start();
         if (this.ingredientSelectorOptions) {
           this.ingredientSelectorOpen = true;
           return;
@@ -164,13 +166,6 @@ export const useGameStore = defineStore("gameStore", {
           this.score += 50;
         }
 
-        return;
-      }
-
-      // all foods completed
-      if (this.combinedFoods.length === 4) {
-        this.paused = true;
-        this.gameOver = true;
         return;
       }
 
