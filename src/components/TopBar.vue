@@ -19,7 +19,7 @@
       </div>
       <div class="orders">
         <template v-for="order in gameStore.orderQueue" :key="order.createdAt">
-          <div class="order">
+          <div :class="['order', { warning: order.remainingTimeMs <= 5000 }]">
             <img class="icon" :src="`/food_icons/${order.id}.png`" />
             <div class="text">{{ formatTimer(order.remainingTimeMs) }}</div>
           </div>
@@ -130,6 +130,14 @@ function formatTimer(remainingMs) {
           font-size: 1.5rem;
           font-weight: 800;
           line-height: 1;
+        }
+
+        &.warning {
+          background-color: $color-warning-bg;
+
+          .text {
+            color: $color-warning-fg;
+          }
         }
       }
     }
