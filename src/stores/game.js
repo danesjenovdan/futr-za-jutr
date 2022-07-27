@@ -1,4 +1,5 @@
 import { last, sample } from "lodash-es";
+import { nanoid } from "nanoid";
 import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
@@ -8,6 +9,11 @@ const GAME_TIME_MS = 90 * 1000;
 const ORDER_DELAY_MAX_MS = 20 * 1000;
 const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
 const ORDER_DELAY_MIN_MS = 5 * 1000;
+
+function getRemainingTimeForOrder(order, now) {
+  const elapsedMs = (now || Date.now()) - order.createdAt;
+  return Math.max(0, ORDER_TIME_MS - elapsedMs);
+}
 
 function getRandomFoodId() {
   const keys = Object.keys(ingredients.foods);
@@ -62,8 +68,9 @@ function createNewOrder(foodId, now) {
 
   return {
     id: nextFoodId,
+    uid: nanoid(),
     createdAt: now || Date.now(),
-    remainingTimeMs: ORDER_TIME_MS,
+    timerSeconds: Math.ceil(ORDER_TIME_MS / 1000),
   };
 }
 
@@ -141,22 +148,32 @@ export const useGameStore = defineStore("gameStore", {
   },
   actions: {
     tick() {
+      // !!!
+      // TRY TO NOT UPDATE STATE TOO MUCH (LIKE EVERY TICK) BECAUSE IT MESSES WITH ANIMATIONS
+      // !!!
       const now = Date.now();
 
-      // update remaining time on all orders
       this.orderQueue.forEach((order) => {
-        const elapsedMs = now - order.createdAt;
-        order.remainingTimeMs = Math.max(0, ORDER_TIME_MS - elapsedMs);
+        const remainingMs = getRemainingTimeForOrder(order, now);
+        // ANIM FIX: only update once per second
+        order.timerSeconds = Math.ceil(remainingMs / 1000);
       });
 
       // remove all expired items from queue
-      this.orderQueue = this.orderQueue.filter((order, i) => {
-        // first one is the current order
-        if (i === 0) {
-          return true;
+      for (;;) {
+        // ANIM FIX: dont use filter, mutate array instead
+        const indexToRemove = this.orderQueue.findIndex((order, i) => {
+          // never remove first one because it is the current order
+          if (i === 0) {
+            return false;
+          }
+          return getRemainingTimeForOrder(order, now) <= 0;
+        });
+        if (indexToRemove === -1) {
+          break;
         }
-        return order.remainingTimeMs > 0;
-      });
+        this.orderQueue.splice(indexToRemove, 1);
+      }
 
       const lastOrder = last(this.orderQueue);
       if (!lastOrder || now - lastOrder.createdAt > this.orderDelay) {
@@ -219,8 +236,9 @@ export const useGameStore = defineStore("gameStore", {
         }
 
         if (this.currentFood.layers.length >= numIngredients) {
-          if (this.currentOrder.remainingTimeMs) {
-            this.bonusTimeMs += this.currentOrder.remainingTimeMs;
+          const remainingMs = getRemainingTimeForOrder(this.currentOrder, now);
+          if (remainingMs) {
+            this.bonusTimeMs += remainingMs;
             this.score += 50;
           }
           this.orderQueue.shift();
