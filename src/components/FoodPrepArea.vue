@@ -1,12 +1,14 @@
 <template>
   <div class="food-prep-area constrain-width">
     <div class="layers">
-      <template
-        v-for="layer in gameStore.displayedLayers"
-        :key="layer.layerImage"
-      >
-        <img :src="layer.layerImage" />
-      </template>
+      <TransitionGroup name="layer-list">
+        <img
+          v-for="layer in gameStore.displayedLayers"
+          :key="layer.layerImage"
+          :src="layer.layerImage"
+          :class="{ replaced: layer.replace }"
+        />
+      </TransitionGroup>
     </div>
     <IngredientSelector />
   </div>
@@ -18,6 +20,30 @@ import IngredientSelector from "./IngredientSelector.vue";
 
 const gameStore = useGameStore();
 </script>
+
+<style>
+.layer-list-enter-active {
+  transition: all 0.5s ease;
+}
+
+.layer-list-leave-active {
+  transition: all 0.2s ease;
+}
+
+.layer-list-enter-from {
+  opacity: 0;
+  transform: translateY(-25%);
+}
+
+.layer-list-enter-from.replaced {
+  opacity: 0;
+  transform: none;
+}
+
+.layer-list-leave-to {
+  opacity: 0;
+}
+</style>
 
 <style scoped lang="scss">
 .food-prep-area {

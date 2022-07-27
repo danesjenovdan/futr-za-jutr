@@ -57,7 +57,7 @@ function formatTimer(remainingMs) {
 .order-list-enter-from,
 .order-list-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateX(50%);
 }
 
 .order-list-leave-active {
