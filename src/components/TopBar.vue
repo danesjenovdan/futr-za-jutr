@@ -18,12 +18,16 @@
         </div>
       </div>
       <div class="orders">
-        <template v-for="order in gameStore.orderQueue" :key="order.createdAt">
-          <div :class="['order', { warning: order.remainingTimeMs <= 5000 }]">
+        <TransitionGroup name="order-list">
+          <div
+            v-for="order in gameStore.orderQueue"
+            :key="order.uid"
+            :class="['order', { warning: order.timerSeconds <= 5 }]"
+          >
             <img class="icon" :src="`/food_icons/${order.id}.png`" />
-            <div class="text">{{ formatTimer(order.remainingTimeMs) }}</div>
+            <div class="text">{{ formatTimer(order.timerSeconds * 1000) }}</div>
           </div>
-        </template>
+        </TransitionGroup>
       </div>
     </div>
   </div>
@@ -42,6 +46,24 @@ function formatTimer(remainingMs) {
   return `${formattedMinutes}:${formattedSeconds}`;
 }
 </script>
+
+<style>
+.order-list-move,
+.order-list-enter-active,
+.order-list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.order-list-enter-from,
+.order-list-leave-to {
+  opacity: 0;
+  transform: translateX(50%);
+}
+
+.order-list-leave-active {
+  position: absolute;
+}
+</style>
 
 <style scoped lang="scss">
 @import "../assets/scss/variables";
@@ -107,8 +129,10 @@ function formatTimer(remainingMs) {
 
     .orders {
       position: absolute;
-      top: 0.95rem;
+      top: 0;
       right: 0;
+      overflow: hidden;
+      padding: 0.95rem 0rem 3rem 1rem;
 
       .order {
         display: flex;
