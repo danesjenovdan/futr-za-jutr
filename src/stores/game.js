@@ -52,6 +52,7 @@ function createNewFood(foodId) {
       break;
     }
     newFood.layers.push({
+      type: ingredient.type,
       layerImage: getLayerImage(ingredient, undefined, newFood.layers),
       replace: ingredient.replace,
     });
@@ -219,6 +220,7 @@ export const useGameStore = defineStore("gameStore", {
         for (let i = numDone; i < foodTemplate.ingredients.length; i += 1) {
           const ingredient = foodTemplate.ingredients[i];
           this.currentFood.layers.push({
+            type: ingredient.type,
             layerImage: getLayerImage(
               ingredient,
               this.ingredientSelection,
