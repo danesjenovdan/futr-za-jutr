@@ -7,8 +7,18 @@
           alt="Futr za jutr"
           class="logo"
         />
+        <div class="final-score">
+          <div class="stars">
+            <div v-for="i in 3" :key="i" class="star">
+              <img src="../../assets/images/icons/zvezda-prazna.svg" />
+            </div>
+          </div>
+          <div class="score">
+            {{ shareState.score - negativeScore }}
+          </div>
+        </div>
         <div class="summary-box">
-          <div class="title">PRIPRAVLJENI OBROKI</div>
+          <div class="title">Pripravljene jedi</div>
           <div class="counts-with-icon">
             <div
               v-for="foodName in foodNames"
@@ -27,7 +37,7 @@
           </div>
         </div>
         <div class="summary-box">
-          <div class="title">UPORABLJENE SESTAVINE</div>
+          <div class="title">Uporabljene sestavine</div>
           <div class="counts-with-icon">
             <div
               v-for="(qualityTitle, qualityName) in qualityNames"
@@ -46,18 +56,8 @@
             </div>
           </div>
         </div>
-        <div class="final-score">
-          <div class="stars">
-            <div v-for="i in 3" :key="i" class="star">
-              <img src="../../assets/images/icons/zvezda-prazna.svg" />
-            </div>
-          </div>
-          <div class="score">
-            {{ shareState.score - negativeScore }}
-          </div>
-        </div>
         <div>
-          <button type="button" class="share-button">DELI REZULTAT</button>
+          <button type="button" class="share-button">DELI SVOJ REZULTAT</button>
         </div>
       </div>
     </div>
@@ -103,9 +103,9 @@ const negativeScore = computed(() => {
 
 const foodNames = Object.keys(ingredients.foods);
 const qualityNames = {
-  best: "trajnostne",
-  medium: "srednje",
-  worst: "netrajnostne",
+  best: "trajnostna",
+  medium: "sprejemljiva",
+  worst: "netrajnostna",
 };
 
 const foodCounts = computed(() => {
@@ -236,8 +236,8 @@ const qualityCounts = computed(() => {
     }
 
     .final-score {
-      margin: 2.1rem 0 0;
-      padding: 5.4rem 0 3.3rem 0;
+      margin: 1rem 0;
+      padding: 5.4rem 0 2rem 0;
       background-color: transparent;
       background-image: url("../../assets/images/backgrounds/tvoj-rezultat-okvir.svg");
       background-repeat: no-repeat;
