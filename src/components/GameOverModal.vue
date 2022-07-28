@@ -81,7 +81,7 @@ function onResultsClick() {
     width: 30.6rem;
     padding: 4.2rem 2.8rem 3.5rem 3.8rem;
     background-color: transparent;
-    background: url("../assets/images/backgrounds/obvestilo-okvir.svg");
+    background-image: url("../assets/images/backgrounds/obvestilo-okvir.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     text-align: center;

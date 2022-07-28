@@ -1,54 +1,69 @@
 <template>
-  <div class="top">
-    <div class="top-content constrain-width">
-      <img
-        src="../../assets/images/logo-igra.svg"
-        alt="Futr za jutr"
-        class="logo"
-      />
-      <div class="summary-box">
-        <div class="title">PRIPRAVLJENI OBROKI</div>
-        <div class="counts-with-icon">
-          <div
-            v-for="foodName in foodNames"
-            :key="foodName"
-            class="count-with-icon"
-          >
-            <img :src="`/food_icons/${foodName}.png`" />
-            <div class="count">{{ foodCounts[foodName] }} x</div>
+  <div class="scroll-container">
+    <div class="top">
+      <div class="top-content constrain-width">
+        <img
+          src="../../assets/images/logo-igra.svg"
+          alt="Futr za jutr"
+          class="logo"
+        />
+        <div class="summary-box">
+          <div class="title">PRIPRAVLJENI OBROKI</div>
+          <div class="counts-with-icon">
+            <div
+              v-for="foodName in foodNames"
+              :key="foodName"
+              class="count-with-icon"
+            >
+              <img :src="`/food_icons/${foodName}.png`" />
+              <div class="count">{{ foodCounts[foodName] }} x</div>
+            </div>
+          </div>
+          <div class="pills">
+            <div class="pill">
+              <img class="icon" src="../../assets/images/icons/kovanec.svg" />
+              <div class="text">+{{ shareState.score }}</div>
+            </div>
           </div>
         </div>
-        <div class="pills">
-          <div class="pill">
-            <img class="icon" src="../../assets/images/icons/kovanec.svg" />
-            <div class="text">+{{ shareState.score }}</div>
+        <div class="summary-box">
+          <div class="title">UPORABLJENE SESTAVINE</div>
+          <div class="counts-with-icon">
+            <div
+              v-for="(qualityTitle, qualityName) in qualityNames"
+              :key="qualityName"
+              class="count-with-icon"
+            >
+              <img :src="`/quality_icons/${qualityName}.png`" />
+              <div class="count">{{ qualityCounts[qualityName] }} x</div>
+              <div class="description">{{ qualityTitle }}</div>
+            </div>
+          </div>
+          <div class="pills">
+            <div class="pill">
+              <img class="icon" src="../../assets/images/icons/kovanec.svg" />
+              <div class="text red">-{{ negativeScore }}</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="summary-box">
-        <div class="title">UPORABLJENE SESTAVINE</div>
-        <div class="counts-with-icon">
-          <div
-            v-for="(qualityTitle, qualityName) in qualityNames"
-            :key="qualityName"
-            class="count-with-icon"
-          >
-            <img :src="`/quality_icons/${qualityName}.png`" />
-            <div class="count">{{ qualityCounts[qualityName] }} x</div>
-            <div class="description">{{ qualityTitle }}</div>
+        <div class="final-score">
+          <div class="stars">
+            <div v-for="i in 3" :key="i" class="star">
+              <img src="../../assets/images/icons/zvezda-prazna.svg" />
+            </div>
+          </div>
+          <div class="score">
+            {{ shareState.score - negativeScore }}
           </div>
         </div>
-        <div class="pills">
-          <div class="pill">
-            <img class="icon" src="../../assets/images/icons/kovanec.svg" />
-            <div class="text red">-{{ negativeScore }}</div>
-          </div>
+        <div>
+          <button type="button" class="share-button">DELI REZULTAT</button>
         </div>
       </div>
     </div>
-  </div>
-  <div>
-    <div>{{ shareState }}</div>
+    <div>
+      <div>{{ shareState }}</div>
+    </div>
   </div>
 </template>
 
@@ -115,6 +130,12 @@ const qualityCounts = computed(() => {
 <style scoped lang="scss">
 @import "../../assets/scss/variables";
 
+.scroll-container {
+  height: 100%;
+  overflow-y: auto;
+  background-color: $color-dark-1;
+}
+
 .top {
   background-color: $color-dark-1;
 
@@ -131,7 +152,7 @@ const qualityCounts = computed(() => {
       margin: 1rem 0;
       padding: 2.4rem 1.8rem 2.2rem 1.3rem;
       background-color: transparent;
-      background: url("../../assets/images/backgrounds/rezultat-okvir.svg");
+      background-image: url("../../assets/images/backgrounds/rezultat-okvir.svg");
       background-repeat: no-repeat;
       background-size: 100% 100%;
 
@@ -212,6 +233,56 @@ const qualityCounts = computed(() => {
           }
         }
       }
+    }
+
+    .final-score {
+      margin: 2.1rem 0 0;
+      padding: 5.4rem 0 3.3rem 0;
+      background-color: transparent;
+      background-image: url("../../assets/images/backgrounds/tvoj-rezultat-okvir.svg");
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+
+      .stars {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        .star {
+          width: 4rem;
+          height: 4rem;
+
+          &:nth-of-type(2) {
+            margin-top: -0.4rem;
+          }
+        }
+      }
+
+      .score {
+        margin-top: 0.8rem;
+        color: $color-white;
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1;
+        text-align: center;
+        @include text-stroke($color-black, 0.05em);
+      }
+    }
+
+    .share-button {
+      display: flex;
+      margin-inline: auto;
+      padding: 1.4rem 3.2rem 1.4rem 1.8rem;
+      border: none;
+      background-color: transparent;
+      background-image: url("../../assets/images/buttons/deli-rezultat-gumb.svg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      font-size: 2rem;
+      font-weight: 800;
+      font-style: italic;
+      line-height: 1;
+      color: $color-accent-primary-contrast;
     }
   }
 }
