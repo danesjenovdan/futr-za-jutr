@@ -52,6 +52,7 @@ function createNewFood(foodId) {
       break;
     }
     newFood.layers.push({
+      type: ingredient.type,
       layerImage: getLayerImage(ingredient, undefined, newFood.layers),
       replace: ingredient.replace,
     });
@@ -76,10 +77,10 @@ function createNewOrder(foodId, now) {
 
 export const useGameStore = defineStore("gameStore", {
   state: () => ({
-    combinedFoods: [createNewFood("pie")],
+    combinedFoods: [createNewFood("burger")],
     ingredientSelectorOpen: false,
     ingredientSelection: null,
-    orderQueue: [createNewOrder("pie")],
+    orderQueue: [createNewOrder("burger")],
     score: 0,
     bonusTimeMs: 0,
     orderDelay: ORDER_DELAY_MAX_MS,
@@ -219,6 +220,7 @@ export const useGameStore = defineStore("gameStore", {
         for (let i = numDone; i < foodTemplate.ingredients.length; i += 1) {
           const ingredient = foodTemplate.ingredients[i];
           this.currentFood.layers.push({
+            type: ingredient.type,
             layerImage: getLayerImage(
               ingredient,
               this.ingredientSelection,

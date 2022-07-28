@@ -3,10 +3,12 @@
 }
 
 html {
+  height: 100%;
   font-size: var(--rem-size, 10px);
 }
 
 body {
+  height: 100%;
   background: $color-viewport-bg;
   font-weight: 100%;
   font-family: "Fira Sans Extra Condensed", sans-serif;
@@ -14,7 +16,7 @@ body {
 
 #app {
   background: $color-page-bg;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 
   // // @media (min-width: 992px) and (orientation: landscape) {

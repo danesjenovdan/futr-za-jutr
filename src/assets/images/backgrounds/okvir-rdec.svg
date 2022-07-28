@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187.93 190.58">
+  <defs>
+    <linearGradient id="a" x1="94.3" x2="94.3" y1="168.4" y2="190.58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#940004"/>
+      <stop offset=".37" stop-color="#fc0909"/>
+    </linearGradient>
+    <linearGradient id="b" x1="94.3" x2="94.3" y1="13.34" y2="178.17" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#940004"/>
+      <stop offset=".1" stop-color="#d40005"/>
+      <stop offset=".25" stop-color="#fc0909"/>
+      <stop offset=".46" stop-color="#fc0909"/>
+      <stop offset=".57" stop-color="#ff6a72"/>
+      <stop offset="1" stop-color="#ffbfc1"/>
+    </linearGradient>
+  </defs>
+  <path fill="#fff" d="M17.72 19.6h160v160h-160zm0 0a385.15 385.15 0 0 1 160 0m0 160a448.96 448.96 0 0 1-160 0m160-160c8.52 51.01 7.83 104.53 0 160m-160 0c-8.61-55.83-9.5-109.42 0-160"/>
+  <path stroke="#fc0808" stroke-linecap="round" stroke-width="15" d="M14.3 15.9a385.15 385.15 0 0 1 160 0"/>
+  <path fill="none" stroke="url(#a)" stroke-linecap="round" stroke-width="15" d="M174.3 175.9a448.96 448.96 0 0 1-160 0"/>
+  <path stroke="#fc0808" stroke-linecap="round" stroke-width="15" d="M174.3 15.9c8.52 51.01 7.83 104.53 0 160m-160 0c-8.61-55.83-9.51-109.43 0-160"/>
+  <path fill="none" stroke="url(#b)" stroke-linecap="round" stroke-width="4" d="M20.22 22.1s-5.85 40.03-5.93 72.02 5.93 75.82 5.93 75.82 59.15 7.75 74.07 5.96 68.93-2.79 72.93-5.79 7.15-74.62 7.07-79.31-6.07-66.69-6.07-68.69-60.85-7.4-73.93-6.7-74.07 6.69-74.07 6.69Z"/>
+</svg>

@@ -206,6 +206,10 @@
       "icon": "/food_icons/burger.png",
       "ingredients": [
         {
+          "type": "none",
+          "layer_image": "/ingredient_layers/burger/kroznik_b_s.png"
+        },
+        {
           "type": "dough",
           "layer_image": "/ingredient_layers/burger/bun_b_s.png"
         },
@@ -300,6 +304,10 @@
             "medium": "/ingredient_layers/salad/5sauce3_s.png",
             "worst": "/ingredient_layers/salad/5sauce1_s.png"
           }
+        },
+        {
+          "type": "none",
+          "layer_image": "/ingredient_layers/salad/none.png"
         }
       ]
     },

@@ -25,13 +25,43 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { useGameStore } from "../stores/game";
+import { useTimerStore } from "../stores/timer";
+import ingredients from "../assets/ingredients.json";
 
 const router = useRouter();
 const gameStore = useGameStore();
+const timerStore = useTimerStore();
+
+const foodToNum = (x) => Object.keys(ingredients.foods).indexOf(x);
+const qualityToNum = (x) => ["best", "medium", "worst"].indexOf(x);
+const layersToNums = (layers) =>
+  layers
+    .filter((l) => l.type !== "none" && l.quality)
+    .map((l) => qualityToNum(l.quality))
+    .join("");
+
+function encodeFood(food) {
+  const foodNum = foodToNum(food.id);
+  const qualityNums = layersToNums(food.layers);
+  return Number.parseInt(`${foodNum}${qualityNums}`, 10).toString(36);
+}
 
 function onResultsClick() {
-  // TODO: add score and stuff to results url
-  router.push({ name: "results" });
+  const completedFoods = [...gameStore.combinedFoods];
+  if (!gameStore.currentFoodDone) {
+    completedFoods.pop();
+  }
+
+  const shareState = [
+    gameStore.score.toString(36),
+    Math.floor(timerStore.elapsedMs / 1000).toString(36),
+    ...completedFoods.map((food) => encodeFood(food)),
+  ].join(";");
+
+  router.push({
+    name: "results",
+    query: { s: shareState },
+  });
 }
 </script>
 
@@ -51,7 +81,7 @@ function onResultsClick() {
     width: 30.6rem;
     padding: 4.2rem 2.8rem 3.5rem 3.8rem;
     background-color: transparent;
-    background: url("../assets/images/backgrounds/obvestilo-okvir.svg");
+    background-image: url("../assets/images/backgrounds/obvestilo-okvir.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     text-align: center;
