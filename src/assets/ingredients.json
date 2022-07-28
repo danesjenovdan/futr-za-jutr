@@ -206,6 +206,10 @@
       "icon": "/food_icons/burger.png",
       "ingredients": [
         {
+          "type": "none",
+          "layer_image": "/ingredient_layers/burger/kroznik_b_s.png"
+        },
+        {
           "type": "dough",
           "layer_image": "/ingredient_layers/burger/bun_b_s.png"
         },

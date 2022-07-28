@@ -77,10 +77,10 @@ function createNewOrder(foodId, now) {
 
 export const useGameStore = defineStore("gameStore", {
   state: () => ({
-    combinedFoods: [createNewFood("pie")],
+    combinedFoods: [createNewFood("burger")],
     ingredientSelectorOpen: false,
     ingredientSelection: null,
-    orderQueue: [createNewOrder("pie")],
+    orderQueue: [createNewOrder("burger")],
     score: 0,
     bonusTimeMs: 0,
     orderDelay: ORDER_DELAY_MAX_MS,
