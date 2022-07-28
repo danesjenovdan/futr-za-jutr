@@ -304,6 +304,10 @@
             "medium": "/ingredient_layers/salad/5sauce3_s.png",
             "worst": "/ingredient_layers/salad/5sauce1_s.png"
           }
+        },
+        {
+          "type": "none",
+          "layer_image": "/ingredient_layers/salad/none.png"
         }
       ]
     },
