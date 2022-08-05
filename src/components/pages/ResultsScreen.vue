@@ -57,7 +57,9 @@
           </div>
         </div>
         <div>
-          <button type="button" class="share-button">DELI SVOJ REZULTAT</button>
+          <button type="button" class="share-button" @click="share">
+            DELI SVOJ REZULTAT
+          </button>
         </div>
       </div>
     </div>
@@ -94,7 +96,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import ingredients from "../../assets/ingredients.json";
 
@@ -151,6 +153,77 @@ const qualityCounts = computed(() => {
   });
   return counts;
 });
+
+// share
+const clipboardWorks = ref(true);
+
+const resultString = computed(() =>
+  `
+Znaš sestaviti trajnosten obrok? 🥗
+
+Meni je v ${shareState.value.time} sekundah uspelo pripraviti ${
+    shareState.value.foods.length
+  } jedi in pri tem doseči ${
+    shareState.value.score - negativeScore.value
+  } točk. 🏆
+
+V mojih jedeh je bilo ${qualityCounts.value.best} trajnostnih, ${
+    qualityCounts.value.medium
+  } sprejemljivih in ${qualityCounts.value.worst} netrajnostnih sestavin. 👨‍🍳
+
+Preizkusi se tudi ti! 👇
+https://futr.lb.djnd.si/
+  `.trim()
+);
+const alertString = computed(() =>
+  `
+Tvoj rezultat smo skopirali v odložišče. Objavi ga na svojem najljubšem kanalu in k pripravi jedi povabi tudi prijatelje in prijateljice!
+
+${resultString.value}
+  `.trim()
+);
+
+const errorAlertString = `Ups, nekaj je šlo narobe pri kopiranju v odložišče. Rezultat imaš spodaj, skopiraj in deli ga!`;
+
+const fallbackCopyTextToClipboard = (text) => {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  // Avoid scrolling to bottom
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand("copy");
+  } catch (err) {
+    clipboardWorks.value = false;
+    // eslint-disable-next-line no-alert
+    alert(errorAlertString);
+  }
+  document.body.removeChild(textArea);
+};
+const copyTextToClipboard = (text) => {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(
+    () => {
+      // eslint-disable-next-line no-alert
+      alert(alertString.value);
+    },
+    () => {
+      clipboardWorks.value = false;
+      // eslint-disable-next-line no-alert
+      alert(errorAlertString);
+    }
+  );
+};
+const share = () => {
+  copyTextToClipboard(resultString.value);
+};
 </script>
 
 <style scoped lang="scss">
@@ -340,7 +413,7 @@ const qualityCounts = computed(() => {
             margin-right: 1.7rem;
             padding: 1.3rem 1.2rem;
             background-color: transparent;
-            background-image: url("../../assets/images/backgrounds/okvir-moder.svg");
+            background-image: url("../../assets/images/backgrounds/okvir-zlat.svg");
             background-repeat: no-repeat;
             background-size: 100% 100%;
 

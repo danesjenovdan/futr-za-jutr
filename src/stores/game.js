@@ -5,10 +5,10 @@ import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
 const ORDER_TIME_MS = 30 * 1000;
-const GAME_TIME_MS = 90 * 1000;
-const ORDER_DELAY_MAX_MS = 20 * 1000;
-const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
-const ORDER_DELAY_MIN_MS = 5 * 1000;
+const GAME_TIME_MS = 30 * 1000;
+const ORDER_DELAY_MAX_MS = 30 * 1000;
+const ORDER_DELAY_SUBTRACT_MS = 4 * 1000;
+const ORDER_DELAY_MIN_MS = 10 * 1000;
 
 function getRemainingTimeForOrder(order, now) {
   const elapsedMs = (now || Date.now()) - order.createdAt;

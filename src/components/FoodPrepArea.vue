@@ -1,14 +1,17 @@
 <template>
-  <div class="food-prep-area constrain-width">
-    <div class="layers">
-      <TransitionGroup name="layer-list">
-        <img
-          v-for="layer in gameStore.displayedLayers"
-          :key="layer.layerImage"
-          :src="layer.layerImage"
-          :class="{ replaced: layer.replace }"
-        />
-      </TransitionGroup>
+  <div class="food-prep-area">
+    <div class="food-prep-bg"></div>
+    <div class="layers-container constrain-width">
+      <div class="layers">
+        <TransitionGroup name="layer-list">
+          <img
+            v-for="layer in gameStore.displayedLayers"
+            :key="layer.layerImage"
+            :src="layer.layerImage"
+            :class="{ replaced: layer.replace }"
+          />
+        </TransitionGroup>
+      </div>
     </div>
     <IngredientSelector />
   </div>
@@ -48,16 +51,23 @@ const gameStore = useGameStore();
 <style scoped lang="scss">
 .food-prep-area {
   position: relative;
-  display: flex;
   height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  background-image: url("../assets/images/backgrounds/foodprepbg.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom center;
+
+  .food-prep-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(#fff, 0.6);
+    clip-path: polygon(0% 78%, 50% 61%, 100% 78%, 100% 100%, 0% 100%);
+  }
+
+  .layers-container {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
   .layers {
     position: relative;
