@@ -63,6 +63,11 @@
         </div>
       </div>
     </div>
+    <div class="jagged-divider">
+      <div class="shadow-container">
+        <div class="clipped-container"></div>
+      </div>
+    </div>
     <div class="bottom">
       <div class="bottom-content constrain-width">
         <div class="title">SESTAVINE</div>
@@ -419,11 +424,36 @@ const share = () => {
   }
 }
 
+.jagged-divider {
+  overflow: hidden;
+  background: $color-light;
+
+  .shadow-container {
+    filter: drop-shadow(0 0 0.75rem $color-dark-1);
+
+    .clipped-container {
+      padding: 2rem 0;
+      background: $color-dark-1;
+      margin-inline: -1px;
+      clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% 2.4rem,
+        80% 1rem,
+        60% 1.6rem,
+        40% 1rem,
+        20% 2.2rem,
+        0% 2rem
+      );
+    }
+  }
+}
+
 .bottom {
   background: $color-light;
 
   .bottom-content {
-    padding: 4rem 2rem 1.1rem 2rem;
+    padding: 1rem 2rem 1.1rem 2rem;
 
     .title {
       color: $color-dark-1;
