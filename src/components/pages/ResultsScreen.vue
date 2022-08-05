@@ -10,7 +10,11 @@
         <div class="final-score">
           <div class="stars">
             <div v-for="i in 3" :key="i" class="star">
-              <img src="../../assets/images/icons/zvezda-prazna.svg" />
+              <img
+                v-if="i > stars"
+                src="../../assets/images/icons/zvezda-prazna.svg"
+              />
+              <img v-else src="../../assets/images/icons/zvezda.svg" />
             </div>
           </div>
           <div class="score">
@@ -164,6 +168,24 @@ const qualityCounts = computed(() => {
     counts[qualityName] = layers.filter((l) => l === qualityName).length;
   });
   return counts;
+});
+
+const stars = computed(() => {
+  const sum =
+    qualityCounts.value.best +
+    qualityCounts.value.medium +
+    qualityCounts.value.worst;
+  const bestPercent = qualityCounts.value.best / sum;
+  if (bestPercent >= 0.75) {
+    return 3;
+  }
+  if (bestPercent >= 0.5) {
+    return 2;
+  }
+  if (bestPercent >= 0.25) {
+    return 1;
+  }
+  return 0;
 });
 
 // share
