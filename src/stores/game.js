@@ -4,15 +4,17 @@ import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
-const ORDER_TIME_MS = 30 * 1000;
-const GAME_TIME_MS = 30 * 1000;
-const ORDER_DELAY_MAX_MS = 30 * 1000;
-const ORDER_DELAY_SUBTRACT_MS = 4 * 1000;
-const ORDER_DELAY_MIN_MS = 10 * 1000;
+const GAME_TIME_MS = 60 * 1000;
+const ORDER_DELAY_MAX_MS = 20 * 1000;
+const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
+const ORDER_DELAY_MIN_MS = 5 * 1000;
+const ORDER_TIME_MAX_MS = 30 * 1000;
+const ORDER_TIME_SUBTRACT_MS = 5 * 1000;
+const ORDER_TIME_MIN_MS = 10 * 1000;
 
 function getRemainingTimeForOrder(order, now) {
   const elapsedMs = (now || Date.now()) - order.createdAt;
-  return Math.max(0, ORDER_TIME_MS - elapsedMs);
+  return Math.max(0, order.orderTime - elapsedMs);
 }
 
 function getRandomFoodId() {
@@ -61,7 +63,7 @@ function createNewFood(foodId) {
   return newFood;
 }
 
-function createNewOrder(foodId, now) {
+function createNewOrder(foodId, now, orderTime = ORDER_TIME_MAX_MS) {
   let nextFoodId = foodId;
   if (!nextFoodId || !ingredients.foods[nextFoodId]) {
     nextFoodId = getRandomFoodId();
@@ -71,7 +73,8 @@ function createNewOrder(foodId, now) {
     id: nextFoodId,
     uid: nanoid(),
     createdAt: now || Date.now(),
-    timerSeconds: Math.ceil(ORDER_TIME_MS / 1000),
+    orderTime,
+    timerSeconds: Math.ceil(orderTime / 1000),
   };
 }
 
@@ -84,6 +87,7 @@ export const useGameStore = defineStore("gameStore", {
     score: 0,
     bonusTimeMs: 0,
     orderDelay: ORDER_DELAY_MAX_MS,
+    orderTime: ORDER_TIME_MAX_MS,
   }),
   getters: {
     remainingTimeMs(state) {
@@ -178,10 +182,14 @@ export const useGameStore = defineStore("gameStore", {
 
       const lastOrder = last(this.orderQueue);
       if (!lastOrder || now - lastOrder.createdAt > this.orderDelay) {
-        this.orderQueue.push(createNewOrder(undefined, now));
+        this.orderQueue.push(createNewOrder(undefined, now, this.orderTime));
         this.orderDelay = Math.max(
           ORDER_DELAY_MIN_MS,
           this.orderDelay - ORDER_DELAY_SUBTRACT_MS
+        );
+        this.orderTime = Math.max(
+          ORDER_TIME_MIN_MS,
+          this.orderTime - ORDER_TIME_SUBTRACT_MS
         );
       }
     },
