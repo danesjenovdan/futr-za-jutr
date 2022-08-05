@@ -3,60 +3,62 @@
     <div v-if="gameStore.ingredientSelectorOpen" class="ingredient-selector">
       <div class="shadow-container">
         <div class="clipped-container">
-          <div class="ingredients">
-            <button
-              :class="[
-                'ingredient',
-                {
-                  selected:
-                    shuffledOptions[0].quality ===
-                    gameStore.ingredientSelection,
-                },
-              ]"
-              @click="selectOption(0)"
-            >
-              <div class="icon">
-                <img :src="shuffledOptions[0].icon" />
-              </div>
-              <div class="text">{{ shuffledOptions[0].name }}</div>
-            </button>
-            <button
-              :class="[
-                'ingredient',
-                {
-                  selected:
-                    shuffledOptions[1].quality ===
-                    gameStore.ingredientSelection,
-                },
-              ]"
-              @click="selectOption(1)"
-            >
-              <div class="icon">
-                <img :src="shuffledOptions[1].icon" />
-              </div>
-              <div class="text">{{ shuffledOptions[1].name }}</div>
-            </button>
-            <button
-              :class="[
-                'ingredient',
-                {
-                  selected:
-                    shuffledOptions[2].quality ===
-                    gameStore.ingredientSelection,
-                },
-              ]"
-              @click="selectOption(2)"
-            >
-              <div class="icon">
-                <img :src="shuffledOptions[2].icon" />
-              </div>
-              <div class="text">{{ shuffledOptions[2].name }}</div>
-            </button>
+          <div class="constrain-width">
+            <div class="ingredients">
+              <button
+                :class="[
+                  'ingredient',
+                  {
+                    selected:
+                      shuffledOptions[0].quality ===
+                      gameStore.ingredientSelection,
+                  },
+                ]"
+                @click="selectOption(0)"
+              >
+                <div class="icon">
+                  <img :src="shuffledOptions[0].icon" />
+                </div>
+                <div class="text">{{ shuffledOptions[0].name }}</div>
+              </button>
+              <button
+                :class="[
+                  'ingredient',
+                  {
+                    selected:
+                      shuffledOptions[1].quality ===
+                      gameStore.ingredientSelection,
+                  },
+                ]"
+                @click="selectOption(1)"
+              >
+                <div class="icon">
+                  <img :src="shuffledOptions[1].icon" />
+                </div>
+                <div class="text">{{ shuffledOptions[1].name }}</div>
+              </button>
+              <button
+                :class="[
+                  'ingredient',
+                  {
+                    selected:
+                      shuffledOptions[2].quality ===
+                      gameStore.ingredientSelection,
+                  },
+                ]"
+                @click="selectOption(2)"
+              >
+                <div class="icon">
+                  <img :src="shuffledOptions[2].icon" />
+                </div>
+                <div class="text">{{ shuffledOptions[2].name }}</div>
+              </button>
+            </div>
+            <div class="divider">
+              <!-- TODO: arrow triangle on selection -->
+            </div>
+            <div class="description">{{ description }}</div>
           </div>
-          <div class="divider">
-            <!-- TODO: arrow triangle on selection -->
-          </div>
-          <div class="description">{{ description }}</div>
         </div>
       </div>
     </div>
