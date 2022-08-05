@@ -157,6 +157,41 @@ const qualityCounts = computed(() => {
 // share
 const clipboardWorks = ref(true);
 
+const resultIngredientsString = computed(() => {
+  const best =
+    // eslint-disable-next-line no-nested-ternary
+    qualityCounts.value.best === 1
+      ? `je bila ${qualityCounts.value.best} trajnostna`
+      : // eslint-disable-next-line no-nested-ternary
+      qualityCounts.value.best === 2
+      ? `sta bili ${qualityCounts.value.best} trajnostni`
+      : qualityCounts.value.best < 5
+      ? `so bile ${qualityCounts.value.best} trajnostne`
+      : `je bilo ${qualityCounts.value.best} trajnostnih`;
+  const medium =
+    // eslint-disable-next-line no-nested-ternary
+    qualityCounts.value.medium === 1
+      ? `${qualityCounts.value.medium} sprejemljiva`
+      : // eslint-disable-next-line no-nested-ternary
+      qualityCounts.value.medium === 2
+      ? `${qualityCounts.value.medium} sprejemljivi`
+      : qualityCounts.value.medium < 5
+      ? `${qualityCounts.value.medium} sprejemljive`
+      : `${qualityCounts.value.medium} sprejemljivih`;
+  const worst =
+    // eslint-disable-next-line no-nested-ternary
+    qualityCounts.value.worst === 1
+      ? `${qualityCounts.value.worst} netrajnostna sestavina`
+      : // eslint-disable-next-line no-nested-ternary
+      qualityCounts.value.worst === 2
+      ? `${qualityCounts.value.worst} netrajnostni sestavini`
+      : qualityCounts.value.worst < 5
+      ? `${qualityCounts.value.worst} netrajnostne sestavine`
+      : `${qualityCounts.value.worst} netrajnostnih sestavin`;
+
+  return `${best}, ${medium} in ${worst}`;
+});
+
 const resultString = computed(() =>
   `
 Znaš sestaviti trajnosten obrok? 🥗
@@ -167,9 +202,7 @@ Meni je v ${shareState.value.time} sekundah uspelo pripraviti ${
     shareState.value.score - negativeScore.value
   } točk. 🏆
 
-V mojih jedeh je bilo ${qualityCounts.value.best} trajnostnih, ${
-    qualityCounts.value.medium
-  } sprejemljivih in ${qualityCounts.value.worst} netrajnostnih sestavin. 👨‍🍳
+V mojih jedeh ${resultIngredientsString.value}. 👨‍🍳
 
 Preizkusi se tudi ti! 👇
 https://futr.lb.djnd.si/
