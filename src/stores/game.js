@@ -1,4 +1,4 @@
-import { last, sample } from "lodash-es";
+import { last, random } from "lodash-es";
 import { nanoid } from "nanoid";
 import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
@@ -17,9 +17,18 @@ function getRemainingTimeForOrder(order, now) {
   return Math.max(0, order.orderTime - elapsedMs);
 }
 
+const firstFoodId = "burger";
+const foodIdSamplePool = [...Object.keys(ingredients.foods)].filter(
+  (id) => id !== firstFoodId
+);
+
 function getRandomFoodId() {
-  const keys = Object.keys(ingredients.foods);
-  return sample(keys);
+  const randomIndex = random(foodIdSamplePool.length - 1);
+  const randomFoodId = foodIdSamplePool.splice(randomIndex, 1)[0];
+  if (!foodIdSamplePool.length) {
+    foodIdSamplePool.push(...Object.keys(ingredients.foods));
+  }
+  return randomFoodId;
 }
 
 function getLayerImage(ingredient, quality, layers) {
