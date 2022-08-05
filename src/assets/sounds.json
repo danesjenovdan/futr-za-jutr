@@ -1,0 +1,8 @@
+{
+  "music": "/sounds/Boardwalk-Arcade.mp3",
+  "sounds": {
+    "select": "/sounds/530776_2532248-lq.mp3",
+    "success": "/sounds/109662_945474-lq.mp3",
+    "failure": "/sounds/54047_533680-lq.mp3"
+  }
+}

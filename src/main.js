@@ -18,6 +18,17 @@ pinia.use(({ store }) => {
   store.router = markRaw(router);
 });
 
+router.beforeEach((to) => {
+  if (to.name === "game") {
+    if (window.gameAudio?.music?.paused) {
+      window.gameAudio.music.currentTime = 0;
+      window.gameAudio.music.play();
+    }
+  } else if (window.gameAudio?.music) {
+    window.gameAudio.music.pause();
+  }
+});
+
 const app = createApp(App);
 app.use(pinia);
 app.use(router);

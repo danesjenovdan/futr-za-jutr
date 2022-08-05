@@ -97,6 +97,8 @@ export const useGameStore = defineStore("gameStore", {
     bonusTimeMs: 0,
     orderDelay: ORDER_DELAY_MAX_MS,
     orderTime: ORDER_TIME_MAX_MS,
+    music: null,
+    sounds: {},
   }),
   getters: {
     remainingTimeMs(state) {
@@ -166,6 +168,12 @@ export const useGameStore = defineStore("gameStore", {
       // TRY TO NOT UPDATE STATE TOO MUCH (LIKE EVERY TICK) BECAUSE IT MESSES WITH ANIMATIONS
       // !!!
       const now = Date.now();
+
+      // make sure music is playing (browsers sometimes block if no user interation before playing)
+      if (window.gameAudio?.music?.paused) {
+        window.gameAudio.music.currentTime = 0;
+        window.gameAudio.music.play();
+      }
 
       this.orderQueue.forEach((order) => {
         const remainingMs = getRemainingTimeForOrder(order, now);
@@ -248,6 +256,13 @@ export const useGameStore = defineStore("gameStore", {
           });
           this.ingredientSelection = null;
 
+          if (ingredient.type !== "none") {
+            if (window.gameAudio?.sounds?.select) {
+              window.gameAudio.sounds.select.currentTime = 0;
+              window.gameAudio.sounds.select.play();
+            }
+          }
+
           const nextIngredient = foodTemplate.ingredients[i + 1];
           if (ingredient.type !== "none" || nextIngredient?.type !== "none") {
             break;
@@ -259,6 +274,10 @@ export const useGameStore = defineStore("gameStore", {
           if (remainingMs) {
             this.bonusTimeMs += remainingMs;
             this.score += 50;
+            if (window.gameAudio?.sounds?.success) {
+              window.gameAudio.sounds.success.currentTime = 0;
+              window.gameAudio.sounds.success.play();
+            }
           }
           this.orderQueue.shift();
         }
