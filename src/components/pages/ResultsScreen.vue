@@ -56,9 +56,16 @@
             </div>
           </div>
         </div>
-        <div>
+        <div class="buttons">
+          <button
+            type="button"
+            class="retry-button"
+            @click="$router.push({ name: 'game', query: { reset: true } })"
+          >
+            Želim se ponovno preizkusiti!
+          </button>
           <button type="button" class="share-button" @click="share">
-            DELI SVOJ REZULTAT
+            DELI REZULTAT
           </button>
         </div>
       </div>
@@ -277,7 +284,7 @@ const share = () => {
   background-color: $color-dark-1;
 
   .top-content {
-    padding: 1.1rem 1.6rem 4rem 1.6rem;
+    padding: 1.1rem 1.6rem 1rem 1.6rem;
 
     .logo {
       display: block;
@@ -406,20 +413,41 @@ const share = () => {
       }
     }
 
-    .share-button {
+    .buttons {
       display: flex;
-      margin-inline: auto;
-      padding: 1.4rem 3.2rem 1.4rem 1.8rem;
-      border: none;
-      background-color: transparent;
-      background-image: url("../../assets/images/buttons/deli-rezultat-gumb.svg");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      font-size: 2rem;
-      font-weight: 800;
-      font-style: italic;
-      line-height: 1;
-      color: $color-accent-primary-contrast;
+      justify-content: space-around;
+
+      .retry-button {
+        width: 13rem;
+        display: flex;
+        align-items: center;
+        padding: 1.4rem 1.8rem;
+        border: none;
+        background-color: transparent;
+        background-image: url("../../assets/images/buttons/poskusi-ponovno.svg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        font-size: 1.25rem;
+        font-weight: 600;
+        font-style: italic;
+        line-height: 1;
+        color: $color-subtle;
+      }
+
+      .share-button {
+        display: flex;
+        padding: 1.4rem 3.2rem 1.4rem 1.8rem;
+        border: none;
+        background-color: transparent;
+        background-image: url("../../assets/images/buttons/deli-rezultat-gumb.svg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        font-size: 2rem;
+        font-weight: 800;
+        font-style: italic;
+        line-height: 1;
+        color: $color-accent-primary-contrast;
+      }
     }
   }
 }

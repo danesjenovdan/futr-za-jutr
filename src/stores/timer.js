@@ -25,10 +25,18 @@ export const useTimerStore = defineStore("timerStore", () => {
     timerId.value = null;
   };
 
+  const $reset = () => {
+    clearInterval(timerId.value);
+    timerId.value = null;
+    startMs.value = null;
+    currentMs.value = null;
+  };
+
   return {
     started,
     start,
     stop,
     elapsedMs,
+    $reset,
   };
 });
