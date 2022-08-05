@@ -4,6 +4,11 @@
       <div class="top-bubble">
         <div class="text">Glej naročila in pazi na čas!</div>
       </div>
+      <div class="middle-box">
+        V času, ki ga imaš na voljo, pripravi čim več jedi in s tem zberi čim
+        več točk, pri tem pa pazi na sestavine, saj te za vsako netrajnostno
+        izbiro čaka kazen!
+      </div>
       <div class="bottom-bubble">
         <div class="text">Izbiraj primerne trajnostne sestavine.</div>
       </div>
@@ -51,13 +56,24 @@ const gameStore = useGameStore();
     padding-left: 1.6rem;
   }
 
+  .middle-box {
+    width: 30rem;
+    margin: 7rem auto 0;
+    background: url("../assets/images/backgrounds/rezultat-okvir.svg");
+    padding: 2rem 2rem;
+    font-size: 2rem;
+    font-style: italic;
+    line-height: 1.2;
+    text-align: center;
+  }
+
   .bottom-bubble {
     width: 17.5rem;
     height: 9.6rem;
-    margin: 10.3rem 3.4rem 0 auto;
-    background: url("../assets/images/backgrounds/navodilo-spodaj.svg");
-    padding-top: 2.7rem;
-    padding-left: 3.4rem;
+    margin: 4rem auto 0 4rem;
+    background: url("../assets/images/backgrounds/navodilo-zgoraj.svg");
+    padding-top: 4.8rem;
+    padding-left: 2.6rem;
     padding-right: 2rem;
   }
 }

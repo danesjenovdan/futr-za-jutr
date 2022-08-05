@@ -413,7 +413,7 @@ const share = () => {
             margin-right: 1.7rem;
             padding: 1.3rem 1.2rem;
             background-color: transparent;
-            background-image: url("../../assets/images/backgrounds/okvir-moder.svg");
+            background-image: url("../../assets/images/backgrounds/okvir-zlat.svg");
             background-repeat: no-repeat;
             background-size: 100% 100%;
 
