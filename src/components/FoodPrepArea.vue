@@ -2,6 +2,17 @@
   <div class="food-prep-area">
     <div class="food-prep-bg"></div>
     <div class="layers-container constrain-width">
+      <div
+        :class="[
+          'shine',
+          {
+            'bounce-in': gameStore.currentFoodDone,
+            show: gameStore.currentFoodDone,
+          },
+        ]"
+      >
+        <img src="../assets/images/hrana-shine-small.png" />
+      </div>
       <div class="layers">
         <TransitionGroup name="layer-list">
           <img
@@ -46,6 +57,49 @@ const gameStore = useGameStore();
 .layer-list-leave-to {
   opacity: 0;
 }
+
+@keyframes bounce-in {
+  from,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.bounce-in {
+  animation-duration: 1s;
+  animation-name: bounce-in;
+}
 </style>
 
 <style scoped lang="scss">
@@ -67,17 +121,34 @@ const gameStore = useGameStore();
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
 
-  .layers {
-    position: relative;
-    width: 22rem;
-    height: 27.5rem;
-
-    img {
+    .shine {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
+      padding-top: 8rem;
+      opacity: 0;
+
+      &.show {
+        opacity: 1;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .layers {
+      position: relative;
+      width: 22rem;
+      height: 27.5rem;
+
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

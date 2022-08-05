@@ -10,7 +10,11 @@
         <div class="final-score">
           <div class="stars">
             <div v-for="i in 3" :key="i" class="star">
-              <img src="../../assets/images/icons/zvezda-prazna.svg" />
+              <img
+                v-if="i > stars"
+                src="../../assets/images/icons/zvezda-prazna.svg"
+              />
+              <img v-else src="../../assets/images/icons/zvezda.svg" />
             </div>
           </div>
           <div class="score">
@@ -56,11 +60,23 @@
             </div>
           </div>
         </div>
-        <div>
+        <div class="buttons">
+          <button
+            type="button"
+            class="retry-button"
+            @click="$router.push({ name: 'game', query: { reset: true } })"
+          >
+            Želim se ponovno preizkusiti!
+          </button>
           <button type="button" class="share-button" @click="share">
-            DELI SVOJ REZULTAT
+            DELI REZULTAT
           </button>
         </div>
+      </div>
+    </div>
+    <div class="jagged-divider">
+      <div class="shadow-container">
+        <div class="clipped-container"></div>
       </div>
     </div>
     <div class="bottom">
@@ -154,8 +170,61 @@ const qualityCounts = computed(() => {
   return counts;
 });
 
+const stars = computed(() => {
+  const sum =
+    qualityCounts.value.best +
+    qualityCounts.value.medium +
+    qualityCounts.value.worst;
+  const bestPercent = qualityCounts.value.best / sum;
+  if (bestPercent >= 0.75) {
+    return 3;
+  }
+  if (bestPercent >= 0.5) {
+    return 2;
+  }
+  if (bestPercent >= 0.25) {
+    return 1;
+  }
+  return 0;
+});
+
 // share
 const clipboardWorks = ref(true);
+
+const resultIngredientsString = computed(() => {
+  const best =
+    // eslint-disable-next-line no-nested-ternary
+    qualityCounts.value.best === 1
+      ? `je bila ${qualityCounts.value.best} trajnostna`
+      : // eslint-disable-next-line no-nested-ternary
+      qualityCounts.value.best === 2
+      ? `sta bili ${qualityCounts.value.best} trajnostni`
+      : qualityCounts.value.best < 5
+      ? `so bile ${qualityCounts.value.best} trajnostne`
+      : `je bilo ${qualityCounts.value.best} trajnostnih`;
+  const medium =
+    // eslint-disable-next-line no-nested-ternary
+    qualityCounts.value.medium === 1
+      ? `${qualityCounts.value.medium} sprejemljiva`
+      : // eslint-disable-next-line no-nested-ternary
+      qualityCounts.value.medium === 2
+      ? `${qualityCounts.value.medium} sprejemljivi`
+      : qualityCounts.value.medium < 5
+      ? `${qualityCounts.value.medium} sprejemljive`
+      : `${qualityCounts.value.medium} sprejemljivih`;
+  const worst =
+    // eslint-disable-next-line no-nested-ternary
+    qualityCounts.value.worst === 1
+      ? `${qualityCounts.value.worst} netrajnostna sestavina`
+      : // eslint-disable-next-line no-nested-ternary
+      qualityCounts.value.worst === 2
+      ? `${qualityCounts.value.worst} netrajnostni sestavini`
+      : qualityCounts.value.worst < 5
+      ? `${qualityCounts.value.worst} netrajnostne sestavine`
+      : `${qualityCounts.value.worst} netrajnostnih sestavin`;
+
+  return `${best}, ${medium} in ${worst}`;
+});
 
 const resultString = computed(() =>
   `
@@ -167,9 +236,7 @@ Meni je v ${shareState.value.time} sekundah uspelo pripraviti ${
     shareState.value.score - negativeScore.value
   } točk. 🏆
 
-V mojih jedeh je bilo ${qualityCounts.value.best} trajnostnih, ${
-    qualityCounts.value.medium
-  } sprejemljivih in ${qualityCounts.value.worst} netrajnostnih sestavin. 👨‍🍳
+V mojih jedeh ${resultIngredientsString.value}. 👨‍🍳
 
 Preizkusi se tudi ti! 👇
 https://futr.lb.djnd.si/
@@ -239,7 +306,7 @@ const share = () => {
   background-color: $color-dark-1;
 
   .top-content {
-    padding: 1.1rem 1.6rem 4rem 1.6rem;
+    padding: 1.1rem 1.6rem 1rem 1.6rem;
 
     .logo {
       display: block;
@@ -368,20 +435,66 @@ const share = () => {
       }
     }
 
-    .share-button {
+    .buttons {
       display: flex;
-      margin-inline: auto;
-      padding: 1.4rem 3.2rem 1.4rem 1.8rem;
-      border: none;
-      background-color: transparent;
-      background-image: url("../../assets/images/buttons/deli-rezultat-gumb.svg");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      font-size: 2rem;
-      font-weight: 800;
-      font-style: italic;
-      line-height: 1;
-      color: $color-accent-primary-contrast;
+      justify-content: space-around;
+
+      .retry-button {
+        width: 13rem;
+        display: flex;
+        align-items: center;
+        padding: 1.4rem 1.8rem;
+        border: none;
+        background-color: transparent;
+        background-image: url("../../assets/images/buttons/poskusi-ponovno.svg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        font-size: 1.25rem;
+        font-weight: 600;
+        font-style: italic;
+        line-height: 1;
+        color: $color-subtle;
+      }
+
+      .share-button {
+        display: flex;
+        padding: 1.4rem 3.2rem 1.4rem 1.8rem;
+        border: none;
+        background-color: transparent;
+        background-image: url("../../assets/images/buttons/deli-rezultat-gumb.svg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        font-size: 2rem;
+        font-weight: 800;
+        font-style: italic;
+        line-height: 1;
+        color: $color-accent-primary-contrast;
+      }
+    }
+  }
+}
+
+.jagged-divider {
+  overflow: hidden;
+  background: $color-light;
+
+  .shadow-container {
+    filter: drop-shadow(0 0 0.75rem $color-dark-1);
+
+    .clipped-container {
+      padding: 2rem 0;
+      background: $color-dark-1;
+      margin-inline: -1px;
+      clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% 2.4rem,
+        80% 1rem,
+        60% 1.6rem,
+        40% 1rem,
+        20% 2.2rem,
+        0% 2rem
+      );
     }
   }
 }
@@ -390,7 +503,7 @@ const share = () => {
   background: $color-light;
 
   .bottom-content {
-    padding: 4rem 2rem 1.1rem 2rem;
+    padding: 1rem 2rem 1.1rem 2rem;
 
     .title {
       color: $color-dark-1;

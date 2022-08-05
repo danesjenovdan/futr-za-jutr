@@ -1,23 +1,34 @@
-import { last, sample } from "lodash-es";
+import { last, random } from "lodash-es";
 import { nanoid } from "nanoid";
 import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
-const ORDER_TIME_MS = 30 * 1000;
-const GAME_TIME_MS = 30 * 1000;
-const ORDER_DELAY_MAX_MS = 30 * 1000;
-const ORDER_DELAY_SUBTRACT_MS = 4 * 1000;
-const ORDER_DELAY_MIN_MS = 10 * 1000;
+const GAME_TIME_MS = 60 * 1000;
+const ORDER_DELAY_MAX_MS = 15 * 1000;
+const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
+const ORDER_DELAY_MIN_MS = 5 * 1000;
+const ORDER_TIME_MAX_MS = 30 * 1000;
+const ORDER_TIME_SUBTRACT_MS = 5 * 1000;
+const ORDER_TIME_MIN_MS = 10 * 1000;
 
 function getRemainingTimeForOrder(order, now) {
   const elapsedMs = (now || Date.now()) - order.createdAt;
-  return Math.max(0, ORDER_TIME_MS - elapsedMs);
+  return Math.max(0, order.orderTime - elapsedMs);
 }
 
+const firstFoodId = "burger";
+const foodIdSamplePool = [...Object.keys(ingredients.foods)].filter(
+  (id) => id !== firstFoodId
+);
+
 function getRandomFoodId() {
-  const keys = Object.keys(ingredients.foods);
-  return sample(keys);
+  const randomIndex = random(foodIdSamplePool.length - 1);
+  const randomFoodId = foodIdSamplePool.splice(randomIndex, 1)[0];
+  if (!foodIdSamplePool.length) {
+    foodIdSamplePool.push(...Object.keys(ingredients.foods));
+  }
+  return randomFoodId;
 }
 
 function getLayerImage(ingredient, quality, layers) {
@@ -61,7 +72,7 @@ function createNewFood(foodId) {
   return newFood;
 }
 
-function createNewOrder(foodId, now) {
+function createNewOrder(foodId, now, orderTime = ORDER_TIME_MAX_MS) {
   let nextFoodId = foodId;
   if (!nextFoodId || !ingredients.foods[nextFoodId]) {
     nextFoodId = getRandomFoodId();
@@ -71,7 +82,8 @@ function createNewOrder(foodId, now) {
     id: nextFoodId,
     uid: nanoid(),
     createdAt: now || Date.now(),
-    timerSeconds: Math.ceil(ORDER_TIME_MS / 1000),
+    orderTime,
+    timerSeconds: Math.ceil(orderTime / 1000),
   };
 }
 
@@ -84,6 +96,9 @@ export const useGameStore = defineStore("gameStore", {
     score: 0,
     bonusTimeMs: 0,
     orderDelay: ORDER_DELAY_MAX_MS,
+    orderTime: ORDER_TIME_MAX_MS,
+    music: null,
+    sounds: {},
   }),
   getters: {
     remainingTimeMs(state) {
@@ -154,6 +169,12 @@ export const useGameStore = defineStore("gameStore", {
       // !!!
       const now = Date.now();
 
+      // make sure music is playing (browsers sometimes block if no user interation before playing)
+      if (window.gameAudio?.music?.paused) {
+        window.gameAudio.music.currentTime = 0;
+        window.gameAudio.music.play();
+      }
+
       this.orderQueue.forEach((order) => {
         const remainingMs = getRemainingTimeForOrder(order, now);
         // ANIM FIX: only update once per second
@@ -178,10 +199,14 @@ export const useGameStore = defineStore("gameStore", {
 
       const lastOrder = last(this.orderQueue);
       if (!lastOrder || now - lastOrder.createdAt > this.orderDelay) {
-        this.orderQueue.push(createNewOrder(undefined, now));
+        this.orderQueue.push(createNewOrder(undefined, now, this.orderTime));
         this.orderDelay = Math.max(
           ORDER_DELAY_MIN_MS,
           this.orderDelay - ORDER_DELAY_SUBTRACT_MS
+        );
+        this.orderTime = Math.max(
+          ORDER_TIME_MIN_MS,
+          this.orderTime - ORDER_TIME_SUBTRACT_MS
         );
       }
     },
@@ -231,6 +256,13 @@ export const useGameStore = defineStore("gameStore", {
           });
           this.ingredientSelection = null;
 
+          if (ingredient.type !== "none") {
+            if (window.gameAudio?.sounds?.select) {
+              window.gameAudio.sounds.select.currentTime = 0;
+              window.gameAudio.sounds.select.play();
+            }
+          }
+
           const nextIngredient = foodTemplate.ingredients[i + 1];
           if (ingredient.type !== "none" || nextIngredient?.type !== "none") {
             break;
@@ -242,6 +274,10 @@ export const useGameStore = defineStore("gameStore", {
           if (remainingMs) {
             this.bonusTimeMs += remainingMs;
             this.score += 50;
+            if (window.gameAudio?.sounds?.success) {
+              window.gameAudio.sounds.success.currentTime = 0;
+              window.gameAudio.sounds.success.play();
+            }
           }
           this.orderQueue.shift();
         }
