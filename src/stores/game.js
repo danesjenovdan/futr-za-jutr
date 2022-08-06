@@ -97,8 +97,7 @@ export const useGameStore = defineStore("gameStore", {
     bonusTimeMs: 0,
     orderDelay: ORDER_DELAY_MAX_MS,
     orderTime: ORDER_TIME_MAX_MS,
-    music: null,
-    sounds: {},
+    currentOrderFailed: null,
   }),
   getters: {
     remainingTimeMs(state) {
@@ -175,21 +174,39 @@ export const useGameStore = defineStore("gameStore", {
         window.gameAudio.music.play();
       }
 
+      if (this.currentOrderFailed) {
+        if (now - this.currentOrderFailed > 2000) {
+          this.currentOrderFailed = null;
+        }
+      }
+
       this.orderQueue.forEach((order) => {
         const remainingMs = getRemainingTimeForOrder(order, now);
+
+        const oldTimerSeconds = order.timerSeconds;
         // ANIM FIX: only update once per second
         order.timerSeconds = Math.ceil(remainingMs / 1000);
+        if (order.timerSeconds <= 0 && oldTimerSeconds > 0) {
+          if (window.gameAudio?.sounds?.failure) {
+            window.gameAudio.sounds.failure.currentTime = 0;
+            window.gameAudio.sounds.failure.play();
+          }
+        }
       });
 
       // remove all expired items from queue
       for (;;) {
         // ANIM FIX: dont use filter, mutate array instead
         const indexToRemove = this.orderQueue.findIndex((order, i) => {
-          // never remove first one because it is the current order
-          if (i === 0) {
-            return false;
+          const remainingMs = getRemainingTimeForOrder(order, now);
+          if (remainingMs <= 0) {
+            // first one is the current order
+            if (i === 0) {
+              this.currentOrderFailed = now;
+            }
+            return true;
           }
-          return getRemainingTimeForOrder(order, now) <= 0;
+          return false;
         });
         if (indexToRemove === -1) {
           break;
@@ -208,6 +225,15 @@ export const useGameStore = defineStore("gameStore", {
           ORDER_TIME_MIN_MS,
           this.orderTime - ORDER_TIME_SUBTRACT_MS
         );
+      }
+
+      // current food failed, start new one
+      if (this.currentOrderFailed === now) {
+        this.ingredientSelectorOpen = false;
+        this.ingredientSelection = null;
+        this.combinedFoods.pop();
+        const nextFood = createNewFood(this.currentOrder.id);
+        this.combinedFoods.push(nextFood);
       }
     },
     continueFoodPrep() {

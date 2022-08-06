@@ -23,6 +23,17 @@
           />
         </TransitionGroup>
       </div>
+      <div
+        :class="[
+          'announcement',
+          {
+            'bounce-in': gameStore.currentOrderFailed,
+            show: gameStore.currentOrderFailed,
+          },
+        ]"
+      >
+        <div class="text">Čas je potekel!</div>
+      </div>
     </div>
     <IngredientSelector />
   </div>
@@ -103,6 +114,8 @@ const gameStore = useGameStore();
 </style>
 
 <style scoped lang="scss">
+@import "../assets/scss/variables";
+
 .food-prep-area {
   position: relative;
   height: 100%;
@@ -148,6 +161,26 @@ const gameStore = useGameStore();
         position: absolute;
         width: 100%;
         height: 100%;
+      }
+    }
+
+    .announcement {
+      position: absolute;
+      inset: 0;
+      padding-top: 12rem;
+      opacity: 0;
+
+      &.show {
+        opacity: 1;
+      }
+
+      .text {
+        color: $color-white;
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1;
+        text-align: center;
+        @include text-stroke($color-black, 0.05em);
       }
     }
   }
