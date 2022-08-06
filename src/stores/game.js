@@ -177,8 +177,16 @@ export const useGameStore = defineStore("gameStore", {
 
       this.orderQueue.forEach((order) => {
         const remainingMs = getRemainingTimeForOrder(order, now);
+
+        const oldTimerSeconds = order.timerSeconds;
         // ANIM FIX: only update once per second
         order.timerSeconds = Math.ceil(remainingMs / 1000);
+        if (order.timerSeconds <= 0 && oldTimerSeconds > 0) {
+          if (window.gameAudio?.sounds?.failure) {
+            window.gameAudio.sounds.failure.currentTime = 0;
+            window.gameAudio.sounds.failure.play();
+          }
+        }
       });
 
       // remove all expired items from queue
