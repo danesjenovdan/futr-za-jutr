@@ -4,13 +4,13 @@ import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
-const GAME_TIME_MS = 60 * 1000;
+const GAME_TIME_MS = 50 * 1000;
 const ORDER_DELAY_MAX_MS = 15 * 1000;
 const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
-const ORDER_DELAY_MIN_MS = 5 * 1000;
+const ORDER_DELAY_MIN_MS = 15 * 1000;
 const ORDER_TIME_MAX_MS = 30 * 1000;
-const ORDER_TIME_SUBTRACT_MS = 5 * 1000;
-const ORDER_TIME_MIN_MS = 10 * 1000;
+const ORDER_TIME_SUBTRACT_MS = 2 * 1000;
+const ORDER_TIME_MIN_MS = 20 * 1000;
 
 function getRemainingTimeForOrder(order, now) {
   const elapsedMs = (now || Date.now()) - order.createdAt;
@@ -158,6 +158,9 @@ export const useGameStore = defineStore("gameStore", {
       if (state.ingredientSelectorOpen && !state.ingredientSelection) {
         return true;
       }
+      if (state.currentOrderFailed) {
+        return true;
+      }
       return false;
     },
   },
@@ -174,9 +177,11 @@ export const useGameStore = defineStore("gameStore", {
         window.gameAudio.music.play();
       }
 
+      let failedOrderCleared = false;
       if (this.currentOrderFailed) {
         if (now - this.currentOrderFailed > 2000) {
           this.currentOrderFailed = null;
+          failedOrderCleared = true;
         }
       }
 
@@ -216,7 +221,6 @@ export const useGameStore = defineStore("gameStore", {
 
       const lastOrder = last(this.orderQueue);
       if (!lastOrder || now - lastOrder.createdAt > this.orderDelay) {
-        this.orderQueue.push(createNewOrder(undefined, now, this.orderTime));
         this.orderDelay = Math.max(
           ORDER_DELAY_MIN_MS,
           this.orderDelay - ORDER_DELAY_SUBTRACT_MS
@@ -225,12 +229,15 @@ export const useGameStore = defineStore("gameStore", {
           ORDER_TIME_MIN_MS,
           this.orderTime - ORDER_TIME_SUBTRACT_MS
         );
+        this.orderQueue.push(createNewOrder(undefined, now, this.orderTime));
       }
 
       // current food failed, start new one
       if (this.currentOrderFailed === now) {
         this.ingredientSelectorOpen = false;
         this.ingredientSelection = null;
+      }
+      if (failedOrderCleared) {
         this.combinedFoods.pop();
         const nextFood = createNewFood(this.currentOrder.id);
         this.combinedFoods.push(nextFood);
