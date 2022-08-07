@@ -4,13 +4,13 @@ import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
-const GAME_TIME_MS = 60 * 1000;
+const GAME_TIME_MS = 50 * 1000;
 const ORDER_DELAY_MAX_MS = 15 * 1000;
 const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
-const ORDER_DELAY_MIN_MS = 5 * 1000;
+const ORDER_DELAY_MIN_MS = 15 * 1000;
 const ORDER_TIME_MAX_MS = 30 * 1000;
-const ORDER_TIME_SUBTRACT_MS = 5 * 1000;
-const ORDER_TIME_MIN_MS = 10 * 1000;
+const ORDER_TIME_SUBTRACT_MS = 2 * 1000;
+const ORDER_TIME_MIN_MS = 20 * 1000;
 
 function getRemainingTimeForOrder(order, now) {
   const elapsedMs = (now || Date.now()) - order.createdAt;
