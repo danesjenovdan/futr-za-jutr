@@ -98,6 +98,10 @@ export const useGameStore = defineStore("gameStore", {
     orderDelay: ORDER_DELAY_MAX_MS,
     orderTime: ORDER_TIME_MAX_MS,
     currentOrderFailed: null,
+    displays: {
+      bonusTime: { created: null, text: "" },
+      bonusScore: { created: null, text: "" },
+    },
   }),
   getters: {
     remainingTimeMs(state) {
@@ -184,6 +188,15 @@ export const useGameStore = defineStore("gameStore", {
           failedOrderCleared = true;
         }
       }
+
+      Object.keys(this.displays).forEach((key) => {
+        const display = this.displays[key];
+        if (display.created) {
+          if (now - display.created > 2000) {
+            display.created = null;
+          }
+        }
+      });
 
       this.orderQueue.forEach((order) => {
         const remainingMs = getRemainingTimeForOrder(order, now);
@@ -306,7 +319,13 @@ export const useGameStore = defineStore("gameStore", {
           const remainingMs = getRemainingTimeForOrder(this.currentOrder, now);
           if (remainingMs) {
             this.bonusTimeMs += remainingMs;
+            this.displays.bonusTime.created = now;
+            this.displays.bonusTime.text = `+${Math.floor(remainingMs / 1000)}`;
+
             this.score += 50;
+            this.displays.bonusScore.created = now;
+            this.displays.bonusScore.text = `+${50}`;
+
             if (window.gameAudio?.sounds?.success) {
               window.gameAudio.sounds.success.currentTime = 0;
               window.gameAudio.sounds.success.play();

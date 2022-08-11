@@ -16,6 +16,7 @@ $color-accent-primary-contrast: #0a2954;
 $color-subtle: #ffffcc;
 $color-warning-bg: #ffff00;
 $color-warning-fg: #fc0808;
+$color-success: #7bfb4c;
 
 @mixin text-stroke($color: $color-black, $size: 0.05em) {
   text-shadow:

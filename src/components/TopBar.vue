@@ -5,6 +5,14 @@
         <div class="pill score">
           <img class="icon" src="../assets/images/icons/kovanec.svg" />
           <div class="text">{{ gameStore.score }}</div>
+          <Transition name="bonus">
+            <div
+              v-if="gameStore.displays.bonusScore.created"
+              class="text bonus"
+            >
+              {{ gameStore.displays.bonusScore.text }}
+            </div>
+          </Transition>
         </div>
         <div
           :class="[
@@ -15,6 +23,11 @@
         >
           <img class="icon" src="../assets/images/icons/ura.svg" />
           <div class="text">{{ formatTimer(gameStore.remainingTimeMs) }}</div>
+          <Transition name="bonus">
+            <div v-if="gameStore.displays.bonusTime.created" class="text bonus">
+              {{ gameStore.displays.bonusTime.text }}
+            </div>
+          </Transition>
         </div>
       </div>
       <div class="orders">
@@ -48,6 +61,23 @@ function formatTimer(remainingMs) {
 </script>
 
 <style>
+.bonus-enter-active {
+  transition: all 0.5s ease;
+}
+
+.bonus-leave-active {
+  transition: all 0.2s ease;
+}
+
+.bonus-enter-from {
+  opacity: 0;
+}
+
+.bonus-leave-to {
+  opacity: 0;
+  transform: translateY(-2rem);
+}
+
 .order-list-move,
 .order-list-enter-active,
 .order-list-leave-active {
@@ -86,6 +116,7 @@ function formatTimer(remainingMs) {
       gap: 1rem;
 
       .pill {
+        position: relative;
         display: flex;
         background-color: $color-dark-1;
         border-radius: 10em;
@@ -102,6 +133,13 @@ function formatTimer(remainingMs) {
           font-size: 1.5rem;
           font-weight: 800;
           line-height: 1;
+
+          &.bonus {
+            position: absolute;
+            inset: 2rem 0 auto auto;
+            text-align: right;
+            color: $color-success !important;
+          }
         }
 
         &.score {
@@ -114,6 +152,10 @@ function formatTimer(remainingMs) {
         &.time {
           .text {
             min-width: 5.1rem;
+
+            &.bonus {
+              padding-right: 1.5rem;
+            }
           }
         }
 
