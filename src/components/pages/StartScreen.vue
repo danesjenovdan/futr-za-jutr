@@ -9,7 +9,10 @@
         trajnosten obrok?
       </div>
       <div class="buttons">
-        <button class="start-button" @click="$router.push({ name: 'game' })">
+        <button
+          class="start-button"
+          @click="$router.push({ name: 'game', query: { reset: 'true' } })"
+        >
           ZAČNI!
         </button>
       </div>

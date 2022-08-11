@@ -64,7 +64,7 @@
           <button
             type="button"
             class="retry-button"
-            @click="$router.push({ name: 'game', query: { reset: true } })"
+            @click="$router.push({ name: 'game', query: { reset: 'true' } })"
           >
             Želim se ponovno preizkusiti!
           </button>
