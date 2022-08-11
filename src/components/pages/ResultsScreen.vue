@@ -1,5 +1,6 @@
 <template>
   <div class="scroll-container">
+    <ScrollDownArrow />
     <div class="top">
       <div class="top-content constrain-width">
         <img
@@ -114,6 +115,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
+import ScrollDownArrow from "../ScrollDownArrow.vue";
 import ingredients from "../../assets/ingredients.json";
 
 const route = useRoute();
