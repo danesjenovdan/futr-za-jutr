@@ -303,6 +303,8 @@ const share = () => {
 }
 
 .top {
+  position: relative;
+  z-index: 1;
   background-color: $color-dark-1;
 
   .top-content {
@@ -475,6 +477,10 @@ const share = () => {
 }
 
 .jagged-divider {
+  position: relative;
+  z-index: 0;
+  margin-top: -1px;
+  margin-bottom: -1px;
   overflow: hidden;
   background: $color-light;
 
@@ -500,6 +506,8 @@ const share = () => {
 }
 
 .bottom {
+  position: relative;
+  z-index: 1;
   background: $color-light;
 
   .bottom-content {
