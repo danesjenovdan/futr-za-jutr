@@ -1,7 +1,16 @@
 <template>
   <div class="food-prep-area">
     <div class="food-prep-bg"></div>
-    <div class="layers-container constrain-width">
+    <div
+      :class="[
+        'layers-container',
+        'constrain-width',
+        {
+          hidden: gameStore.currentOrderTransition,
+          'slide-out': gameStore.currentOrderDone,
+        },
+      ]"
+    >
       <div
         :class="[
           'shine',
@@ -107,9 +116,26 @@ const gameStore = useGameStore();
   }
 }
 
+@keyframes slide-out {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: translateX(100vw);
+  }
+}
+
 .bounce-in {
   animation-duration: 1s;
   animation-name: bounce-in;
+}
+
+.slide-out {
+  animation-delay: 1s;
+  animation-duration: 1s;
+  animation-name: slide-out;
+  animation-fill-mode: forwards;
 }
 </style>
 
@@ -134,6 +160,10 @@ const gameStore = useGameStore();
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    &.hidden {
+      visibility: hidden;
+    }
 
     .shine {
       position: absolute;

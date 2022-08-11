@@ -79,7 +79,9 @@ export const useGameStore = defineStore("gameStore", {
     bonusTimeMs: 0,
     orderDelay: ORDER_DELAY_MAX_MS,
     orderTime: ORDER_TIME_MAX_MS,
+    currentOrderDone: null,
     currentOrderFailed: null,
+    currentOrderTransition: null,
     displays: {
       bonusTime: { created: null, text: "" },
       bonusScore: { created: null, text: "" },
@@ -115,6 +117,9 @@ export const useGameStore = defineStore("gameStore", {
       return numDone >= numIngredients;
     },
     displayedLayers(state) {
+      if (state.currentOrderTransition) {
+        return [];
+      }
       const lastLayer = last(state.currentFood.layers);
       if (lastLayer?.replace) {
         return [lastLayer];
@@ -144,6 +149,9 @@ export const useGameStore = defineStore("gameStore", {
       if (state.ingredientSelectorOpen && !state.ingredientSelection) {
         return true;
       }
+      if (state.currentFoodDone) {
+        return true;
+      }
       if (state.currentOrderFailed) {
         return true;
       }
@@ -171,11 +179,25 @@ export const useGameStore = defineStore("gameStore", {
         window.gameAudio.music.play();
       }
 
+      if (this.currentOrderTransition) {
+        if (now - this.currentOrderTransition > 250) {
+          this.currentOrderTransition = null;
+        }
+      }
+
       let failedOrderCleared = false;
       if (this.currentOrderFailed) {
         if (now - this.currentOrderFailed > 2000) {
           this.currentOrderFailed = null;
           failedOrderCleared = true;
+        }
+      }
+
+      let doneOrderCleared = false;
+      if (this.currentOrderDone) {
+        if (now - this.currentOrderDone > 2000) {
+          this.currentOrderDone = null;
+          doneOrderCleared = true;
         }
       }
 
@@ -241,9 +263,12 @@ export const useGameStore = defineStore("gameStore", {
         this.ingredientSelectorOpen = false;
         this.ingredientSelection = null;
       }
-      if (failedOrderCleared) {
-        this.combinedFoods.pop();
-        // const nextFoodId = this.currentOrder?.id || this.getNextRandomFoodId();
+
+      if (failedOrderCleared || doneOrderCleared) {
+        this.currentOrderTransition = now;
+        if (failedOrderCleared) {
+          this.combinedFoods.pop();
+        }
         const nextFood = createNewFood(this.currentOrder.id);
         this.combinedFoods.push(nextFood);
       }
@@ -267,10 +292,9 @@ export const useGameStore = defineStore("gameStore", {
 
       const foodTemplate = ingredients.foods[this.currentFood.id];
       const numDone = this.currentFood.layers.length;
-      const numIngredients = foodTemplate.ingredients.length;
 
       // current food is not completed
-      if (numDone < numIngredients) {
+      if (!this.currentFoodDone) {
         // open ingredient selector
         if (!this.ingredientSelectorOpen && this.ingredientSelectorOptions) {
           this.ingredientSelectorOpen = true;
@@ -307,7 +331,7 @@ export const useGameStore = defineStore("gameStore", {
           }
         }
 
-        if (this.currentFood.layers.length >= numIngredients) {
+        if (this.currentFoodDone) {
           const remainingMs = getRemainingTimeForOrder(this.currentOrder, now);
           if (remainingMs) {
             this.bonusTimeMs += remainingMs;
@@ -318,6 +342,8 @@ export const useGameStore = defineStore("gameStore", {
             this.displays.bonusScore.created = now;
             this.displays.bonusScore.text = `+${50}`;
 
+            this.currentOrderDone = now;
+
             if (window.gameAudio?.sounds?.success) {
               window.gameAudio.sounds.success.currentTime = 0;
               window.gameAudio.sounds.success.play();
@@ -325,14 +351,7 @@ export const useGameStore = defineStore("gameStore", {
           }
           this.orderQueue.shift();
         }
-
-        return;
       }
-
-      // current food completed, start new one
-      // const nextFoodId = this.currentOrder?.id || this.getNextRandomFoodId();
-      const nextFood = createNewFood(this.currentOrder.id);
-      this.combinedFoods.push(nextFood);
     },
   },
 });
