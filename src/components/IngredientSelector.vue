@@ -167,7 +167,7 @@ function selectOption(index) {
 
           &.selected {
             .icon {
-              background-image: url("../assets/images/backgrounds/okvir-zelen.svg");
+              background-image: url("../assets/images/backgrounds/okvir-svetel.svg");
             }
           }
 
