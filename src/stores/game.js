@@ -82,6 +82,7 @@ export const useGameStore = defineStore("gameStore", {
     currentOrderDone: null,
     currentOrderFailed: null,
     currentOrderTransition: null,
+    currentLayerDone: null,
     displays: {
       bonusTime: { created: null, text: "" },
       bonusScore: { created: null, text: "" },
@@ -134,28 +135,23 @@ export const useGameStore = defineStore("gameStore", {
       if (!timerStore.started) {
         return "ZAČNI IGRO";
       }
-      if (state.ingredientSelectorOpen) {
-        return "POTRDI IZBIRO";
-      }
-      if (state.currentFoodDone) {
-        return "NASLEDNJA JED";
-      }
       if (state.currentIngredientType === "none") {
         return "ZAKLJUČI JED";
       }
-      return "DODAJ SESTAVINO";
+      return "POTRDI IZBIRO";
     },
     continueButtonDisabled(state) {
-      if (state.ingredientSelectorOpen && !state.ingredientSelection) {
-        return true;
+      const timerStore = useTimerStore();
+      if (!timerStore.started) {
+        return false;
       }
-      if (state.currentFoodDone) {
-        return true;
+      if (state.currentIngredientType === "none" && !state.currentLayerDone) {
+        return false;
       }
-      if (state.currentOrderFailed) {
-        return true;
+      if (state.ingredientSelectorOpen && state.ingredientSelection) {
+        return false;
       }
-      return false;
+      return true;
     },
   },
   actions: {
@@ -182,6 +178,14 @@ export const useGameStore = defineStore("gameStore", {
       if (this.currentOrderTransition) {
         if (now - this.currentOrderTransition > 250) {
           this.currentOrderTransition = null;
+        }
+      }
+
+      let doneLayerCleared = false;
+      if (this.currentLayerDone) {
+        if (now - this.currentLayerDone > 500) {
+          this.currentLayerDone = null;
+          doneLayerCleared = true;
         }
       }
 
@@ -264,6 +268,12 @@ export const useGameStore = defineStore("gameStore", {
         this.ingredientSelection = null;
       }
 
+      if (doneLayerCleared) {
+        if (!this.ingredientSelectorOpen && this.ingredientSelectorOptions) {
+          this.ingredientSelectorOpen = true;
+        }
+      }
+
       if (failedOrderCleared || doneOrderCleared) {
         this.currentOrderTransition = now;
         if (failedOrderCleared) {
@@ -271,6 +281,7 @@ export const useGameStore = defineStore("gameStore", {
         }
         const nextFood = createNewFood(this.currentOrder.id);
         this.combinedFoods.push(nextFood);
+        this.currentLayerDone = now;
       }
     },
     continueFoodPrep() {
@@ -295,12 +306,6 @@ export const useGameStore = defineStore("gameStore", {
 
       // current food is not completed
       if (!this.currentFoodDone) {
-        // open ingredient selector
-        if (!this.ingredientSelectorOpen && this.ingredientSelectorOptions) {
-          this.ingredientSelectorOpen = true;
-          return;
-        }
-
         // confirm ingredient selection
         this.ingredientSelectorOpen = false;
 
@@ -330,6 +335,8 @@ export const useGameStore = defineStore("gameStore", {
             break;
           }
         }
+
+        this.currentLayerDone = now;
 
         if (this.currentFoodDone) {
           const remainingMs = getRemainingTimeForOrder(this.currentOrder, now);
