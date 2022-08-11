@@ -2,12 +2,14 @@
   <div v-if="!timerStore.started && !gameStore.gameOver" class="modal-bg">
     <div class="constrain-width">
       <div class="top-bubble">
-        <div class="text">Glej naročila in pazi na čas!</div>
+        <div class="text">
+          Vsaka jed ima omejen čas za pripravo. Pazi, da ti ne poteče!
+        </div>
       </div>
       <div class="middle-box">
         V času, ki ga imaš na voljo, pripravi čim več jedi in s tem zberi čim
         več točk, pri tem pa pazi na sestavine, saj te za vsako netrajnostno
-        izbiro čaka kazen!
+        izbiro na koncu igre čaka kazen!
       </div>
       <div class="bottom-bubble">
         <div class="text">Izbiraj primerne trajnostne sestavine.</div>
@@ -48,12 +50,12 @@ const gameStore = useGameStore();
   }
 
   .top-bubble {
-    width: 17.9rem;
+    width: 20.8rem;
     height: 9.7rem;
     margin: 4.4rem 3.9rem 0 auto;
     background: url("../assets/images/backgrounds/navodilo-zgoraj.svg");
-    padding-top: 5.4rem;
-    padding-left: 1.6rem;
+    padding-top: 4.8rem;
+    padding-left: 2.1rem;
   }
 
   .middle-box {

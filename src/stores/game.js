@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
-const GAME_TIME_MS = 50 * 1000;
+const GAME_TIME_MS = 60 * 1000;
 const ORDER_DELAY_MAX_MS = 15 * 1000;
 const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
 const ORDER_DELAY_MIN_MS = 15 * 1000;
@@ -18,18 +18,6 @@ function getRemainingTimeForOrder(order, now) {
 }
 
 const firstFoodId = "burger";
-const foodIdSamplePool = [...Object.keys(ingredients.foods)].filter(
-  (id) => id !== firstFoodId
-);
-
-function getRandomFoodId() {
-  const randomIndex = random(foodIdSamplePool.length - 1);
-  const randomFoodId = foodIdSamplePool.splice(randomIndex, 1)[0];
-  if (!foodIdSamplePool.length) {
-    foodIdSamplePool.push(...Object.keys(ingredients.foods));
-  }
-  return randomFoodId;
-}
 
 function getLayerImage(ingredient, quality, layers) {
   if (ingredient.layer_image) {
@@ -46,14 +34,10 @@ function getLayerImage(ingredient, quality, layers) {
 }
 
 function createNewFood(foodId) {
-  let nextFoodId = foodId;
-  if (!nextFoodId || !ingredients.foods[nextFoodId]) {
-    nextFoodId = getRandomFoodId();
-  }
-  const foodTemplate = ingredients.foods[nextFoodId];
+  const foodTemplate = ingredients.foods[foodId];
 
   const newFood = {
-    id: nextFoodId,
+    id: foodId,
     layers: [],
   };
 
@@ -73,13 +57,8 @@ function createNewFood(foodId) {
 }
 
 function createNewOrder(foodId, now, orderTime = ORDER_TIME_MAX_MS) {
-  let nextFoodId = foodId;
-  if (!nextFoodId || !ingredients.foods[nextFoodId]) {
-    nextFoodId = getRandomFoodId();
-  }
-
   return {
-    id: nextFoodId,
+    id: foodId,
     uid: nanoid(),
     createdAt: now || Date.now(),
     orderTime,
@@ -89,15 +68,25 @@ function createNewOrder(foodId, now, orderTime = ORDER_TIME_MAX_MS) {
 
 export const useGameStore = defineStore("gameStore", {
   state: () => ({
-    combinedFoods: [createNewFood("burger")],
+    foodIdSamplePool: [...Object.keys(ingredients.foods)].filter(
+      (id) => id !== firstFoodId
+    ),
+    combinedFoods: [createNewFood(firstFoodId)],
     ingredientSelectorOpen: false,
     ingredientSelection: null,
-    orderQueue: [createNewOrder("burger")],
+    orderQueue: [createNewOrder(firstFoodId)],
     score: 0,
     bonusTimeMs: 0,
     orderDelay: ORDER_DELAY_MAX_MS,
     orderTime: ORDER_TIME_MAX_MS,
+    currentOrderDone: null,
     currentOrderFailed: null,
+    currentOrderTransition: null,
+    currentLayerDone: null,
+    displays: {
+      bonusTime: { created: null, text: "" },
+      bonusScore: { created: null, text: "" },
+    },
   }),
   getters: {
     remainingTimeMs(state) {
@@ -129,6 +118,9 @@ export const useGameStore = defineStore("gameStore", {
       return numDone >= numIngredients;
     },
     displayedLayers(state) {
+      if (state.currentOrderTransition) {
+        return [];
+      }
       const lastLayer = last(state.currentFood.layers);
       if (lastLayer?.replace) {
         return [lastLayer];
@@ -143,28 +135,34 @@ export const useGameStore = defineStore("gameStore", {
       if (!timerStore.started) {
         return "ZAČNI IGRO";
       }
-      if (state.ingredientSelectorOpen) {
-        return "POTRDI IZBIRO";
-      }
-      if (state.currentFoodDone) {
-        return "NASLEDNJA JED";
-      }
       if (state.currentIngredientType === "none") {
         return "ZAKLJUČI JED";
       }
-      return "DODAJ SESTAVINO";
+      return "POTRDI IZBIRO";
     },
     continueButtonDisabled(state) {
-      if (state.ingredientSelectorOpen && !state.ingredientSelection) {
-        return true;
+      const timerStore = useTimerStore();
+      if (!timerStore.started) {
+        return false;
       }
-      if (state.currentOrderFailed) {
-        return true;
+      if (state.currentIngredientType === "none" && !state.currentLayerDone) {
+        return false;
       }
-      return false;
+      if (state.ingredientSelectorOpen && state.ingredientSelection) {
+        return false;
+      }
+      return true;
     },
   },
   actions: {
+    getNextRandomFoodId() {
+      const randomIndex = random(this.foodIdSamplePool.length - 1);
+      const randomFoodId = this.foodIdSamplePool.splice(randomIndex, 1)[0];
+      if (!this.foodIdSamplePool.length) {
+        this.foodIdSamplePool.push(...Object.keys(ingredients.foods));
+      }
+      return randomFoodId;
+    },
     tick() {
       // !!!
       // TRY TO NOT UPDATE STATE TOO MUCH (LIKE EVERY TICK) BECAUSE IT MESSES WITH ANIMATIONS
@@ -177,6 +175,20 @@ export const useGameStore = defineStore("gameStore", {
         window.gameAudio.music.play();
       }
 
+      if (this.currentOrderTransition) {
+        if (now - this.currentOrderTransition > 250) {
+          this.currentOrderTransition = null;
+        }
+      }
+
+      let doneLayerCleared = false;
+      if (this.currentLayerDone) {
+        if (now - this.currentLayerDone > 500) {
+          this.currentLayerDone = null;
+          doneLayerCleared = true;
+        }
+      }
+
       let failedOrderCleared = false;
       if (this.currentOrderFailed) {
         if (now - this.currentOrderFailed > 2000) {
@@ -184,6 +196,23 @@ export const useGameStore = defineStore("gameStore", {
           failedOrderCleared = true;
         }
       }
+
+      let doneOrderCleared = false;
+      if (this.currentOrderDone) {
+        if (now - this.currentOrderDone > 2000) {
+          this.currentOrderDone = null;
+          doneOrderCleared = true;
+        }
+      }
+
+      Object.keys(this.displays).forEach((key) => {
+        const display = this.displays[key];
+        if (display.created) {
+          if (now - display.created > 2000) {
+            display.created = null;
+          }
+        }
+      });
 
       this.orderQueue.forEach((order) => {
         const remainingMs = getRemainingTimeForOrder(order, now);
@@ -229,7 +258,8 @@ export const useGameStore = defineStore("gameStore", {
           ORDER_TIME_MIN_MS,
           this.orderTime - ORDER_TIME_SUBTRACT_MS
         );
-        this.orderQueue.push(createNewOrder(undefined, now, this.orderTime));
+        const nextFoodId = this.getNextRandomFoodId();
+        this.orderQueue.push(createNewOrder(nextFoodId, now, this.orderTime));
       }
 
       // current food failed, start new one
@@ -237,10 +267,21 @@ export const useGameStore = defineStore("gameStore", {
         this.ingredientSelectorOpen = false;
         this.ingredientSelection = null;
       }
-      if (failedOrderCleared) {
-        this.combinedFoods.pop();
+
+      if (doneLayerCleared) {
+        if (!this.ingredientSelectorOpen && this.ingredientSelectorOptions) {
+          this.ingredientSelectorOpen = true;
+        }
+      }
+
+      if (failedOrderCleared || doneOrderCleared) {
+        this.currentOrderTransition = now;
+        if (failedOrderCleared) {
+          this.combinedFoods.pop();
+        }
         const nextFood = createNewFood(this.currentOrder.id);
         this.combinedFoods.push(nextFood);
+        this.currentLayerDone = now;
       }
     },
     continueFoodPrep() {
@@ -262,16 +303,9 @@ export const useGameStore = defineStore("gameStore", {
 
       const foodTemplate = ingredients.foods[this.currentFood.id];
       const numDone = this.currentFood.layers.length;
-      const numIngredients = foodTemplate.ingredients.length;
 
       // current food is not completed
-      if (numDone < numIngredients) {
-        // open ingredient selector
-        if (!this.ingredientSelectorOpen && this.ingredientSelectorOptions) {
-          this.ingredientSelectorOpen = true;
-          return;
-        }
-
+      if (!this.currentFoodDone) {
         // confirm ingredient selection
         this.ingredientSelectorOpen = false;
 
@@ -302,11 +336,21 @@ export const useGameStore = defineStore("gameStore", {
           }
         }
 
-        if (this.currentFood.layers.length >= numIngredients) {
+        this.currentLayerDone = now;
+
+        if (this.currentFoodDone) {
           const remainingMs = getRemainingTimeForOrder(this.currentOrder, now);
           if (remainingMs) {
             this.bonusTimeMs += remainingMs;
+            this.displays.bonusTime.created = now;
+            this.displays.bonusTime.text = `+${Math.floor(remainingMs / 1000)}`;
+
             this.score += 50;
+            this.displays.bonusScore.created = now;
+            this.displays.bonusScore.text = `+${50}`;
+
+            this.currentOrderDone = now;
+
             if (window.gameAudio?.sounds?.success) {
               window.gameAudio.sounds.success.currentTime = 0;
               window.gameAudio.sounds.success.play();
@@ -314,13 +358,7 @@ export const useGameStore = defineStore("gameStore", {
           }
           this.orderQueue.shift();
         }
-
-        return;
       }
-
-      // current food completed, start new one
-      const nextFood = createNewFood(this.currentOrder.id);
-      this.combinedFoods.push(nextFood);
     },
   },
 });

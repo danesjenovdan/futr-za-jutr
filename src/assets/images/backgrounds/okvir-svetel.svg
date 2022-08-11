@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187.93 190.58">
+  <defs>
+    <linearGradient id="a" x1="17.63" x2="177.81" y1="8.8" y2="8.8" gradientTransform="matrix(1 0 0 -1 0 192)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a59f08"/>
+      <stop offset=".16" stop-color="#cfc400"/>
+      <stop offset=".38" stop-color="#e6da12"/>
+      <stop offset=".62" stop-color="#ffff39"/>
+      <stop offset=".99" stop-color="#ffffd1"/>
+    </linearGradient>
+    <linearGradient id="b" x1="94.3" x2="94.3" y1="476.4" y2="498.58" gradientTransform="translate(0 -308)" gradientUnits="userSpaceOnUse">
+      <stop offset=".65" stop-color="#ffc"/>
+      <stop offset="1" stop-color="#b2b36f"/>
+    </linearGradient>
+    <linearGradient id="c" x1="94.29" x2="94.29" y1="321.35" y2="486.17" gradientTransform="translate(0 -308)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dedebd"/>
+      <stop offset=".29" stop-color="#ededce"/>
+      <stop offset=".62" stop-color="#ededc5"/>
+      <stop offset=".99" stop-color="#fafae6"/>
+    </linearGradient>
+  </defs>
+  <path fill="#fff" d="M17.72 19.6h160v160h-160zm0 0a385.15 385.15 0 0 1 160 0"/>
+  <path fill="#fff" stroke="url(#a)" stroke-miterlimit="10" d="M177.72 179.6a448.96 448.96 0 0 1-160 0"/>
+  <path fill="#fff" d="M177.72 19.6c8.52 51.01 7.83 104.53 0 160m-160 0c-8.61-55.83-9.5-109.42 0-160"/>
+  <path fill="none" stroke="#ffc" stroke-linecap="round" stroke-width="15" d="M14.3 15.9a385.15 385.15 0 0 1 160 0"/>
+  <path fill="none" stroke="url(#b)" stroke-linecap="round" stroke-miterlimit="10" stroke-width="15" d="M174.3 175.9a448.96 448.96 0 0 1-160 0"/>
+  <path fill="none" stroke="#ffc" stroke-linecap="round" stroke-width="15" d="M174.3 15.9c8.52 51.01 7.83 104.53 0 160m-160 0c-8.61-55.83-9.51-109.43 0-160"/>
+  <path fill="none" stroke="url(#c)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M20.22 22.1s-5.85 40.03-5.93 72.02 5.93 75.82 5.93 75.82 59.15 7.75 74.07 5.96 68.93-2.79 72.93-5.79 7.15-74.62 7.07-79.31-6.07-66.69-6.07-68.69-60.85-7.4-73.93-6.7-74.07 6.69-74.07 6.69Z"/>
+</svg>

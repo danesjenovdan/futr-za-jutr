@@ -167,7 +167,7 @@ function selectOption(index) {
 
           &.selected {
             .icon {
-              background-image: url("../assets/images/backgrounds/okvir-zelen.svg");
+              background-image: url("../assets/images/backgrounds/okvir-svetel.svg");
             }
           }
 
@@ -199,6 +199,7 @@ function selectOption(index) {
         justify-content: center;
         min-height: 2.4em;
         color: $color-white;
+        font-size: 1.2rem;
         font-weight: 300;
         line-height: 1.2;
         text-align: center;
