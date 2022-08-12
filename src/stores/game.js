@@ -105,6 +105,16 @@ export const useGameStore = defineStore("gameStore", {
     currentOrder(state) {
       return state.orderQueue[0];
     },
+    nextOrders(state) {
+      if (
+        state.currentOrderDone ||
+        state.currentOrderFailed ||
+        state.currentOrderTransition
+      ) {
+        return state.orderQueue;
+      }
+      return state.orderQueue.slice(1);
+    },
     currentIngredientType(state) {
       const foodTemplate = ingredients.foods[state.currentFood.id];
       const numDone = state.currentFood.layers.length;

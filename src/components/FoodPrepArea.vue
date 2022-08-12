@@ -32,16 +32,20 @@
           />
         </TransitionGroup>
       </div>
-      <div
-        :class="[
-          'announcement',
-          {
-            'bounce-in': gameStore.currentOrderFailed,
-            show: gameStore.currentOrderFailed,
-          },
-        ]"
-      >
-        <div class="text">Čas je potekel!</div>
+      <div class="current-order-display">
+        <div class="order-name">
+          <img :src="`/food_icons/${gameStore.currentFood.id}.png`" />
+          {{ currentFoodName }}
+        </div>
+        <div
+          v-if="!gameStore.currentOrderFailed && !gameStore.currentFoodDone"
+          class="order-time"
+        >
+          {{ formatTimer(gameStore.currentOrder.timerSeconds * 1000) }}
+        </div>
+        <div v-if="gameStore.currentOrderFailed" class="failure-text bounce-in">
+          Čas je potekel!
+        </div>
       </div>
     </div>
     <IngredientSelector />
@@ -49,10 +53,24 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import { useGameStore } from "../stores/game";
+import { formatTimer } from "../helpers/formatTimer";
 import IngredientSelector from "./IngredientSelector.vue";
 
 const gameStore = useGameStore();
+
+const foodNames = {
+  burger: "BURGER",
+  pie: "PITA",
+  salad: "SOLATA",
+  soup: "JUHA",
+  taco: "TACO",
+};
+
+const currentFoodName = computed(() => {
+  return foodNames[gameStore.currentFood.id];
+});
 </script>
 
 <style>
@@ -194,17 +212,36 @@ const gameStore = useGameStore();
       }
     }
 
-    .announcement {
+    .current-order-display {
       position: absolute;
       inset: 0;
-      padding-top: 12rem;
-      opacity: 0;
+      padding-top: 8rem;
 
-      &.show {
-        opacity: 1;
+      .order-name {
+        margin-bottom: 1rem;
+        color: $color-white;
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1;
+        text-align: center;
+        @include text-stroke($color-black, 0.05em);
+
+        img {
+          height: 1em;
+          transform: translateX(-5%) translateY(-5%) scale(1.33);
+        }
       }
 
-      .text {
+      .order-time {
+        color: $color-white;
+        font-size: 5rem;
+        font-weight: 800;
+        line-height: 1;
+        text-align: center;
+        @include text-stroke($color-black, 0.05em);
+      }
+
+      .failure-text {
         color: $color-white;
         font-size: 3rem;
         font-weight: 800;
