@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class="bottom">
-      <ResultIngredients />
+      <ResultIngredients :share-state="shareState" />
     </div>
   </div>
 </template>
