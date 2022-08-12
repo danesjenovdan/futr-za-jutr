@@ -17,6 +17,7 @@ const portrait = computed(() => width.value < height.value);
 .orientation-banner {
   position: fixed;
   inset: 0 0 auto 0;
+  z-index: 9999;
   background: orange;
   font-size: 2rem;
   font-weight: 700;

@@ -18,10 +18,12 @@
         </div>
         <div class="pros-cons">
           <div v-for="pro in pros" :key="pro" class="pro">
-            <img src="../assets/images/icons/smile_blue.png" /> {{ pro }}
+            <img src="../assets/images/icons/smile_blue.png" />
+            <div class="text">{{ pro }}</div>
           </div>
           <div v-for="con in cons" :key="con" class="con">
-            <img src="../assets/images/icons/sad_red.png" /> {{ con }}
+            <img src="../assets/images/icons/sad_red.png" />
+            <div class="text">{{ con }}</div>
           </div>
         </div>
       </div>
@@ -137,19 +139,28 @@ const cons = computed(() => {
       .pros-cons {
         .pro,
         .con {
-          color: $color-warning-fg;
-          font-size: 1.2rem;
-          font-weight: 600;
-          font-style: italic;
+          display: flex;
+          gap: 0.33rem;
 
           img {
             width: 1.2rem;
             height: 1.2rem;
+            margin-top: 0.3rem;
+          }
+
+          .text {
+            color: $color-warning-fg;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-style: italic;
+            line-height: 1.5;
           }
         }
 
         .pro {
-          color: $color-dark-1;
+          .text {
+            color: $color-dark-1;
+          }
         }
       }
     }
@@ -176,7 +187,7 @@ const cons = computed(() => {
   .description {
     margin-top: 2rem;
     color: $color-dark-1;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 300;
   }
 }

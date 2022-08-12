@@ -1,11 +1,11 @@
 <template>
   <div v-if="!timerStore.started && !gameStore.gameOver" class="modal-bg">
-    <div class="constrain-width">
-      <div class="top-bubble">
-        <div class="text">
-          Vsaka jed ima omejen čas za pripravo. Pazi, da ti ne poteče!
-        </div>
+    <div class="top-bubble">
+      <div class="text">
+        Vsaka jed ima omejen čas za pripravo. Pazi, da ti ne poteče!
       </div>
+    </div>
+    <div class="constrain-width">
       <div class="middle-box">
         V času, ki ga imaš na voljo, pripravi čim več jedi in s tem zberi čim
         več točk, pri tem pa pazi na sestavine, saj te za vsako netrajnostno
