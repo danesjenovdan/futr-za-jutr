@@ -31,9 +31,10 @@
         </div>
       </div>
       <div class="orders">
+        <div class="title">Naslednja naročila:</div>
         <TransitionGroup name="order-list">
           <div
-            v-for="order in gameStore.orderQueue"
+            v-for="order in gameStore.nextOrders"
             :key="order.uid"
             :class="['order', { warning: order.timerSeconds <= 5 }]"
           >
@@ -48,16 +49,9 @@
 
 <script setup>
 import { useGameStore } from "../stores/game";
+import { formatTimer } from "../helpers/formatTimer";
 
 const gameStore = useGameStore();
-
-function formatTimer(remainingMs) {
-  const seconds = Math.ceil(remainingMs / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const formattedMinutes = String(minutes).padStart(2, "0");
-  const formattedSeconds = String(seconds % 60).padStart(2, "0");
-  return `${formattedMinutes}:${formattedSeconds}`;
-}
 </script>
 
 <style>
@@ -75,7 +69,7 @@ function formatTimer(remainingMs) {
 
 .bonus-leave-to {
   opacity: 0;
-  transform: translateY(-2rem);
+  transform: translateY(-4rem);
 }
 
 .order-list-move,
@@ -175,6 +169,17 @@ function formatTimer(remainingMs) {
       right: 0;
       overflow: hidden;
       padding: 0.95rem 0rem 3rem 1rem;
+
+      .title {
+        margin-bottom: 1rem;
+        margin-right: 0.9rem;
+        color: $color-subtle;
+        font-size: 1.2rem;
+        font-weight: 600;
+        font-style: italic;
+        line-height: 1.2;
+        text-align: center;
+      }
 
       .order {
         display: flex;
