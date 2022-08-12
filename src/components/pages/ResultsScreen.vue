@@ -83,6 +83,37 @@
     <div class="bottom">
       <ResultIngredients :share-state="shareState" />
     </div>
+    <div class="jagged-divider inverse">
+      <div class="shadow-container">
+        <div class="clipped-container"></div>
+      </div>
+    </div>
+    <div class="bottomest">
+      <div class="constrain-width">
+        <div class="follow-us">
+          Želiš izvedeti še več zanimivih in uporabnih informacij glede hrane?
+          <br />
+          <br />
+          <strong>SPREMLJAJ NAS NA NAŠIH KANALIH!</strong>
+        </div>
+        <div class="socials">
+          <a
+            href="https://focus.si/tag/our-food-our-future/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../../assets/images/icons/spletno-mesto.png" />
+          </a>
+          <a
+            href="https://www.instagram.com/futrzajutr/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../../assets/images/icons/instagram.svg" />
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -476,11 +507,53 @@ const share = () => {
       );
     }
   }
+
+  &.inverse {
+    background: $color-dark-1;
+
+    .shadow-container {
+      .clipped-container {
+        background: $color-light;
+      }
+    }
+  }
 }
 
 .bottom {
   position: relative;
   z-index: 1;
   background: $color-light;
+}
+
+.bottomest {
+  position: relative;
+  z-index: 1;
+  background: $color-dark-1;
+  padding-bottom: 2rem;
+
+  .follow-us {
+    color: $color-white;
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-style: italic;
+    text-align: center;
+
+    strong {
+      font-weight: 800;
+    }
+  }
+
+  .socials {
+    display: flex;
+    gap: 1.6rem;
+    justify-content: center;
+    margin-top: 1.4rem;
+
+    img {
+      width: 2.6rem;
+      height: 2.6rem;
+      object-fit: contain;
+    }
+  }
 }
 </style>
