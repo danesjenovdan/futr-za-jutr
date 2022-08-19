@@ -174,7 +174,7 @@ const cons = computed(() => {
       padding: 0;
       border: none;
       background-color: transparent;
-      background-image: url("../assets/images/icons/plus.svg");
+      background-image: url("../assets/images/icons/plus-full.svg");
       background-repeat: no-repeat;
       background-size: 100% 100%;
 
