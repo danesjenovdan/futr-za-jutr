@@ -98,7 +98,7 @@
         </div>
         <div class="socials">
           <a
-            href="https://focus.si/tag/our-food-our-future/"
+            href="https://ourfood-ourfuture.eu/"
             target="_blank"
             rel="noreferrer noopener"
           >
