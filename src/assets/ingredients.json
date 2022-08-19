@@ -226,19 +226,31 @@
         "name": "Češnje",
         "icon": "/ingredient_icons/sweet1.png",
         "description": "Okusno in zdravo sadje, ki raste tako rekoč po celem svetu.",
-        "long_description": "Ker češnje rastejo lokalno, jih v sezoni lahko obiramo dozorele in uživamo sveže. Pridelujejo jih po celi državi, od Primorske do Prekmurja, tako da je dostop do njih manj škodljiv za okolje, saj so transportne poti krajše, to pa vpliva tudi na njihovo kakovost. Poleg tega, da so okusne, so češnje tudi zdrave, saj vsebujejo veliko vitaminov, mineralov, antioksidantov in drugih hranljivih snovi. Za še bolj trajnostno izbiro poskrbimo z nakupom lokalno gojenih češenj v sezoni njihove rasti, pri sadju pa smo pozorni tudi na ekološko pridelavo, pri kateri ne uporabljajo pesticidov in fitofarmacevtskih sredstev."
+        "long_description": "Ker češnje rastejo lokalno, jih v sezoni lahko obiramo dozorele in uživamo sveže. Pridelujejo jih po celi državi, od Primorske do Prekmurja, tako da je dostop do njih manj škodljiv za okolje, saj so transportne poti krajše, to pa vpliva tudi na njihovo kakovost. Poleg tega, da so okusne, so češnje tudi zdrave, saj vsebujejo veliko vitaminov, mineralov, antioksidantov in drugih hranljivih snovi. Za še bolj trajnostno izbiro poskrbimo z nakupom lokalno gojenih češenj v sezoni njihove rasti, pri sadju pa smo pozorni tudi na ekološko pridelavo, pri kateri ne uporabljajo pesticidov in fitofarmacevtskih sredstev.",
+        "pros_and_cons": [
+          "(+) majhen ogljični odtis zaradi lokalne pridelave",
+          "(+) veliko ekoloških pridelovalcev"
+        ]
       },
       "medium": {
         "name": "Banana",
         "icon": "/ingredient_icons/sweet2.png",
         "description": "Zdravo in priročno sadje, ki raste na monokulturnih plantažah v tropskem podnebju.",
-        "long_description": "Ker banane pri nas zrastejo le v tropskem rastlinjaku botaničnega vrta, niso trajnostna prehranska izbira. Čeprav njihova pridelava proizvede manj toplogrednih plinov kot pridelava hrane živalskega izvora, so izpusti višji kot pri pridelavi soje ali riža. Večina banan je namreč pridelanih na monokulturnih plantažah, kjer uporabljajo veliko količino pesticidov in plastike – vsak šop banan namreč oblečejo v plastično vrečo, prepojeno s pesticidi. Poleg tega pri gojenju in obiranju banan pogosto prihaja tudi do izkoriščanja delovne sile, zato moramo biti pri nakupu pozorni na certifikat fair trade (pravična trgovina). Ko temu prištejemo še pakiranje in transport, je jasno, da so banane z drugega konca sveta ekološko gledano pač slaba izbira, čeprav so poceni, priročne, okusne in dobre za naše zdravje."
+        "long_description": "Ker banane pri nas zrastejo le v tropskem rastlinjaku botaničnega vrta, niso trajnostna prehranska izbira. Čeprav njihova pridelava proizvede manj toplogrednih plinov kot pridelava hrane živalskega izvora, so izpusti višji kot pri pridelavi soje ali riža. Večina banan je namreč pridelanih na monokulturnih plantažah, kjer uporabljajo veliko količino pesticidov in plastike – vsak šop banan namreč oblečejo v plastično vrečo, prepojeno s pesticidi. Poleg tega pri gojenju in obiranju banan pogosto prihaja tudi do izkoriščanja delovne sile, zato moramo biti pri nakupu pozorni na certifikat fair trade (pravična trgovina). Ko temu prištejemo še pakiranje in transport, je jasno, da so banane z drugega konca sveta ekološko gledano pač slaba izbira, čeprav so poceni, priročne, okusne in dobre za naše zdravje.",
+        "pros_and_cons": [
+          "(-) pogosto izkoriščanje delovne sile in moderno suženjstvo",
+          "(+) transportne poti krajše kot pri kakavu"
+        ]
       },
       "worst": {
         "name": "Kakav",
         "icon": "/ingredient_icons/sweet3.png",
         "description": "Posušena in fermentirana semena kakavovca, ki izvira iz Južne Amerike.",
-        "long_description": "Večina kakava na trgu je pridelana netrajnostno. Zaradi intenzivnega gojenja pridelovalci uporabljajo fitofarmacevtska sredstva, izbirajo sorte, ki povečajo količino pridelka, ne pa kakovosti, zavoljo ogromnih plantaž izsekavajo gozdove in uničujejo naravni habitat, marsikje pa izkoriščajo celo otroško delovno silo – na plantažah še vedno dela več kot 1,5 milijona otrok. In vse to, še preden ga predelajo, zapakirajo v plastično embalažo in transportirajo po svetu. Kakav, čeprav bogat s hranili, je, kar se tiče škodljivosti za okolje, na lestvici takoj za rdečim mesom, zato naj se v katerikoli obliki na jedilniku znajde zgolj, če je pridelan ekološko in ima certifikat fair trade (pravična trgovina)."
+        "long_description": "Večina kakava na trgu je pridelana netrajnostno. Zaradi intenzivnega gojenja pridelovalci uporabljajo fitofarmacevtska sredstva, izbirajo sorte, ki povečajo količino pridelka, ne pa kakovosti, zavoljo ogromnih plantaž izsekavajo gozdove in uničujejo naravni habitat, marsikje pa izkoriščajo celo otroško delovno silo – na plantažah še vedno dela več kot 1,5 milijona otrok. In vse to, še preden ga predelajo, zapakirajo v plastično embalažo in transportirajo po svetu. Kakav, čeprav bogat s hranili, je, kar se tiče škodljivosti za okolje, na lestvici takoj za rdečim mesom, zato naj se v katerikoli obliki na jedilniku znajde zgolj, če je pridelan ekološko in ima certifikat fair trade (pravična trgovina).",
+        "pros_and_cons": [
+          "(-) izkoriščevalski delovni pogoji",
+          "(-) monokulturna intenzivna pridelava, povezana z uporabo pesticidov in izsekavanjem gozdov"
+        ]
       }
     },
     "tomato": {
