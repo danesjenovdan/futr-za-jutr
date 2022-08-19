@@ -8,4 +8,4 @@ resources:
 images:
   - name: futr-za-jutr
     newName: rg.fr-par.scw.cloud/djnd/futr-za-jutr
-    newTag: '1380e28b7d5b9cfb905d69fce6a8a0c9dd4a73e7'
+    newTag: 'd74ccefb40a4005118287b1f1dec71b3e29f40ac'
