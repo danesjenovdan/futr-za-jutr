@@ -1,5 +1,6 @@
 <template>
   <div class="top">
+    <DesktopWarningBanner />
     <div class="top-content constrain-width">
       <div class="logo">
         <img src="../../assets/images/focus-naslovna.png" alt="Futr za jutr" />
@@ -49,6 +50,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import DesktopWarningBanner from "../DesktopWarningBanner.vue";
+</script>
 
 <style scoped lang="scss">
 @import "../../assets/scss/variables";
