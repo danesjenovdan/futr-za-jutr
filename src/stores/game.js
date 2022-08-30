@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
-const GAME_TIME_MS = 45 * 1000;
+const GAME_TIME_MS = 90 * 1000;
 const ORDER_DELAY_MAX_MS = 15 * 1000;
 const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
 const ORDER_DELAY_MIN_MS = 15 * 1000;
@@ -351,9 +351,18 @@ export const useGameStore = defineStore("gameStore", {
         if (this.currentFoodDone) {
           const remainingMs = getRemainingTimeForOrder(this.currentOrder, now);
           if (remainingMs) {
-            this.bonusTimeMs += remainingMs;
-            this.displays.bonusTime.created = now;
-            this.displays.bonusTime.text = `+${Math.floor(remainingMs / 1000)}`;
+            const qualities = new Set(
+              this.currentFood.layers.map((l) => l.quality).filter(Boolean)
+            );
+            const bestOnly = qualities.size === 1 && qualities.has("best");
+
+            if (bestOnly) {
+              this.bonusTimeMs += remainingMs;
+              this.displays.bonusTime.created = now;
+              this.displays.bonusTime.text = `+${Math.floor(
+                remainingMs / 1000
+              )}`;
+            }
 
             this.score += 50;
             this.displays.bonusScore.created = now;

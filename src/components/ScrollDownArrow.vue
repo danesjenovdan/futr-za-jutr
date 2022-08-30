@@ -1,7 +1,9 @@
 <template>
   <Transition name="arrow-fade">
     <div v-if="showArrow" ref="arrowContainer" class="arrow-container">
-      <div class="arrow"></div>
+      <div class="arrow">
+        <img class="arrow" src="../assets/images/icons/puscica.svg" />
+      </div>
     </div>
   </Transition>
 </template>
@@ -69,16 +71,18 @@ onBeforeUnmount(() => {
     animation: arrow-bounce 1.5s infinite;
     filter: drop-shadow(0 1.5px 0.5px $color-dark-1);
 
-    &::before {
-      content: "";
+    img {
       position: absolute;
-      top: 0;
-      left: 2px;
-      width: 1.2rem;
-      height: 1.2rem;
-      border-left: 2px solid #fafafa;
-      border-bottom: 2px solid #fafafa;
-      transform: rotate(-45deg);
+      bottom: 0.5rem;
+      right: 0;
+      width: 5rem;
+      height: 5rem;
+    }
+
+    @media (min-width: 768px) {
+      img {
+        right: 1rem;
+      }
     }
   }
 }
