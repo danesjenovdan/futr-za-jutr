@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { useTimerStore } from "./timer";
 import ingredients from "../assets/ingredients.json";
 
-const GAME_TIME_MS = 90 * 1000;
+const GAME_TIME_MS = 60 * 1000;
 const ORDER_DELAY_MAX_MS = 15 * 1000;
 const ORDER_DELAY_SUBTRACT_MS = 2 * 1000;
 const ORDER_DELAY_MIN_MS = 15 * 1000;
