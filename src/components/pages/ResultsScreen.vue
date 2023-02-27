@@ -91,14 +91,15 @@
     <div class="bottomest">
       <div class="constrain-width">
         <div class="follow-us">
-          Želiš izvedeti še več zanimivih in uporabnih informacij glede hrane?
+          Želiš tudi sam prispevati k bolj trajnostnemu in etičnemu
+          prehranjevanju in se ob tem zabavati na Disco juhi?
           <br />
           <br />
           <strong>SPREMLJAJ NAS NA NAŠIH KANALIH!</strong>
         </div>
         <div class="socials">
           <a
-            href="https://ourfood-ourfuture.eu/"
+            href="https://focus.si/javno-povabilo-organizacija-disco-juhe-disco-soup-ozavescanje-mladih-o-eticnem-in-trajnostnem-nacinu-prehranjevanja/"
             target="_blank"
             rel="noreferrer noopener"
           >
